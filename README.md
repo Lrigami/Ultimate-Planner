@@ -36,13 +36,29 @@
 
 ## About the Project
 
-Petite description du projet
+Ultimate Planner is an application for organisation and planning. It has a number of features: 
+- management of to-do lists and customised tasks, with a list or kanban view;
+- calendar management with personalised events, with a daily, weekly or monthly view;
+- creating notes so you don't forget anything; 
+- and tracking of several markers: water, mood, sleep, as well as multiple personalised habits. 
+Statistics are displayed for trackers, and a dashboard brings together all the important elements of the day for the user. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Roadmap
 
-Checklist figurant la roadmap du projet (références aux issues)
+The project is currently in the development phase. The project has been initiated. 
+
+Here is the project roadmap for the moment: 
+- [ ] To-do list and task management (#13); 
+- [ ] Kanban view of tasks;
+- [ ] Management of several to-do lists;
+- [ ] Management of notes;
+- [ ] Tracker management (water, mood, sleep); 
+- [ ] Habit management;
+- [ ] Event management and display;
+- [ ] User management;
+- [ ] Advanced settings.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -71,7 +87,7 @@ Dites ce qu'il faut faire...
 _exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
 
 
-Ensuite vous pouvez montrer ce que vous obtenez au final...
+Ensuite vous pouvez montrer ce que vous obtenez à la fin...
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -83,11 +99,10 @@ Dites comment faire pour lancer votre projet
 
 ## Built with
 
-Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
-
-_exemples :_
-* [Materialize.css](http://materializecss.com) - Framework CSS (front-end)
-* [Atom](https://atom.io/) - Editeur de textes
+* [Tailwind.css](https://tailwindcss.com/) - CSS Framework (front-end)
+* [Angular](https://angular.dev/) - Web Application Framework
+* [Node.js](https://nodejs.org/fr) - Runtime Environment
+* [PostgreSQL](https://www.postgresql.org/) - Relational Database Management System (RDBMS)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -121,7 +136,7 @@ Use this space to list resources you find helpful and would like to give credit 
 
 ## Authors
 Listez le(s) auteur(s) du projet ici !
-* **Jhon doe** _alias_ [@outout14](https://github.com/outout14)
+* **THIRY Prune** _alias_ [@Lrigami](https://github.com/Lrigami)
 
 Lisez la liste des [contributeurs](https://github.com/your/project/contributors) pour voir qui à aidé au projet !
 
