@@ -1,1 +1,165 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    /* main action buttons */
+    --red-outline: #E61931;
+    --overdue: #E61931;
+    --red-tonal-btn: #F5A3AD;
+    --due-date-less-than-one-week: #E9B116;
+    --green-outline: #8BBB44;
+    --due-date-more-than-one-week: #8BBB44;
+    --due-date-done: #8BBB44;
+    --green-tonal-btn: #D1E4B4;
+    --today: #D1E4B4;
+
+    /* main action buttons : hover */
+
+
+    /* main action buttons : disabled */
+
+
+    /* main action buttons : focused */
+
+
+    /* main action buttons : pressed */
+
+
+    /* main action buttons : dragged */
+
+    /* Sign in/up, mood, sleep, icons */
+    --sign-in: #B4E4BA;
+    --great-mood: #B4E4BA;
+    --good-sleep: #B4E4BA;
+    --low-priority: #B4E4BA;
+    --happy-mood: #D5EFA9;
+    --task-done: #D5EFA9;
+    --sun: #FBF79D;
+    --sign-up: #F6E0A2;
+    --meh-mood: #F6E0A2;
+    --normal-sleep: #F6E0A2;
+    --medium-priority: #F6E0A2;
+    --angry-mood: #F5A3AD;
+    --bad-sleep: #F5A3AD;
+    --high-priority: #F5A3AD;
+    --sleepy-mood: #B499FF;
+    --sad-mood: #99D0FF;
+    --water: #99D0FF;
+
+    /* events, tasks, habits & notes */
+    --yellow-personalised: #FEFDE7;
+    --yellow-future-event: #FCFABF;
+    --orange-personalised: #FDF7E8;
+    --orange-future-event: #FAEAC2;
+    --pink-personalised: #FFE5F0;
+    --pink-future-event: #FFBDD9;
+    --purple-personalissed: #ECE5FF;
+    --purple-future-event: #CFBDFF;
+    --blue-personalised: #E5F3FF;
+    --blue-future-event: #BDE0FF;
+    --green-personalised: #ECF8EE;
+    --green-future-event: #CFEDD4;
+
+    /* backgrounds, borders & texts */
+    --background: #F2F2F2;
+    --icon-filled: #E6E6E6;
+    --grey-outline: #D9D9D9;
+    --filled-active: #D9D9D9;
+    --text-black: #000000;
+    --text-grey: #666666;
+    --text-white: #FFFFFF;
+}
+
+/* buttons */
+
+.btn {
+    height: 40px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn span:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-only-btn {
+    padding: 24px 0px;
+}
+
+.text-and-icon-btn {
+    padding: 0 24px 0 16px;
+    gap: 8px;
+}
+
+.icon-in-btn {
+    width: 18px;
+    height: 18px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+
+.icon-in-fab {
+    width: 24px;
+    height: 24px;
+}
+
+.fab-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+}
+
+.extended-fab-btn {
+    min-width: 80px;
+    height: 56px;
+    padding: 16px;
+    gap: 12px;
+    border-radius: 16px;
+}
+
+.outlined {
+    border: 2px solid;
+}
+
+.green-outline {
+    border-color: var(--green-outline);
+}
+
+.red-outline {
+    border-color: var(--red-outline);
+}
+
+.grey-outline {
+    border-color: var(--grey-outline);
+}
+
+.red-tonal-btn {
+    background-color: var(--red-tonal-btn);
+}
+
+.green-tonal-btn {
+    background-color: var(--green-tonal-btn);
+}
+
+.not-filled-btn {
+    background-color: transparent;
+}
+
+.white-text-btn {
+    color: var(--text-white);
+}
+
+.grey-text-btn {
+    color: var(--text-grey);
+}

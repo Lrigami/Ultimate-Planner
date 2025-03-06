@@ -1,0 +1,10 @@
+<span *ngIf="icon && !text" class="material-symbols-outlined">
+{{ icon }}
+</span>
+<span *ngIf="icon && text" class="text-and-icon-btn">
+    <span class="material-symbols-outlined">{{ icon }}</span>
+    <span>{{ text }}</span>
+</span>
+<span *ngIf="text && !icon">
+{{ text }}
+</span>
