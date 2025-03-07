@@ -1,1 +1,13 @@
-<p>task-card works!</p>
+<div>
+    <!-- if checked -> update task done / if not -> update task not done -->
+    <input type="checkbox" id="done" name="done" />
+</div>
+<div>
+    <p>{{titre}} <span>({{kanban_category}})</span></p>
+    <p *ngIf options >{{description}} {{due_date}}</p>
+    <p>*ngFor tag of tags : {{tag}} </p>
+</div>
+<div>
+    <button app-button icon="edit" class="icon-btn" (click)="displayEditForm()"></button>
+    <button app-button icon="delete" class="icon-btn" (click)="displayCancelForm()"></button>
+</div>
