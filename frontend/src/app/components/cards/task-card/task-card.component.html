@@ -3,11 +3,11 @@
     <input type="checkbox" id="done" name="done" />
 </div>
 <div>
-    <p>{{titre}} <span>({{kanban_category}})</span></p>
-    <p *ngIf options >{{description}} {{due_date}}</p>
-    <p>*ngFor tag of tags : {{tag}} </p>
+    <p>{{ task.title }} <span>({{ task.kanban_category }})</span></p>
+    <p *ngIf options >{{ task.description }} {{ task.due_date }}</p>
+    <p><!-- Gérer les tags plus tard : *ngFor tag of tags : {{tag}} --></p>
 </div>
 <div>
     <button app-button icon="edit" class="icon-btn" (click)="displayEditForm()"></button>
-    <button app-button icon="delete" class="icon-btn" (click)="displayCancelForm()"></button>
+    <button app-button icon="delete" class="icon-btn" (click)="displayDeleteForm()"></button>
 </div>
