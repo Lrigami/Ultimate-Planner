@@ -6,7 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
 const taskRoutes = require('./routes/tasks.route');
 const app = express();
-const port = process.env.PORT;
+const port = process.env.SERV_PORT;
 
 app.use(cors()); 
 app.use(express.json());
