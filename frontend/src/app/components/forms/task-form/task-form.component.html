@@ -1,1 +1,54 @@
-<p>menu works!</p>
+<div>
+    <div>
+        <input type="checkbox" id="checktask" name="checktask">
+        <div>
+        <input type="text" id="task-title" name="task-title" placeholder="Title" formControlName="title">
+        <p>Category:
+            <select>
+                <!-- Pour chaque catégorie existante du type kanban_category : afficher une option -->
+            </select>
+        </p>
+        </div>
+        <!-- Au click : le formulaire se ferme -->
+        <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="closeForm()"></button>
+    </div>
+    <div>
+        <!-- Ici icône description + textarea. Sous : séparateur -->
+        <textarea placeholder="Deescription">
+            <span class="material-symbols-outlined">notes</span>
+        </textarea>
+        <hr />
+    </div>
+    <ul>
+        <!-- 1) icon due date + due date + input date. 2) prioriy + segmented button. 3) tags: + liste des tags + bouton add -->
+        <li>
+            <span class="material-symbols-outlined">acute</span>
+            <label for="due-date">Due date: </label>
+            <input type="date" id="due-date" name="due-date">
+        </li>
+        <li>
+            <p>Priority: </p>
+            <div id="priority-segmented-buttons">
+                <label for="high-priority">High</label>
+                <input type="radio" name="high-priority" id="high-priority">
+                <label for="medium-priority">Medium</label>
+                <input type="radio" name="medium-priority" id="medium-priority">
+                <label for="low-priority">Low</label>
+                <input type="radio" name="low-priority" id="low-priority">
+            </div>
+        </li>
+        <li>
+            <p>Tags: </p>
+            <!-- For tag in tags table : display tag sous forme de bouton checkbox -->
+            <!-- Cliquer sur le bouton ouvre un formulaire de création de tag -->
+            <button app-button icon="add" class="icon-btn not-filled-btn no-outline" (click)="openNewTagForm()"></button>
+        </li>
+    </ul>
+</div>
+<div>
+    <!-- Le bouton "Save" doit être désactivé si le titre est vide -->
+    <!-- Au click : les données sont transmises à l'élément parent (task-card dans le cas d'un edit / task-list dans le cas d'un ajout) -->
+    <button app-button text="Save" class="btn text-only-btn" [disabled]="taskForm.invalid" [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'"></button>
+    <!-- Au click, le formulaire se ferme  -->
+    <button app-button text="Cancel" class="btn text-only-btn grey-outline" (click)="closeForm()"></button>
+</div>
