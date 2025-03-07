@@ -10,7 +10,8 @@ const port = process.env.SERV_PORT;
 
 app.use(cors()); 
 app.use(express.json());
-app.use('/tasks', taskRoutes);
+// Changer le 1 pour un paramètre :to-do-list
+app.use('/1/tasks', taskRoutes);
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {

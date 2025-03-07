@@ -3,7 +3,8 @@ const pool = require("../config/database");
 
 class Method {
 
-    // Methods
+    // Attention : il faudra changer le "1" de to_do_list_id pour qu'il soit un paramètre, afin que la tâche soit ajoutée dans la bonne to-do list lorsqu'il y en aura plusieurs. 
+    // Ou alors changer la route pour qu'elle suive ce format : /:to-do-list/tasks
     async create(data) {
         const { title, description, dueDate, priority, kanban, completed } = data;
 
