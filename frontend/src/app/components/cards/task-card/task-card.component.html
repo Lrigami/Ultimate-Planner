@@ -11,3 +11,5 @@
     <button app-button icon="edit" class="icon-btn" (click)="displayEditForm()"></button>
     <button app-button icon="delete" class="icon-btn" (click)="displayDeleteForm()"></button>
 </div>
+
+<delete-form class="form" [ngClass]="isDeleteFormVisible ? 'show-form' : 'hide-form'" (closeDeleteForm)="handleSaveFormClose($event)"></delete-form>

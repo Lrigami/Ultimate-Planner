@@ -52,3 +52,5 @@
     <!-- Au click, le formulaire se ferme  -->
     <button app-button text="Cancel" class="btn text-only-btn grey-outline" (click)="closeForm()"></button>
 </div>
+
+<save-form class="form" [ngClass]="isSaveFormVisible ? 'show-form' : 'hide-form'" (closeSaveForm)="handleSaveFormClose($event)"></save-form>

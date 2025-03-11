@@ -68,3 +68,25 @@
     --text-grey: #666666;
     --text-white: #FFFFFF;
 }
+
+/* forms */
+
+.form {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.show-form {
+    display: flex;
+}
+
+.hide-form {
+    display: none;
+}
+
+.choices-btn {
+    display: flex;
+    gap: 20px;
+}

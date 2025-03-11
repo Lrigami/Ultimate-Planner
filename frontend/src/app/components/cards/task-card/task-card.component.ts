@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../buttons/button.component';
+import { DeleteFormComponent } from '../../forms/delete-form/delete-form.component';
 
 @Component({
   selector: 'task-card',
-  imports: [FormsModule, ButtonComponent],
+  imports: [FormsModule, ButtonComponent, DeleteFormComponent],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css'
 })
@@ -17,7 +18,7 @@ export class TaskCardComponent {
   due_date?: Date;
   tag?: string = "tag-test";
   showEditForm: boolean = false;
-  showDeleteForm: boolean = false;
+  isDeleteFormVisible = false;
 
   // task-card doit gérer l'affichage des données de la carte concernée
 
@@ -29,6 +30,13 @@ export class TaskCardComponent {
   }
 
   displayDeleteForm() {
-    this.showDeleteForm = true;
+    this.isDeleteFormVisible = true;
+  }
+
+  handleDeleteFormClose(deleteResponse: boolean) {
+    if (deleteResponse) {
+      // gérer la suppression des données
+    }
+    this.isDeleteFormVisible = false;
   }
 }
