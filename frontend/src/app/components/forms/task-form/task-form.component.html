@@ -14,7 +14,7 @@
     </div>
     <div>
         <!-- Ici icône description + textarea. Sous : séparateur -->
-        <textarea placeholder="Deescription">
+        <textarea placeholder="Deescription" formControlName="description">
             <span class="material-symbols-outlined">notes</span>
         </textarea>
         <hr />
@@ -48,7 +48,7 @@
 <div>
     <!-- Le bouton "Save" doit être désactivé si le titre est vide -->
     <!-- Au click : les données sont transmises à l'élément parent (task-card dans le cas d'un edit / task-list dans le cas d'un ajout) -->
-    <button app-button text="Save" class="btn text-only-btn no-outline" [disabled]="taskForm.invalid" [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'"></button>
+    <button app-button text="Save" class="btn text-only-btn no-outline" [disabled]="taskForm.invalid" [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'" (click)="handleSaveFormClose(true)"></button>
     <!-- Au click, le formulaire se ferme  -->
     <button app-button text="Cancel" class="btn text-only-btn grey-outline not-filled-btn" (click)="closeForm()"></button>
 </div>

@@ -1,10 +1,10 @@
 <div>
     <!-- if checked -> update task done / if not -> update task not done -->
-    <input type="checkbox" id="done" name="done" />
+    <input type="checkbox" id="done" name="done" [(ngModel)]="task.done" />
 </div>
 <div>
     <p>{{ task.title }} <span>({{ task.kanban_category }})</span></p>
-    <p *ngIf options >{{ task.description }} {{ task.due_date }}</p>
+    <p *ngIf="task.description || task.due_date"><span *ngIf="task.description"><span class="material-symbols-outlined">notes</span> {{ task.description }}</span> - <span *ngIf="task.due_date"><span class="material-symbols-outlined">acute</span> {{ task.due_date | date:'shortDate' }}</span></p>
     <p><!-- Gérer les tags plus tard : *ngFor tag of tags : {{tag}} --></p>
 </div>
 <div>
@@ -12,4 +12,6 @@
     <button app-button icon="delete" class="icon-btn" (click)="displayDeleteForm()"></button>
 </div>
 
-<delete-form class="form" [ngClass]="isDeleteFormVisible ? 'show-form' : 'hide-form'" (closeDeleteForm)="handleSaveFormClose($event)"></delete-form>
+<delete-form class="form" [ngClass]="isDeleteFormVisible ? 'show-form' : 'hide-form'" (closeDeleteForm)="handleDeleteFormClose($event)"></delete-form>
+
+<task-form class="form" [ngClass]="isEditFormVisible ? 'show-form' : 'hide-form'" [taskData]="task" (closeForm)="handleEditFormClose($event)"></task-form>
