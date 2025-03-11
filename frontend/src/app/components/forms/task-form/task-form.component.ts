@@ -30,14 +30,14 @@ export class TaskFormComponent {
 
   handleSaveFormClose(dataResponse: boolean) {
     if (dataResponse) {
-      // gérer l'enregistrement des données de la tâche
+      // gérer l'enregistrement des données de la tâche ici parce que les données sont ici dans task-form
     }
     this.isSaveFormVisible = false;
   }
 
   handleTagFormClose(dataResponse: boolean) {
     if (dataResponse) {
-      // gérer l'enregistrement du nouveau tag
+      // actualiser la liste des tags dans task-card pour qu'il apparaisse et soit sélectionnable par l'utilisateur directement
     }
     this.isTagFormVisible = false;
   }
