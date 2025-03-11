@@ -9,7 +9,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ColorFormComponent {
   @Output() saveColor = new EventEmitter<string>();
 
-  onCloseForm(colorResponse: string) {
-    this.saveColor.emit(colorResponse);
-  }
+  // onCloseForm(colorResponse: string) {
+  //   this.saveColor.emit(colorResponse);
+  // }
 }

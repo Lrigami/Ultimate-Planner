@@ -1,12 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../buttons/button.component';
 import { DeleteFormComponent } from '../../forms/delete-form/delete-form.component';
+import { TaskFormComponent } from '../../forms/task-form/task-form.component';
 import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'task-card',
-  imports: [FormsModule, ButtonComponent, DeleteFormComponent, TaskService],
+  imports: [FormsModule, ButtonComponent, DeleteFormComponent, CommonModule, TaskFormComponent],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css'
 })

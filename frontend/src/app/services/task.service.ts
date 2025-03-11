@@ -8,9 +8,17 @@ import { Observable, tap, BehaviorSubject } from 'rxjs';
 export class TaskService {
     private taskListSubject = new BehaviorSubject<void>(null!);
     taskList$ = this.taskListSubject.asObservable();
-    private apiUrl = 'http://localhost:3000/tasks';
+    private apiUrl = 'http://localhost:3000/1/tasks';
 
     constructor(private http: HttpClient) {}
+
+    getAllTasks() {
+        return this.http.get<any>(`${this.apiUrl}`).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
 
     getTask(id: number) {
         return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(

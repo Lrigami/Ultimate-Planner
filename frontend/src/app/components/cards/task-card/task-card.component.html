@@ -1,6 +1,6 @@
 <div>
     <!-- if checked -> update task done / if not -> update task not done -->
-    <input type="checkbox" id="done" name="done" [(ngModel)]="task.done" />
+    <input type="checkbox" id="done" name="done"/> <!-- [(ngModel)]="task.done" -->
 </div>
 <div>
     <p>{{ task.title }} <span>({{ task.kanban_category }})</span></p>
@@ -12,6 +12,6 @@
     <button app-button icon="delete" class="icon-btn" (click)="displayDeleteForm()"></button>
 </div>
 
-<delete-form class="form" [ngClass]="isDeleteFormVisible ? 'show-form' : 'hide-form'" (closeDeleteForm)="handleDeleteFormClose($event)"></delete-form>
+<delete-form class="form" [ngClass]="isDeleteFormVisible ? 'show-form' : 'hide-form'" (deleteData)="handleDeleteFormClose($event)"></delete-form>
 
-<task-form class="form" [ngClass]="isEditFormVisible ? 'show-form' : 'hide-form'" [taskData]="task" (closeForm)="handleEditFormClose($event)"></task-form>
+<task-form class="form" [ngClass]="isEditFormVisible ? 'show-form' : 'hide-form'" [taskData]="task" (isFormVisible)="handleEditFormClose($event)"></task-form>

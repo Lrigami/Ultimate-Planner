@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../buttons/button.component';
 import { SaveFormComponent } from '../save-form/save-form.component';
 import { TagFormComponent } from '../tag-form/tag-form.component';
@@ -7,7 +8,7 @@ import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'task-form',
-  imports: [ButtonComponent, SaveFormComponent, TagFormComponent, TaskService],
+  imports: [CommonModule, ButtonComponent, SaveFormComponent, TagFormComponent],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css'
 })
@@ -70,7 +71,7 @@ export class TaskFormComponent {
     }
   }
 
-  handleTagFormClose(dataResponse: boolean, colorResponse: string) {
+  handleTagFormClose(dataResponse: boolean) {
     if (dataResponse) {
       // actualiser la liste des tags dans task-card pour qu'il apparaisse et soit sélectionnable par l'utilisateur directement
     }

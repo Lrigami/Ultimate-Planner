@@ -1,1 +1,3 @@
-<p>task-list works!</p>
+<div *ngFor="let task of tasks">
+    <task-card [task]="task" class="task-card"></task-card>
+</div>
