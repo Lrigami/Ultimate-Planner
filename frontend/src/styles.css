@@ -76,6 +76,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid black;
 }
 
 .show-form {
@@ -89,4 +90,46 @@
 .choices-btn {
     display: flex;
     gap: 20px;
+}
+
+color-form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 140px;
+    height: 80px;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--grey-tonal-btn);
+    border: 1px solid black;
+}
+
+/* personalised colors */
+
+.grey {
+    background-color: var(--grey-tonal-btn);
+}
+
+.yellow {
+    background-color: var(--yellow-personalised);
+}
+
+.orange {
+    background-color: var(--orange-personalised);
+}
+
+.pink {
+    background-color: var(--pink-personalised);
+}
+
+.purple {
+    background-color: var(--purple-personalised);
+}
+
+.blue {
+    background-color: var(--blue-personalised);
+}
+
+.green {
+    background-color: var(--green-personalised);
 }
