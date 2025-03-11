@@ -48,9 +48,11 @@
 <div>
     <!-- Le bouton "Save" doit être désactivé si le titre est vide -->
     <!-- Au click : les données sont transmises à l'élément parent (task-card dans le cas d'un edit / task-list dans le cas d'un ajout) -->
-    <button app-button text="Save" class="btn text-only-btn" [disabled]="taskForm.invalid" [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'"></button>
+    <button app-button text="Save" class="btn text-only-btn no-outline" [disabled]="taskForm.invalid" [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'"></button>
     <!-- Au click, le formulaire se ferme  -->
-    <button app-button text="Cancel" class="btn text-only-btn grey-outline" (click)="closeForm()"></button>
+    <button app-button text="Cancel" class="btn text-only-btn grey-outline not-filled-btn" (click)="closeForm()"></button>
 </div>
 
-<save-form class="form" [ngClass]="isSaveFormVisible ? 'show-form' : 'hide-form'" (closeSaveForm)="handleSaveFormClose($event)"></save-form>
+<save-form class="form" [ngClass]="isSaveFormVisible ? 'show-form' : 'hide-form'" (saveData)="handleSaveFormClose($event)"></save-form>
+
+<tag-form class="form" [ngClass]="isTagFormVisible ? 'show-form' : 'hide-form'" (saveData)="handleTagFormClose($event)"></tag-form>

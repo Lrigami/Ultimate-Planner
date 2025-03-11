@@ -1,1 +1,8 @@
-<p>tag-form works!</p>
+<div>
+    <label for="tag-name">New tag name: </label>
+    <input type="text" id="tag-name" name="tag-name" placeholder="New tag" formControlName="tagname">
+</div>
+<div class="choices-btn">
+    <button app-button text="Save" [disabled]="tagForm.invalid" class="btn text-only-btn no-outline" [ngClass]="tagForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'" (click)="onCloseForm(true)"></button>
+    <button app-button text="Cancel" class="btn text-only-btn grey-outline not-filled-btn" (click)="onCloseForm(false)"></button>
+</div>
