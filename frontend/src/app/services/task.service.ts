@@ -13,7 +13,7 @@ export class TaskService {
 
     constructor(private http: HttpClient) {}
 
-    getAllTasks() {
+    getAllTasks(): Observable<any> {
         return this.http.get<any>(`${this.apiUrl}`).pipe(
             tap(() => {
                 this.taskListSubject.next();
@@ -21,7 +21,7 @@ export class TaskService {
         )
     }
 
-    getTask(id: number) {
+    getTask(id: number): Observable<any> {
         return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
             tap(() => {
                 this.taskListSubject.next();
@@ -43,6 +43,7 @@ export class TaskService {
     }
 
     updateTask(task: {id: number, title: string, description?: string, dueDate?: Date, priority?: string, kanban?: string, done?: boolean}): Observable<any> {
+        console.log(task);
         return this.http.put<any>(`${this.apiUrl}/${task.id}`, task).pipe(
             tap(() => {
                 this.taskListSubject.next();
@@ -50,7 +51,7 @@ export class TaskService {
         );
     }
 
-    deleteTask(id: number) {
+    deleteTask(id: number): Observable<any> {
         return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
             tap(() => {
                 this.taskListSubject.next();

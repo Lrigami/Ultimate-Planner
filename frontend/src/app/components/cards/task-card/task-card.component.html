@@ -7,11 +7,11 @@
     <p *ngIf="task.description || task.due_date"><span *ngIf="task.description"><span class="material-symbols-outlined">notes</span> {{ task.description }}</span> - <span *ngIf="task.due_date"><span class="material-symbols-outlined">acute</span> {{ task.due_date | date:'shortDate' }}</span></p>
     <p><!-- Gérer les tags plus tard : *ngFor tag of tags : {{tag}} --></p>
 </div>
-<div>
-    <button app-button icon="edit" class="icon-btn" (click)="displayEditForm()"></button>
-    <button app-button icon="delete" class="icon-btn" (click)="displayDeleteForm()"></button>
+<div class="edit-supp">
+    <button app-button icon="edit" class="icon-btn no-outline not-filled-btn" (click)="displayEditForm()"></button>
+    <button app-button icon="delete" class="icon-btn no-outline not-filled-btn" (click)="displayDeleteForm()"></button>
 </div>
 
 <delete-form class="form" [ngClass]="isDeleteFormVisible ? 'show-form' : 'hide-form'" (deleteData)="handleDeleteFormClose($event)"></delete-form>
 
-<task-form class="form" [ngClass]="isEditFormVisible ? 'show-form' : 'hide-form'" [taskData]="task" (isFormVisible)="handleEditFormClose($event)"></task-form>
+<task-form class="form" [ngClass]="isEditFormVisible ? 'show-form' : 'hide-form'" [taskData]="task" (isFormVisible)="handleEditFormClose($event)" (taskUpdated)="updateTaskCard($event)"></task-form>

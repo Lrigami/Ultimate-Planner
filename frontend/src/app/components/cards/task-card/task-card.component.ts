@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../buttons/button.component';
@@ -12,11 +12,11 @@ import { TaskService } from '../../../services/task.service';
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css'
 })
-export class TaskCardComponent {
+export class TaskCardComponent implements OnInit, OnChanges {
   // Input pour passer des informations du parent vers l'enfant : par exemple de task-card à task-form
-  @Input() task!: { id: number, title: string, description?: string, priority?: 
-  string, kanban_category?: string, due_date?: Date };
+  @Input() task!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date };
   @Output() taskUpdated = new EventEmitter<void>();
+  refreshList = new EventEmitter<void>();
   title?: string;
   description?: string;
   kanban_category?: string = "to-do";
@@ -33,11 +33,25 @@ export class TaskCardComponent {
   // Actions du formulaire (cliquer sur Save / Cancel / Close) ne sont pas gérées ici. Lorsque la carte est ajoutée, form envoie des données ici via un @ouput
 
   ngOnInit() {
+    this.updateCard();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['task'] && changes['task'].currentValue) {
+      this.updateCard();
+    }
+  }
+
+  updateCard() {
     this.title = this.task.title;
     this.description = this.task.description;
     this.priority = this.task.priority;
     this.kanban_category = this.task.kanban_category;
     this.due_date = this.task.due_date;
+  }
+
+  updateTaskCard(update: Event) {
+      this.updateCard();
   }
   
   //Method pour afficher les formulaires :
@@ -49,12 +63,16 @@ export class TaskCardComponent {
     if(response) {
       let id = this.task.id;
       this.taskService.getTask(id).subscribe({
-        next: () => {
+        next: (updatedTask) => {
+          this.task = updatedTask;
           this.taskUpdated.emit();
+          this.refreshList.emit();
           this.isEditFormVisible = false;
         },
         error: (error) => console.error("Cannot get task: ", error)
       });
+    } else {
+      this.isEditFormVisible = false;
     }
   }
 

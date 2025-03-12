@@ -16,7 +16,7 @@ import { TaskService } from '../../../services/task.service';
 export class TaskFormComponent implements OnInit, OnChanges {
   @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date };
   @Output() isFormVisible = new EventEmitter<boolean>();
-  taskUpdated = new EventEmitter<void>();
+  taskUpdated = new EventEmitter<boolean>();
   kanbanCategories: string[] = [];
   isSaveFormVisible = false;
   isTagFormVisible = false;
@@ -62,7 +62,6 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   closeForm() {
     this.isSaveFormVisible = true;
-    this.isFormVisible.emit(false);
   }
 
   openNewTagForm() {
@@ -80,13 +79,19 @@ export class TaskFormComponent implements OnInit, OnChanges {
         kanban: this.taskForm.value.kanban_category ?? 'to-do'
       };
 
+      console.log(updatedTask);
+
       this.taskService.updateTask(updatedTask).subscribe({
         next: () => {
           this.taskUpdated.emit();
           this.isSaveFormVisible = false;
+          this.isFormVisible.emit(false);
         },
         error: (error) => console.error("Update failed: ", error)
       });
+    } else {
+        this.isSaveFormVisible = false;
+        this.isFormVisible.emit(false);
     }
   }
 
