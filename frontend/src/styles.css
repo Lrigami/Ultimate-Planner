@@ -69,6 +69,122 @@
     --text-white: #FFFFFF;
 }
 
+/* buttons */
+
+.btn {
+    height: 40px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn span:first-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-only-btn {
+    padding: 24px 0px;
+}
+
+.text-and-icon-btn {
+    padding: 0 24px 0 16px;
+    gap: 8px;
+}
+
+.icon-in-btn {
+    font-size: 18px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.fab-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+}
+
+.extended-fab-btn {
+    min-width: 80px;
+    height: 56px;
+    padding: 16px;
+    gap: 12px;
+    border-radius: 16px;
+}
+
+.fab-btn span:first-of-type, .extended-fab-btn span:first-of-type {
+    width: 24px;
+    height: 24px;
+}
+
+.outlined {
+    border: 2px solid;
+}
+
+.green-outline {
+    border-color: var(--green-outline);
+}
+
+.red-outline {
+    border-color: var(--red-outline);
+}
+
+.grey-outline {
+    border-color: var(--grey-outline);
+}
+
+.no-outline {
+    border: none;
+}
+
+.red-tonal-btn {
+    background-color: var(--red-tonal-btn);
+}
+
+.green-tonal-btn {
+    background-color: var(--green-tonal-btn);
+}
+
+.grey-tonal-btn {
+    background-color: var(--grey-tonal-btn);
+}
+
+.not-filled-btn {
+    background-color: transparent;
+}
+
+.white-text-btn {
+    color: var(--text-white);
+}
+
+.grey-text-btn {
+    color: var(--text-grey);
+}
+
+/* cards */
+
+task-card {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* forms */
 
 .form {
