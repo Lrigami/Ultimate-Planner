@@ -181,8 +181,8 @@ task-card {
     flex-direction: row;
     border: 1px solid black;
     margin-bottom: 10px;
-    justify-content: space-between;
-    align-items: center;
+    gap: 15px;
+    position: relative;
 }
 
 /* forms */

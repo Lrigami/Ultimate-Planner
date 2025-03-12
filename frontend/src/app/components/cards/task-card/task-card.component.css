@@ -1,8 +1,28 @@
 .edit-supp {
+    position: relative;
+    right: 5px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     justify-content: center;
     align-items: center;
     padding: 0 5px;
+}
+
+.description-date {
+    display: flex;
+    gap: 10px;
+}
+
+.description-date span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.check {
+    display: flex;
+    align-items:flex-start;
+    padding-top: 15px;
 }

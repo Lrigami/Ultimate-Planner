@@ -17,9 +17,9 @@ export class TaskListComponent {
 
   ngOnInit() {
     this.displayAll();
-    this.taskService.taskList$.subscribe(() => {
-      this.displayAll();
-    });
+    // this.taskService.taskList$.subscribe(() => {
+    //   this.displayAll();
+    // });
   }
 
   displayAll() {
