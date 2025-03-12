@@ -1,3 +1,1 @@
-<div *ngFor="let task of tasks">
-    <task-card [task]="task" class="task-card"></task-card>
-</div>
+<task-card *ngFor="let task of tasks" [task]="task" class="task-card" (refreshList)="displayAll()" ></task-card>
