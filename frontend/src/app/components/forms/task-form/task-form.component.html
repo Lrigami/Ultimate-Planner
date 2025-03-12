@@ -15,26 +15,24 @@
             <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="closeForm()"></button>
         </div>
         <div>
-            <!-- Ici icône description + textarea. Sous : séparateur -->
             <textarea placeholder="Deescription" formControlName="description"></textarea>
             <hr />
         </div>
         <ul>
-            <!-- 1) icon due date + due date + input date. 2) prioriy + segmented button. 3) tags: + liste des tags + bouton add -->
             <li>
                 <span class="material-symbols-outlined">acute</span>
                 <label for="due-date">Due date: </label>
-                <input type="date" id="due-date" name="due-date">
+                <input type="date" id="due-date" name="due-date" formControlName="due_date">
             </li>
             <li>
                 <p>Priority: </p>
                 <div id="priority-segmented-buttons">
                     <label for="high-priority">High</label>
-                    <input type="radio" name="high-priority" id="high-priority">
+                    <input type="radio" name="priority" id="high-priority" formControlName="priority">
                     <label for="medium-priority">Medium</label>
-                    <input type="radio" name="medium-priority" id="medium-priority">
+                    <input type="radio" name="priority" id="medium-priority" formControlName="priority">
                     <label for="low-priority">Low</label>
-                    <input type="radio" name="low-priority" id="low-priority">
+                    <input type="radio" name="priority" id="low-priority" formControlName="priority">
                 </div>
             </li>
             <li>
@@ -46,14 +44,27 @@
         </ul>
     </div>
     <div>
-        <!-- Le bouton "Save" doit être désactivé si le titre est vide -->
-        <!-- Au click : les données sont transmises à l'élément parent (task-card dans le cas d'un edit / task-list dans le cas d'un ajout) -->
-        <button app-button text="Save" class="btn text-only-btn no-outline" [disabled]="taskForm.invalid" [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'" (click)="handleSaveFormClose(true)"></button>
-        <!-- Au click, le formulaire se ferme  -->
-        <button app-button text="Cancel" class="btn text-only-btn grey-outline not-filled-btn" (click)="closeForm()"></button>
+        <button app-button text="Save" 
+            class="btn text-only-btn no-outline" 
+            [disabled]="taskForm.invalid" 
+            [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'" 
+            (click)="handleSaveFormClose(true)">
+        </button>
+        <button app-button text="Cancel" 
+            class="btn text-only-btn grey-outline not-filled-btn" 
+            (click)="closeForm()">
+        </button>
     </div>
 </form>
 
-<save-form class="form" [ngClass]="isSaveFormVisible ? 'show-form' : 'hide-form'" (saveData)="handleSaveFormClose($event)"></save-form>
+<save-form 
+    *ngIf="isSaveFormVisible"
+    class="form" 
+    (saveData)="handleSaveFormClose($event)">
+</save-form>
 
-<tag-form class="form" [ngClass]="isTagFormVisible ? 'show-form' : 'hide-form'" (saveData)="handleTagFormClose($event)"></tag-form>
+<tag-form 
+    *ngIf="isTagFormVisible"    
+    class="form" 
+    (saveData)="handleTagFormClose()">
+</tag-form>

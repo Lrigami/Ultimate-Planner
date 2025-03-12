@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TaskService } from '../../../services/task.service';
 import { ButtonComponent } from '../../buttons/button.component';
 import { SaveFormComponent } from '../save-form/save-form.component';
 import { TagFormComponent } from '../tag-form/tag-form.component';
-import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'task-form',
@@ -17,27 +17,26 @@ export class TaskFormComponent implements OnInit, OnChanges {
   @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date };
   @Output() isFormVisible = new EventEmitter<boolean>();
   taskUpdated = new EventEmitter<boolean>();
+
+  taskForm: FormGroup;
   kanbanCategories: string[] = [];
   isSaveFormVisible = false;
   isTagFormVisible = false;
 
-  taskForm = new FormGroup({
-    title: new FormControl('', Validators.required), // Champ obligatoire
-    description: new FormControl(''),
-    priority: new FormControl(''),
-    kanban_category: new FormControl(''),
-    due_date: new FormControl('')
-  });
-
-  constructor(public taskService: TaskService) {}
+  constructor(public taskService: TaskService) {
+    this.taskForm = new FormGroup({
+      title: new FormControl('', Validators.required),
+      description: new FormControl(''),
+      priority: new FormControl('undefined'),
+      kanban_category: new FormControl('to-do'),
+      due_date: new FormControl('')
+    });
+  }
 
   ngOnInit() {
     this.updateForm();
     this.taskService.getAllKanban().subscribe({
-      next: (allKanban) => {
-        this.kanbanCategories = allKanban;
-        console.log(this.kanbanCategories);
-      },
+      next: (allKanban) => this.kanbanCategories = allKanban,
       error: (error) => console.error("Get Kanban failed: ", error)
     });
   }
@@ -53,52 +52,45 @@ export class TaskFormComponent implements OnInit, OnChanges {
       this.taskForm.patchValue({
         title: this.taskData.title || '',
         description: this.taskData.description || '',
-        priority: this.taskData.priority || '',
-        kanban_category: this.taskData.kanban_category || '',
+        priority: this.taskData.priority || 'undefined',
+        kanban_category: this.taskData.kanban_category || 'to-do',
         due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toISOString().split('T')[0] : ''
       });
     }
   }
 
   closeForm() {
-    this.isSaveFormVisible = true;
+    this.isFormVisible.emit(false);
   }
 
   openNewTagForm() {
     this.isTagFormVisible = true;
   }
 
-  handleSaveFormClose(dataResponse: boolean) {
-    if (dataResponse) {
+  handleSaveFormClose(isSaved: boolean) {
+    if (isSaved) {
       const updatedTask = {
         id: this.taskData.id,
-        title: this.taskForm.value.title ?? '',
-        description: this.taskForm.value.description ?? '',
-        dueDate: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
-        priority: this.taskForm.value.priority ?? 'undefined',
-        kanban: this.taskForm.value.kanban_category ?? 'to-do'
+        title: this.taskForm.value.title,
+        description: this.taskForm.value.description,
+        due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
+        priority: this.taskForm.value.priority,
+        kanban_category: this.taskForm.value.kanban_category
       };
-
-      console.log(updatedTask);
 
       this.taskService.updateTask(updatedTask).subscribe({
         next: () => {
-          this.taskUpdated.emit();
-          this.isSaveFormVisible = false;
-          this.isFormVisible.emit(false);
+          this.taskUpdated.emit(true);
+          this.closeForm();
         },
         error: (error) => console.error("Update failed: ", error)
       });
     } else {
-        this.isSaveFormVisible = false;
-        this.isFormVisible.emit(false);
+        this.closeForm();
     }
   }
 
-  handleTagFormClose(dataResponse: boolean) {
-    if (dataResponse) {
-      // actualiser la liste des tags dans task-card pour qu'il apparaisse et soit sélectionnable par l'utilisateur directement
-    }
+  handleTagFormClose() {
     this.isTagFormVisible = false;
   }
 }

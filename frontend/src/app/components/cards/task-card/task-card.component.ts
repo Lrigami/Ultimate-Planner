@@ -1,39 +1,31 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Task } from '../../../models/task.model';
 import { ButtonComponent } from '../../buttons/button.component';
-import { DeleteFormComponent } from '../../forms/delete-form/delete-form.component';
-import { TaskFormComponent } from '../../forms/task-form/task-form.component';
-import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'task-card',
-  imports: [FormsModule, ButtonComponent, DeleteFormComponent, CommonModule, TaskFormComponent],
+  imports: [CommonModule, ButtonComponent],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css'
 })
 export class TaskCardComponent implements OnInit, OnChanges {
   // Input pour passer des informations du parent vers l'enfant : par exemple de task-card à task-form
-  @Input() task!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date };
-  @Output() taskUpdated = new EventEmitter<void>();
-  refreshList = new EventEmitter<void>();
+  @Input() task!: Task;
+  @Output() edit = new EventEmitter<Task>();
+  @Output() delete = new EventEmitter<Task>();
+
   title?: string;
   description?: string;
   kanban_category?: string = "to-do";
   due_date?: Date;
   priority?: string;
-  // tag?: string = "tag-test";
-  isEditFormVisible = false;
-  isDeleteFormVisible = false;
 
-  constructor(public taskService: TaskService) {}
-
-  // task-card doit gérer l'affichage des données de la carte concernée
-
-  // Actions du formulaire (cliquer sur Save / Cancel / Close) ne sont pas gérées ici. Lorsque la carte est ajoutée, form envoie des données ici via un @ouput
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
     this.updateCard();
+    this.checkColor();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,51 +42,20 @@ export class TaskCardComponent implements OnInit, OnChanges {
     this.due_date = this.task.due_date;
   }
 
-  updateTaskCard(update: Event) {
-      this.updateCard();
-  }
-  
-  //Method pour afficher les formulaires :
-  displayEditForm() {
-    this.isEditFormVisible = true;
-  }
-
-  handleEditFormClose(response: boolean) {
-    if(response) {
-      let id = this.task.id;
-      this.taskService.getTask(id).subscribe({
-        next: (updatedTask) => {
-          this.task = updatedTask;
-          this.taskUpdated.emit();
-          this.refreshList.emit();
-          this.isEditFormVisible = false;
-        },
-        error: (error) => console.error("Cannot get task: ", error)
-      });
-    } else {
-      this.isEditFormVisible = false;
-    }
-  }
-
-  displayDeleteForm() {
-    this.isDeleteFormVisible = true;
-  }
-
-  handleDeleteFormClose(deleteResponse: boolean) {
-    if (deleteResponse) {
-      let id = this.task.id;
-      this.taskService.deleteTask(id).subscribe({
-        next: () => {
-          console.log("Task updated successfully");
-          this.taskUpdated.emit();
-          this.isDeleteFormVisible = false;
-        },
-        error: (error) => console.error("Update failed: ", error)
-      });
-    }
-  }
-
   truncateDescription(text: string, maxLength: number): string {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+  }
+
+  checkColor() {
+    const checkbox = this.el.nativeElement.querySelector('input[type=checkbox]');
+    if (this.task.priority === 'high') {
+      this.renderer.setStyle(checkbox, 'borderColor', 'var(--red-outline)');
+    } else if (this.task.priority === 'medium') {
+      this.renderer.setStyle(checkbox, 'borderColor', 'var(--due-date-less-than-one-week)');
+    } else if (this.task.priority === 'low') {
+      this.renderer.setStyle(checkbox, 'borderColor', 'var(--green-outline)');
+    } else {
+      this.renderer.setStyle(checkbox, 'borderColor', 'var(--grey-outline)');
+    }
   }
 }

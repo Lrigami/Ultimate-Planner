@@ -1,1 +1,22 @@
-<task-card *ngFor="let task of tasks" [task]="task" class="task-card" (refreshList)="displayAll()" ></task-card>
+<task-card 
+    *ngFor="let task of tasks" 
+    [task]="task" 
+    class="task-card" 
+    (edit)="openEditForm(task)"
+    (delete)="openDeleteForm(task)">
+</task-card>
+
+<task-form
+    *ngIf="isEditFormVisible && selectedTask" 
+    class="form"
+    [taskData]="selectedTask"
+    (isFormVisible)="handleFormClose()"
+    (taskUpdated)="handleFormClose()">
+</task-form>
+
+<delete-form 
+    *ngIf="isDeleteFormVisible && selectedTask"
+    class="form"
+    [task]="selectedTask"
+    (deleteData)="handleFormClose()">
+</delete-form>

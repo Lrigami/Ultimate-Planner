@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Task } from '../../../models/task.model';
 import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
@@ -8,6 +9,7 @@ import { ButtonComponent } from '../../buttons/button.component';
   styleUrl: './delete-form.component.css'
 })
 export class DeleteFormComponent {
+  @Input() task!: Task;
   @Output() deleteData = new EventEmitter<boolean>()
 
   onCloseForm(deleteResponse: boolean) {
