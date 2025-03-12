@@ -101,13 +101,20 @@
 }
 
 .icon-btn {
-    width: 40px;
-    height: 40px;
+    min-width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    max-height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100%;
     cursor: pointer;
+    padding: 0;
+}
+
+.icon-btn:hover {
+    background-color: var(--grey-tonal-btn);
 }
 
 .fab-btn {
@@ -173,19 +180,33 @@
     color: var(--text-grey);
 }
 
+/* pages */
+
+task-list {
+    position: relative;
+}
+
 /* cards */
 
 task-card {
     width: 500px;
+    height: 80px;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     margin-bottom: 10px;
     gap: 15px;
     position: relative;
 }
 
 /* forms */
+
+task-form {
+    position: absolute;
+    top: calc(100px);
+    left: calc(50px);
+    background-color: white;
+}
 
 .form {
     width: 400px;
