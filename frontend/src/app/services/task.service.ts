@@ -9,6 +9,7 @@ export class TaskService {
     private taskListSubject = new BehaviorSubject<void>(null!);
     taskList$ = this.taskListSubject.asObservable();
     private apiUrl = 'http://localhost:3000/1/tasks';
+    private apiUrlKanban = 'http://localhost:3000/kanban';
 
     constructor(private http: HttpClient) {}
 
@@ -51,6 +52,16 @@ export class TaskService {
 
     deleteTask(id: number) {
         return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
+
+    // kanban_category 
+
+    getAllKanban() {
+        return this.http.get<string[]>(`${this.apiUrlKanban}`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
