@@ -1,21 +1,23 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../buttons/button.component';
 import { SaveFormComponent } from '../save-form/save-form.component';
 import { TagFormComponent } from '../tag-form/tag-form.component';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../../services/task.service';
 
 @Component({
   selector: 'task-form',
-  imports: [CommonModule, ButtonComponent, SaveFormComponent, TagFormComponent],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ButtonComponent, SaveFormComponent, TagFormComponent],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css'
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnInit, OnChanges {
   @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date };
   @Output() isFormVisible = new EventEmitter<boolean>();
   taskUpdated = new EventEmitter<void>();
+  kanbanCategories: string[] = [];
   isSaveFormVisible = false;
   isTagFormVisible = false;
 
@@ -30,12 +32,29 @@ export class TaskFormComponent {
   constructor(public taskService: TaskService) {}
 
   ngOnInit() {
+    this.updateForm();
+    this.taskService.getAllKanban().subscribe({
+      next: (allKanban) => {
+        this.kanbanCategories = allKanban;
+        console.log(this.kanbanCategories);
+      },
+      error: (error) => console.error("Get Kanban failed: ", error)
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['taskData'] && changes['taskData'].currentValue) {
+      this.updateForm();
+    }
+  }
+
+  updateForm() {
     if (this.taskData) {
       this.taskForm.patchValue({
-        title: this.taskData.title,
-        description: this.taskData.description,
-        priority: this.taskData.priority,
-        kanban_category: this.taskData.kanban_category,
+        title: this.taskData.title || '',
+        description: this.taskData.description || '',
+        priority: this.taskData.priority || '',
+        kanban_category: this.taskData.kanban_category || '',
         due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toISOString().split('T')[0] : ''
       });
     }
@@ -54,11 +73,11 @@ export class TaskFormComponent {
     if (dataResponse) {
       const updatedTask = {
         id: this.taskData.id,
-        title: this.taskData.title,
-        description: this.taskData.description,
-        dueDate: this.taskData.due_date,
-        priority: this.taskData.priority,
-        kanban: this.taskData.kanban_category
+        title: this.taskForm.value.title ?? '',
+        description: this.taskForm.value.description ?? '',
+        dueDate: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
+        priority: this.taskForm.value.priority ?? 'undefined',
+        kanban: this.taskForm.value.kanban_category ?? 'to-do'
       };
 
       this.taskService.updateTask(updatedTask).subscribe({
