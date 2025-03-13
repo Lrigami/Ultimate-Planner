@@ -2,10 +2,11 @@
     position: relative;
     max-height: 90dvh;
     overflow-y: scroll;
+    padding-top: 10px;
 }
 
 .add-btn {
     position: absolute;
     bottom: 5px;
-    right: 70px;
+    left: 350px;
 }
