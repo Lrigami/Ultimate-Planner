@@ -138,7 +138,7 @@
     cursor: pointer;
 }
 
-.fab-btn span:first-of-type, .extended-fab-btn span:first-of-type {
+.fab-btn span.icon-in-btn, .extended-fab-btn span.icon-in-btn {
     width: 24px;
     height: 24px;
 }
@@ -205,7 +205,7 @@ task-list {
 /* cards */
 
 task-card {
-    width: 500px;
+    width: 700px;
     height: 80px;
     display: flex;
     flex-direction: row;
@@ -220,13 +220,13 @@ task-card {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     width: 90%;
     padding: 10px 0;
 }
 
 .form {
-    width: 400px;
+    min-width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -270,6 +270,10 @@ color-form {
 delete-form {
     flex-direction: column;
     height: 200px;
+}
+
+task-form {
+    max-height: 500px;
 }
 
 /* personalised colors */

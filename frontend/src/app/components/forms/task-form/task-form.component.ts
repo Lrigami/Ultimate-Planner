@@ -29,7 +29,8 @@ export class TaskFormComponent implements OnInit, OnChanges {
       description: new FormControl(''),
       priority: new FormControl('undefined'),
       kanban_category: new FormControl('to-do'),
-      due_date: new FormControl('')
+      due_date: new FormControl(''),
+      isChecked: new FormControl(false)
     });
   }
 

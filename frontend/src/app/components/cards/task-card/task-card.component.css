@@ -6,6 +6,7 @@
 
 .task-card-content p {
     margin: 1px 0;
+    max-width: 90%;
 }
 
 .edit-supp {
@@ -43,7 +44,7 @@
 .check span {
     position: absolute;
     left: 3px;
-    top: 15px;
+    top: 16px;
     z-index: -1;
 }
 

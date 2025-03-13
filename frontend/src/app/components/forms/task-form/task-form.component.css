@@ -1,3 +1,9 @@
+.form-elements {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .main-info {
     display: flex;
     position: relative;
@@ -7,7 +13,20 @@
 .main-info button {
     position: absolute;
     right: -13px;
-    top: -5px;
+    top: -43px;
+}
+
+.main-info div {
+    width: 82%;
+}
+
+input[type=text] {
+    width: 97%;
+}
+
+.check {
+    position: absolute;
+    z-index: -1;
 }
 
 input[type=checkbox] {
@@ -22,18 +41,9 @@ input[type=checkbox] {
     margin: 1px 1px;
 }
 
-input[type="checkbox"]:checked {
-    background: var(--green-tonal-btn);
+input[type=checkbox]:checked {
+    background: hsla(84, 63%, 66%, 0.5);
     position: relative;
-    border: 1px solid black;
-    &:before {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: grey;
-      font-size: 13px;
-      position: absolute;
-    }
 }
 
 .description-div {
@@ -42,6 +52,10 @@ input[type="checkbox"]:checked {
 
 textarea {
     margin: auto;
+}
+
+hr {
+    width: 100%;
 }
 
 ul {
