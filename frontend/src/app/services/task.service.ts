@@ -15,7 +15,8 @@ export class TaskService {
 
     getAllTasks(): Observable<any> {
         return this.http.get<any>(`${this.apiUrl}`).pipe(
-            tap(() => {
+            tap((tasks) => {
+                console.log("Tasks from API: ", tasks);
                 this.taskListSubject.next();
             })
         )
@@ -30,7 +31,7 @@ export class TaskService {
     }
 
     // Est-ce que ça suffit ou est-ce que s'il manque un paramètre, cela posera problème pour la création de données dans le back ? 
-    createTask(task: {title: string, description?: string, dueDate?: Date, priority?: string, kanban?: string, done?: boolean}): Observable<any> {
+    createTask(task: {title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
         return this.http.post<any>(this.apiUrl, task);
     }
 
@@ -42,10 +43,11 @@ export class TaskService {
         )
     }
 
-    updateTask(task: {id: number, title: string, description?: string, dueDate?: Date, priority?: string, kanban?: string, done?: boolean}): Observable<any> {
-        console.log(task);
+    updateTask(task: {id: number, title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
+        console.log('task before put: ', task);
         return this.http.put<any>(`${this.apiUrl}/${task.id}`, task).pipe(
-            tap(() => {
+            tap((task) => {
+                console.log("task after put: ", task);
                 this.taskListSubject.next();
             })
         );

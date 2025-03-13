@@ -43,7 +43,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['taskData'] && changes['taskData'].currentValue) { // changes['taskData']?.currentValue
+    if (changes['taskData']?.currentValue) {
       this.updateForm();
     }
     this.priorityColor();
@@ -53,9 +53,9 @@ export class TaskFormComponent implements OnInit, OnChanges {
     if (this.taskData) {
       this.taskForm.patchValue({
         title: this.taskData.title || '',
-        description: this.taskData.description || '',
-        priority: this.taskData.priority || 'undefined',
-        kanban_category: this.taskData.kanban_category || 'to-do',
+        description: this.taskData.description ?? '',
+        priority: this.taskData.priority ?? 'undefined',
+        kanban_category: this.taskData.kanban_category ?? 'to-do',
         due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toISOString().split('T')[0] : ''
       });
     }
@@ -72,6 +72,8 @@ export class TaskFormComponent implements OnInit, OnChanges {
   handleSaveFormClose(isSaved: boolean) {
     if (isSaved) {
       if (this.taskData) {
+        const formData = this.taskForm.value;
+        console.log("formData: ", formData);
         const updatedTask = {
           id: this.taskData.id,
           title: this.taskForm.value.title,
@@ -80,6 +82,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
           priority: this.taskForm.value.priority,
           kanban_category: this.taskForm.value.kanban_category
         };
+        console.log("UpdatedTask: ", updatedTask);
 
         this.taskService.updateTask(updatedTask).subscribe({
           next: () => {

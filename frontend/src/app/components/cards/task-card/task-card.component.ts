@@ -18,7 +18,7 @@ export class TaskCardComponent implements OnInit, OnChanges {
 
   title?: string;
   description?: string;
-  kanban_category?: string = "to-do";
+  kanban_category?: string;
   due_date?: Date;
   priority?: string;
   
@@ -32,7 +32,8 @@ export class TaskCardComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['task'] && changes['task'].currentValue) {
+    if (changes['task']?.currentValue) {
+      console.log("Updated task in card:", changes['task'].currentValue);
       this.updateCard();
     }
   }
