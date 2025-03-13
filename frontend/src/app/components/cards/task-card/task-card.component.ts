@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Task } from '../../../models/task.model';
 import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
   selector: 'task-card',
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, FormsModule, ButtonComponent],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css'
 })
@@ -20,6 +21,8 @@ export class TaskCardComponent implements OnInit, OnChanges {
   kanban_category?: string = "to-do";
   due_date?: Date;
   priority?: string;
+  
+  isChecked = false;
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 

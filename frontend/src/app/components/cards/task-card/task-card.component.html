@@ -1,6 +1,7 @@
 <div class="check">
     <!-- if checked -> update task done / if not -> update task not done -->
-    <input type="checkbox" id="done" name="done"/>
+    <input type="checkbox" id="done" name="done" [(ngModel)]="isChecked"/>
+    <span *ngIf="isChecked" class="material-symbols-outlined">check</span>
 </div>
 <div class="task-card-content">
     <p>{{ task.title }} <span>({{ task.kanban_category }})</span></p>
