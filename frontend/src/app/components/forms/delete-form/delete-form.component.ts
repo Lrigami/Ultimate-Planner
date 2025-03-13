@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../../models/task.model';
+import { TaskService } from '../../../services/task.service';
 import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
@@ -10,9 +11,21 @@ import { ButtonComponent } from '../../buttons/button.component';
 })
 export class DeleteFormComponent {
   @Input() task!: Task;
-  @Output() deleteData = new EventEmitter<boolean>()
+  @Output() taskDeleted = new EventEmitter<boolean>();
 
-  onCloseForm(deleteResponse: boolean) {
-    this.deleteData.emit(deleteResponse);
+  isFormVisible = false;
+
+  constructor(public taskService: TaskService) {}
+
+  handleDeleteFormClose(isDeleted: boolean) {
+    if(isDeleted) {
+      this.taskService.deleteTask(this.task.id).subscribe({
+        next: () => {
+          this.taskDeleted.emit(true);
+        },
+        error: (error) => console.log("Delete failed: ", error)
+      });
+    }
+    this.taskDeleted.emit(true);
   }
 }
