@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../../services/task.service';
@@ -23,7 +23,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
   isSaveFormVisible = false;
   isTagFormVisible = false;
 
-  constructor(public taskService: TaskService) {
+  constructor(private el: ElementRef, private renderer: Renderer2, public taskService: TaskService) {
     this.taskForm = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl(''),
@@ -39,12 +39,14 @@ export class TaskFormComponent implements OnInit, OnChanges {
       next: (allKanban) => this.kanbanCategories = allKanban,
       error: (error) => console.error("Get Kanban failed: ", error)
     });
+    this.priorityColor();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['taskData'] && changes['taskData'].currentValue) {
+    if (changes['taskData'] && changes['taskData'].currentValue) { // changes['taskData']?.currentValue
       this.updateForm();
     }
+    this.priorityColor();
   }
 
   updateForm() {
@@ -92,5 +94,30 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   handleTagFormClose() {
     this.isTagFormVisible = false;
+  } 
+
+  priorityColor() {
+    const priorityRadioBtn = this.el.nativeElement.querySelector('input[type=radio]:checked');
+    console.log(priorityRadioBtn);
+    const highPriority = this.el.nativeElement.querySelector('.high-priority');
+    const mediumPriority = this.el.nativeElement.querySelector('.medium-priority');
+    const lowPriority = this.el.nativeElement.querySelector('.low-priority');
+    if (priorityRadioBtn) {
+      if (priorityRadioBtn.value === 'high') {
+        this.renderer.setStyle(highPriority, 'backgroundColor', 'var(--high-priority)');
+        this.renderer.setStyle(mediumPriority, 'backgroundColor', 'white');
+        this.renderer.setStyle(lowPriority, 'backgroundColor', 'white');
+      } else if (priorityRadioBtn.value === 'medium') {
+        this.renderer.setStyle(highPriority, 'backgroundColor', 'white');
+        this.renderer.setStyle(mediumPriority, 'backgroundColor', 'var(--medium-priority)');
+        this.renderer.setStyle(lowPriority, 'backgroundColor', 'white');
+      } else if (priorityRadioBtn.value === 'low') {
+        this.renderer.setStyle(highPriority, 'backgroundColor', 'white');
+        this.renderer.setStyle(mediumPriority, 'backgroundColor', 'white');
+        this.renderer.setStyle(lowPriority, 'backgroundColor', 'var(--low-priority)');
+      }
+    } else {
+      return;
+    }
   }
 }

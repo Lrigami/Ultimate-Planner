@@ -1,0 +1,125 @@
+.main-info {
+    display: flex;
+    position: relative;
+    gap: 10px;
+}
+
+.main-info button {
+    position: absolute;
+    right: -13px;
+    top: -5px;
+}
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin: 1px 1px;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--green-tonal-btn);
+    position: relative;
+    border: 1px solid black;
+    &:before {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: grey;
+      font-size: 13px;
+      position: absolute;
+    }
+}
+
+.description-div {
+    display: flex;
+}
+
+textarea {
+    margin: auto;
+}
+
+ul {
+    padding-left: 10px;
+    width: 90%;
+    margin: auto;
+}
+
+.due-date-li, .priority-li {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+}
+
+.due-date-li label {
+    align-self: center;
+}
+
+.due-date-li input {
+    position: absolute;
+    right: 20px;
+}
+
+input[type=radio] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    width: 0;
+    margin: 0;
+}
+
+#priority-segmented-buttons {
+    border: 1px solid var(--grey-outline);
+    border-radius: 20px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#priority-segmented-buttons div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#priority-segmented-buttons label {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.high-priority, .medium-priority{
+    border-right: 1px solid var(--grey-outline);
+}
+
+.high-priority {
+    width: 70px;
+}
+
+.medium-priority {
+    width: 90px;
+}
+
+.low-priority {
+    width: 70px;
+}
+
+.tags-li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

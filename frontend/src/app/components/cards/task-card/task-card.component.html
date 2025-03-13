@@ -7,7 +7,7 @@
     <p class="description-date" *ngIf="task.description || task.due_date">
         <span class="description" *ngIf="task.description">
             <span class="material-symbols-outlined">notes</span>
-            <span>{{ truncateDescription(task.description, 30) }}</span>
+            <span>{{ truncateDescription(task.description, 15) }}</span>
         </span>
         <span *ngIf="task.due_date">
             <span class="material-symbols-outlined">acute</span>

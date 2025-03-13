@@ -1,10 +1,10 @@
-<span *ngIf="icon && !text" class="icon-in-btn material-symbols-outlined">
-{{ icon }}
-</span>
 <span *ngIf="icon && text" class="text-and-icon-btn">
     <span class="icon-in-btn material-symbols-outlined">{{ icon }}</span>
     <span>{{ text }}</span>
 </span>
-<span *ngIf="text && !icon">
+<span *ngIf="icon && !text" class="icon-in-btn material-symbols-outlined">
+{{ icon }}
+</span>
+<span *ngIf="text && !icon" class="text-only-btn">
 {{ text }}
 </span>

@@ -1,15 +1,26 @@
-<task-card 
+<div>
+    <task-card 
     *ngFor="let task of tasks" 
     [task]="task" 
     class="task-card" 
     (edit)="openEditForm(task)"
     (delete)="openDeleteForm(task)">
-</task-card>
+    </task-card>
+
+    <button app-button icon="add" text="Add" class="extended-fab-btn green-tonal-btn no-outline" (click)="openNewTaskForm()"></button>
+</div>
 
 <task-form
     *ngIf="isEditFormVisible && selectedTask" 
     class="form"
     [taskData]="selectedTask"
+    (isFormVisible)="handleFormClose()"
+    (taskUpdated)="handleFormClose()">
+</task-form>
+
+<task-form
+    *ngIf="isAddFormVisible" 
+    class="form"
     (isFormVisible)="handleFormClose()"
     (taskUpdated)="handleFormClose()">
 </task-form>

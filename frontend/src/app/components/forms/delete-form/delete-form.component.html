@@ -1,6 +1,6 @@
-<p>Are you sure you want to delete this?</p>
-<p>This actions is irreversible.</p>
+<p class="confirmation">Are you sure you want to delete this?</p>
+<p><strong>This action is irreversible.</strong></p>
 <div class="choices-btn">
     <button app-button icon="delete" text="Delete" class="btn text-and-icon-btn red-tonal-btn no-outline" (click)="onCloseForm(true)"></button>
-    <button app-button text="Cancel" class="btn text-only-btn not-filled-btn outlined" (click)="onCloseForm(false)"></button>
+    <button app-button text="Cancel" class="btn not-filled-btn outlined grey-outline" (click)="onCloseForm(false)"></button>
 </div>

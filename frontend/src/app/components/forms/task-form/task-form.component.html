@@ -1,6 +1,6 @@
 <form [formGroup]="taskForm">    
     <div>
-        <div>
+        <div class="main-info">
             <input type="checkbox" id="checktask" name="checktask">
             <div>
             <input type="text" id="task-title" name="task-title" placeholder="Title" formControlName="title">
@@ -14,44 +14,51 @@
             <!-- Au click : le formulaire se ferme -->
             <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="closeForm()"></button>
         </div>
-        <div>
-            <textarea placeholder="Deescription" formControlName="description"></textarea>
-            <hr />
+        <div class="description-div">
+            <textarea cols="40" rows="6" placeholder="Description" formControlName="description"></textarea>
         </div>
-        <ul>
-            <li>
+        <hr />
+        <ul type="none">
+            <li class="due-date-li">
                 <span class="material-symbols-outlined">acute</span>
                 <label for="due-date">Due date: </label>
                 <input type="date" id="due-date" name="due-date" formControlName="due_date">
             </li>
-            <li>
+            <li class="priority-li">
                 <p>Priority: </p>
-                <div id="priority-segmented-buttons">
-                    <label for="high-priority">High</label>
-                    <input type="radio" name="priority" id="high-priority" formControlName="priority">
-                    <label for="medium-priority">Medium</label>
-                    <input type="radio" name="priority" id="medium-priority" formControlName="priority">
-                    <label for="low-priority">Low</label>
-                    <input type="radio" name="priority" id="low-priority" formControlName="priority">
+                <div id="priority-segmented-buttons" (click)="priorityColor()">
+                    <div class="high-priority">
+                        <label for="high-priority">High</label>
+                        <input type="radio" name="priority" id="high-priority" formControlName="priority" value="high">
+                    </div>
+                    <div class="medium-priority" (click)="priorityColor()">
+                        <label for="medium-priority">Medium</label>
+                        <input type="radio" name="priority" id="medium-priority" formControlName="priority" value="medium">
+                    </div>
+                    <div class="low-priority" (click)="priorityColor()">
+                        <label for="low-priority">Low</label>
+                        <input type="radio" name="priority" id="low-priority" formControlName="priority" value="low">
+                    </div>
                 </div>
             </li>
-            <li>
-                <p>Tags: </p>
-                <!-- For tag in tags table : display tag sous forme de bouton checkbox -->
-                <!-- Cliquer sur le bouton ouvre un formulaire de création de tag -->
-                <button app-button icon="add" class="icon-btn not-filled-btn no-outline" (click)="openNewTagForm()"></button>
+            <li class="tags-li">
+                <span>Tags: </span><button app-button icon="add" class="icon-btn not-filled-btn no-outline" (click)="openNewTagForm()"></button>
+                <ul type="none">
+                    <!-- For tag in tags table : display tag sous forme de bouton checkbox -->
+                    <!-- Cliquer sur le bouton ouvre un formulaire de création de tag -->
+                </ul>              
             </li>
         </ul>
     </div>
-    <div>
+    <div class="choices-btn">
         <button app-button text="Save" 
-            class="btn text-only-btn no-outline" 
+            class="btn no-outline" 
             [disabled]="taskForm.invalid" 
-            [ngClass]="taskForm.invalid ? 'grey-tonal-btn' : 'green-tonal-btn'" 
+            [ngClass]="taskForm.invalid ? 'grey-tonal-btn no-hover' : 'green-tonal-btn'" 
             (click)="handleSaveFormClose(true)">
         </button>
         <button app-button text="Cancel" 
-            class="btn text-only-btn grey-outline not-filled-btn" 
+            class="btn outlined grey-outline not-filled-btn" 
             (click)="closeForm()">
         </button>
     </div>

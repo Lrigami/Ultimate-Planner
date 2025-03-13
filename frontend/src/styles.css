@@ -13,10 +13,11 @@
 
     /* main action buttons : hover */
 
+    --grey-tonal-btn: #E6E6E6;
 
     /* main action buttons : disabled */
 
-    --grey-tonal-btn: #E6E6E6;
+
 
     /* main action buttons : focused */
 
@@ -73,12 +74,14 @@
 
 .btn {
     height: 40px;
+    min-width: 150px;
     width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
     cursor: pointer;
+    font-size: 11pt;
 }
 
 .btn span:first-of-type {
@@ -102,7 +105,7 @@
 
 .icon-btn {
     min-width: 30px;
-    min-width: 30px;
+    min-height: 30px;
     max-width: 30px;
     max-height: 30px;
     display: flex;
@@ -121,6 +124,8 @@
     width: 56px;
     height: 56px;
     border-radius: 16px;
+    filter: drop-shadow(3px 3px 1px var(--grey-outline));
+    cursor: pointer;
 }
 
 .extended-fab-btn {
@@ -129,6 +134,8 @@
     padding: 16px;
     gap: 12px;
     border-radius: 16px;
+    filter: drop-shadow(3px 3px 1px var(--grey-outline));
+    cursor: pointer;
 }
 
 .fab-btn span:first-of-type, .extended-fab-btn span:first-of-type {
@@ -168,6 +175,10 @@
     background-color: var(--grey-tonal-btn);
 }
 
+.red-tonal-btn:hover, .green-tonal-btn:hover, .grey-tonal-btn:hover {
+    filter: drop-shadow(3px 3px 1px var(--grey-outline));
+}
+
 .not-filled-btn {
     background-color: transparent;
 }
@@ -180,10 +191,15 @@
     color: var(--text-grey);
 }
 
+.no-hover:hover {
+    filter: none;
+}
+
 /* pages */
 
 task-list {
     position: relative;
+    display: flex;
 }
 
 /* cards */
@@ -201,11 +217,12 @@ task-card {
 
 /* forms */
 
-task-form {
-    position: absolute;
-    top: calc(100px);
-    left: calc(50px);
-    background-color: white;
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    padding: 10px 0;
 }
 
 .form {
@@ -213,7 +230,10 @@ task-form {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    border: 1px solid var(--grey-outline);
+    border-radius: 15px;
+    background-color: white;
+    filter: drop-shadow(10px 10px 5px var(--grey-outline));
 }
 
 .show-form {
@@ -227,6 +247,12 @@ task-form {
 .choices-btn {
     display: flex;
     gap: 20px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.confirmation {
+    font-size: 1.3rem;
 }
 
 color-form {
@@ -239,6 +265,11 @@ color-form {
     justify-content: center;
     background-color: var(--grey-tonal-btn);
     border: 1px solid black;
+}
+
+delete-form {
+    flex-direction: column;
+    height: 200px;
 }
 
 /* personalised colors */
