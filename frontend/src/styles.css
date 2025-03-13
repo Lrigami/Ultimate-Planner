@@ -200,6 +200,7 @@
 task-list {
     position: relative;
     display: flex;
+    max-width: 500px;
 }
 
 /* cards */

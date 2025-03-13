@@ -1,4 +1,4 @@
-<div>
+<div class="task-list">
     <task-card 
     *ngFor="let task of tasks" 
     [task]="task" 
@@ -6,9 +6,9 @@
     (edit)="openEditForm(task)"
     (delete)="openDeleteForm(task)">
     </task-card>
-
-    <button app-button icon="add" text="Add" class="extended-fab-btn green-tonal-btn no-outline" (click)="openNewTaskForm()"></button>
 </div>
+
+<button app-button icon="add" text="Add" class="add-btn extended-fab-btn green-tonal-btn no-outline" (click)="openNewTaskForm()"></button>
 
 <task-form
     *ngIf="isEditFormVisible && selectedTask" 
