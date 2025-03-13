@@ -71,24 +71,42 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   handleSaveFormClose(isSaved: boolean) {
     if (isSaved) {
-      const updatedTask = {
-        id: this.taskData.id,
-        title: this.taskForm.value.title,
-        description: this.taskForm.value.description,
-        due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
-        priority: this.taskForm.value.priority,
-        kanban_category: this.taskForm.value.kanban_category
-      };
+      if (this.taskData) {
+        const updatedTask = {
+          id: this.taskData.id,
+          title: this.taskForm.value.title,
+          description: this.taskForm.value.description,
+          due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
+          priority: this.taskForm.value.priority,
+          kanban_category: this.taskForm.value.kanban_category
+        };
 
-      this.taskService.updateTask(updatedTask).subscribe({
-        next: () => {
-          this.taskUpdated.emit(true);
-          this.closeForm();
-        },
-        error: (error) => console.error("Update failed: ", error)
-      });
+        this.taskService.updateTask(updatedTask).subscribe({
+          next: () => {
+            this.taskUpdated.emit(true);
+            this.closeForm();
+          },
+          error: (error) => console.error("Update failed: ", error)
+        });
+      } else {
+        const newTask = {
+          title: this.taskForm.value.title,
+          description: this.taskForm.value.description,
+          due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
+          priority: this.taskForm.value.priority,
+          kanban_category: this.taskForm.value.kanban_category
+        };
+
+        this.taskService.createTask(newTask).subscribe({
+          next: () => {
+            this.taskUpdated.emit(true);
+            this.closeForm();
+          },
+          error: (error) => console.error("Update failed: ", error)
+        });
+      }
     } else {
-        this.closeForm();
+      this.closeForm();
     }
   }
 
