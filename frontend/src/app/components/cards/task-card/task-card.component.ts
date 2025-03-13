@@ -33,7 +33,6 @@ export class TaskCardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['task']?.currentValue) {
-      console.log("Updated task in card:", changes['task'].currentValue);
       this.updateCard();
     }
   }

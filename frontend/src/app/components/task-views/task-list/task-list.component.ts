@@ -30,7 +30,6 @@ export class TaskListComponent {
   loadTasks() {
     this.taskService.getAllTasks().subscribe({
       next: (tasks) => {
-        console.log("tasks: ", tasks);
         this.tasks = tasks;
       },
       error: (error) => console.error("Error fetching tasks:", error)
