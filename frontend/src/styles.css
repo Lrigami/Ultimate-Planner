@@ -226,7 +226,7 @@ form {
 }
 
 .form {
-    min-width: 400px;
+    width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -267,6 +267,17 @@ color-form {
     border: 1px solid black;
 }
 
+save-form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    max-width: 350px;
+    max-height: 200px;
+    left: calc(50% - 175px);
+    padding: 10px 0;
+}
+
 delete-form {
     flex-direction: column;
     height: 200px;
@@ -276,6 +287,7 @@ delete-form {
 task-form {
     max-height: 600px;
     max-width: 400px;
+    position: relative;
 }
 
 /* personalised colors */

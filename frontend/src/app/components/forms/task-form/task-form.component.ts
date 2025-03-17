@@ -67,6 +67,10 @@ export class TaskFormComponent implements OnInit, OnChanges {
     this.isFormVisible.emit(false);
   }
 
+  openSaveForm() {
+    this.isSaveFormVisible = true;
+  }
+
   openNewTagForm() {
     this.isTagFormVisible = true;
   }
