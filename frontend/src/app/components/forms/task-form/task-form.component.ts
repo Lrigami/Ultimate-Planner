@@ -76,6 +76,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
       let isDone;
       if (this.taskForm.value.kanban_category === 'done' || this.taskForm.value.isChecked) {
         isDone = true;
+        this.taskForm.value.kanban_category = 'done';
       } else {
         isDone = false;
       }
