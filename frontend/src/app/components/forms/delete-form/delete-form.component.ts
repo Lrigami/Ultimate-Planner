@@ -10,7 +10,7 @@ import { ButtonComponent } from '../../buttons/button.component';
   styleUrl: './delete-form.component.css'
 })
 export class DeleteFormComponent {
-  @Input() task!: Task;
+  @Input() taskData!: Task;
   @Output() taskDeleted = new EventEmitter<boolean>();
 
   isFormVisible = false;
@@ -19,13 +19,12 @@ export class DeleteFormComponent {
 
   handleDeleteFormClose(isDeleted: boolean) {
     if(isDeleted) {
-      this.taskService.deleteTask(this.task.id).subscribe({
+      this.taskService.deleteTask(this.taskData.id).subscribe({
         next: () => {
           this.taskDeleted.emit(true);
         },
         error: (error) => console.log("Delete failed: ", error)
       });
     }
-    this.taskDeleted.emit(true);
   }
 }

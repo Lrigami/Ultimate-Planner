@@ -28,6 +28,6 @@
 <delete-form 
     *ngIf="isDeleteFormVisible && selectedTask"
     class="form"
-    [task]="selectedTask"
+    [taskData]="selectedTask"
     (taskDeleted)="handleFormClose()">
 </delete-form>
