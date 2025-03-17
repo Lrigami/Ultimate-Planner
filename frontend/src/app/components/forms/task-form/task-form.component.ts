@@ -14,7 +14,7 @@ import { TagFormComponent } from '../tag-form/tag-form.component';
   styleUrl: './task-form.component.css'
 })
 export class TaskFormComponent implements OnInit, OnChanges {
-  @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date };
+  @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date, done?: boolean};
   @Output() isFormVisible = new EventEmitter<boolean>();
   taskUpdated = new EventEmitter<boolean>();
 
@@ -57,7 +57,8 @@ export class TaskFormComponent implements OnInit, OnChanges {
         description: this.taskData.description ?? '',
         priority: this.taskData.priority ?? 'undefined',
         kanban_category: this.taskData.kanban_category ?? 'to-do',
-        due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toISOString().split('T')[0] : ''
+        due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toISOString().split('T')[0] : '',
+        isChecked: this.taskData.done
       });
     }
   }
@@ -72,18 +73,22 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   handleSaveFormClose(isSaved: boolean) {
     if (isSaved) {
+      let isDone;
+      if (this.taskForm.value.kanban_category === 'done' || this.taskForm.value.isChecked) {
+        isDone = true;
+      } else {
+        isDone = false;
+      }
       if (this.taskData) {
-        const formData = this.taskForm.value;
-        console.log("formData: ", formData);
         const updatedTask = {
           id: this.taskData.id,
           title: this.taskForm.value.title,
           description: this.taskForm.value.description,
           due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
           priority: this.taskForm.value.priority,
-          kanban_category: this.taskForm.value.kanban_category
+          kanban_category: this.taskForm.value.kanban_category,
+          done: isDone
         };
-        console.log("UpdatedTask: ", updatedTask);
 
         this.taskService.updateTask(updatedTask).subscribe({
           next: () => {
@@ -98,7 +103,8 @@ export class TaskFormComponent implements OnInit, OnChanges {
           description: this.taskForm.value.description,
           due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
           priority: this.taskForm.value.priority,
-          kanban_category: this.taskForm.value.kanban_category
+          kanban_category: this.taskForm.value.kanban_category,
+          done: isDone
         };
 
         this.taskService.createTask(newTask).subscribe({
@@ -120,7 +126,6 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   priorityColor() {
     const priorityRadioBtn = this.el.nativeElement.querySelector('input[type=radio]:checked');
-    console.log(priorityRadioBtn);
     const highPriority = this.el.nativeElement.querySelector('.high-priority');
     const mediumPriority = this.el.nativeElement.querySelector('.medium-priority');
     const lowPriority = this.el.nativeElement.querySelector('.low-priority');

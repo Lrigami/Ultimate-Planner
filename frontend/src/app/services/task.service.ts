@@ -15,7 +15,7 @@ export class TaskService {
 
     getAllTasks(): Observable<any> {
         return this.http.get<any>(`${this.apiUrl}`).pipe(
-            tap((tasks) => {
+            tap(() => {
                 this.taskListSubject.next();
             })
         )
@@ -33,18 +33,9 @@ export class TaskService {
         return this.http.post<any>(this.apiUrl, task);
     }
 
-    checkTask(task: {id: number, done: boolean}): Observable<any> {
-        return this.http.put<any>(`${this.apiUrl}/${task.id}`, task).pipe(
-            tap(() => {
-                this.taskListSubject.next();
-            })
-        )
-    }
-
     updateTask(task: {id: number, title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
-        console.log('task before put: ', task);
         return this.http.put<any>(`${this.apiUrl}/${task.id}`, task).pipe(
-            tap((task) => {
+            tap(() => {  
                 this.taskListSubject.next();
             })
         );

@@ -5,4 +5,5 @@ export interface Task {
     priority?: string;
     kanban_category?: string;
     due_date?: Date;
+    done: boolean;
   }
