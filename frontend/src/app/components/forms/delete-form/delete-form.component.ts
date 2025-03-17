@@ -25,6 +25,8 @@ export class DeleteFormComponent {
         },
         error: (error) => console.log("Delete failed: ", error)
       });
+    } else {
+      this.taskDeleted.emit(true);
     }
   }
 }
