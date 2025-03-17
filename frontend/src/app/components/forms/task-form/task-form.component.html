@@ -1,0 +1,78 @@
+<form [formGroup]="taskForm">    
+    <div class="form-elements">
+        <div class="main-info">
+            <input type="checkbox" id="checktask" name="checktask" formControlName="isChecked">
+            <span *ngIf="taskForm.get('isChecked')?.value" class="check material-symbols-outlined">check</span>
+            <div>
+            <input type="text" maxlength="60" id="task-title" name="task-title" placeholder="Title" formControlName="title">
+            <p>Category:
+                <select name="kanban-categories" id="kanban-categories" formControlName="kanban_category">
+                    <option *ngFor="let kanban_category of kanbanCategories" [value]="kanban_category">{{ kanban_category }}</option>
+                    <!-- Pour chaque catégorie existante du type kanban_category : afficher une option -->
+                </select>
+            </p>
+            </div>
+            <!-- Au click : le formulaire se ferme -->
+            <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="openSaveForm()"></button>
+        </div>
+        <div class="description-div">
+            <textarea cols="40" rows="6" placeholder="Description" formControlName="description"></textarea>
+        </div>
+        <hr />
+        <ul type="none">
+            <li class="due-date-li">
+                <span class="material-symbols-outlined">acute</span>
+                <label for="due-date">Due date: </label>
+                <input type="date" id="due-date" name="due-date" formControlName="due_date">
+            </li>
+            <li class="priority-li">
+                <p>Priority: </p>
+                <div id="priority-segmented-buttons" (click)="priorityColor()">
+                    <div class="high-priority">
+                        <label for="high-priority">High</label>
+                        <input type="radio" name="priority" id="high-priority" formControlName="priority" value="high">
+                    </div>
+                    <div class="medium-priority" (click)="priorityColor()">
+                        <label for="medium-priority">Medium</label>
+                        <input type="radio" name="priority" id="medium-priority" formControlName="priority" value="medium">
+                    </div>
+                    <div class="low-priority" (click)="priorityColor()">
+                        <label for="low-priority">Low</label>
+                        <input type="radio" name="priority" id="low-priority" formControlName="priority" value="low">
+                    </div>
+                </div>
+            </li>
+            <li class="tags-li">
+                <span>Tags: </span><button app-button icon="add" class="icon-btn not-filled-btn no-outline" (click)="openNewTagForm()"></button>
+                <ul type="none">
+                    <!-- For tag in tags table : display tag sous forme de bouton checkbox -->
+                    <!-- Cliquer sur le bouton ouvre un formulaire de création de tag -->
+                </ul>              
+            </li>
+        </ul>
+    </div>
+    <div class="choices-btn">
+        <button app-button text="Save" 
+            class="btn no-outline" 
+            [disabled]="taskForm.invalid" 
+            [ngClass]="taskForm.invalid ? 'grey-tonal-btn no-hover' : 'green-tonal-btn'" 
+            (click)="handleSaveFormClose(true)">
+        </button>
+        <button app-button text="Cancel" 
+            class="btn outlined grey-outline not-filled-btn" 
+            (click)="closeForm()">
+        </button>
+    </div>
+</form>
+
+<save-form 
+    *ngIf="isSaveFormVisible"
+    class="form" 
+    (saveData)="handleSaveFormClose($event)">
+</save-form>
+
+<tag-form 
+    *ngIf="isTagFormVisible"    
+    class="form" 
+    (saveData)="handleTagFormClose()">
+</tag-form>

@@ -1,1 +1,33 @@
-<p>to-do-list works!</p>
+<!-- Changer le nom du titre pour celui de la to-do list dans la prochaine branche -->
+<h2>To-do list title</h2>
+
+<div class="list-controls"></div>
+
+
+<task-list 
+    (editTask)="openEditForm($event)" 
+    (deleteTask)="openDeleteForm($event)"
+    (createTask)="openNewTaskForm()">
+</task-list>
+
+<task-form
+    *ngIf="isEditFormVisible && selectedTask" 
+    class="form"
+    [taskData]="selectedTask"
+    (isFormVisible)="handleFormClose()"
+    (taskUpdated)="handleFormClose()">
+</task-form>
+
+<task-form
+    *ngIf="isAddFormVisible" 
+    class="form"
+    (isFormVisible)="handleFormClose()"
+    (taskUpdated)="handleFormClose()">
+</task-form>
+
+<delete-form 
+    *ngIf="isDeleteFormVisible && selectedTask"
+    class="form"
+    [taskData]="selectedTask"
+    (taskDeleted)="handleFormClose()">
+</delete-form>

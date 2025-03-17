@@ -1,0 +1,12 @@
+.task-list {
+    position: relative;
+    max-height: 90dvh;
+    overflow-y: scroll;
+    padding-top: 10px;
+}
+
+.add-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 500px;
+}
