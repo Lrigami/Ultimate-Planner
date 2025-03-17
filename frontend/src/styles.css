@@ -270,10 +270,12 @@ color-form {
 delete-form {
     flex-direction: column;
     height: 200px;
+    max-width: 400px;
 }
 
 task-form {
-    max-height: 500px;
+    max-height: 600px;
+    max-width: 400px;
 }
 
 /* personalised colors */
