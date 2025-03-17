@@ -209,7 +209,7 @@ task-card {
     height: 80px;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--grey-outline);
     margin-bottom: 10px;
     gap: 15px;
     position: relative;
