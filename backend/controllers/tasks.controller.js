@@ -10,9 +10,21 @@ class Controller {
         this.deleteTask = this.deleteTask.bind(this);
     }
 
+    async getTdlid(req, res) {
+        try {
+            const tdlid = req.params.tdlid;
+            if(!tdlid) return res.status(404).json({message : "To-do list not found."});
+            res.status(200).json(tdlid);
+            return await tdlid;
+        } catch (err) {
+            res.status(500).json({message: err.message});
+        }
+    }
+
     async createNewTask(req, res) {
         try {
-            const newTask = await taskFunctions.createNewTask(req.body);
+            const tdlid = this.getTdlid(req);
+            const newTask = await taskFunctions.createNewTask(tdlid, req.body);
             res.status(201).json(newTask);
         } catch (err) {
             res.status(500).json({message: err.message})
@@ -21,7 +33,8 @@ class Controller {
 
     async readAllTasks(req, res) {
         try {
-            const allTasks = await taskFunctions.readAllTasks();
+            const tdlid = this.getTdlid(req);
+            const allTasks = await taskFunctions.readAllTasks(tdlid);
             res.status(200).json(allTasks);
         } catch (err) {
             res.status(500).json({message: err.message});
@@ -31,7 +44,7 @@ class Controller {
     async readOneTask(req, res) {
         try {
             const oneTask = await taskFunctions.readOneTask(req.params.id);
-            if (!oneTask) return res.status(404).json({message: "Task not Found."});
+            if (!oneTask) return res.status(404).json({message: "Task not found."});
             res.status(200).json(oneTask);
         } catch (err) {
             res.status(500).json({message: err.message});

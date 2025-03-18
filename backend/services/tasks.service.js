@@ -2,15 +2,15 @@
 const taskMethods = require('../repositories/tasks.repo');
 
 class Functions {
-    async createNewTask(taskData) {
+    async createNewTask(tdlid, taskData) {
         if(!taskData.title) {
             throw new Error("A title is required.");
         }
-        return await taskMethods.create(taskData);
+        return await taskMethods.create(tdlid, taskData);
     }
 
-    async readAllTasks() {
-        return await taskMethods.readAll();
+    async readAllTasks(tdlid) {
+        return await taskMethods.readAll(tdlid);
     }
 
     async readOneTask(taskId) {

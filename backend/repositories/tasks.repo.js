@@ -5,19 +5,19 @@ class Method {
 
     // Attention : il faudra changer le "1" de to_do_list_id pour qu'il soit un paramètre, afin que la tâche soit ajoutée dans la bonne to-do list lorsqu'il y en aura plusieurs. 
     // Ou alors changer la route pour qu'elle suive ce format : /:to-do-list/tasks
-    async create(data) {
+    async create(tdlid, data) {
         const { title, description, due_date, priority, kanban_category, done } = data;
 
-        const query = `INSERT INTO tasks (to_do_list_id, title, description, due_date, priority, kanban_category, done) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+        const query = `INSERT INTO tasks (to_do_list_id, title, description, due_date, priority, kanban_category, done) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *`;
 
-        const values = [1, title, description || null, due_date || null, priority || 'undefined', kanban_category || 'to-do', done || false];
+        const values = [tdlid, title, description || null, due_date || null, priority || 'undefined', kanban_category || 'to-do', done || false];
 
         const result = await pool.query(query, values);
         return result.rows[0];
     }
 
-    async readAll() {
-        const result = await query('SELECT * FROM tasks');
+    async readAll(tdlid) {
+        const result = await query(`SELECT * FROM tasks WHERE to_do_list_id = ${tdlid}`);
         return result.rows;
     }
 
