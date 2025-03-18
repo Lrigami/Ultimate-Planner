@@ -1,0 +1,4 @@
+.to-do-list-card-list {
+    display: flex;
+    gap: 10px;
+}

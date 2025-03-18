@@ -204,6 +204,18 @@ task-list {
 
 /* cards */
 
+to-do-list-card {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 150px;
+    padding: 5px 5px 10px 5px;
+}
+
 task-card {
     width: 700px;
     height: 80px;
