@@ -51,8 +51,8 @@ The project is currently in the development phase. The project has been initiate
 
 Here is the project roadmap for the moment: 
 - [ ] To-do list and task management (#13); 
-- [ ] Kanban view of tasks;
-- [ ] Management of several to-do lists;
+- [ ] Management of several to-do lists (#17);
+- [ ] Kanban view;
 - [ ] Management of notes;
 - [ ] Tracker management (water, mood, sleep); 
 - [ ] Habit management;
