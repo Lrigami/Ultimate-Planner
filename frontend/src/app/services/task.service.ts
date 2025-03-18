@@ -8,10 +8,17 @@ import { Observable, tap, BehaviorSubject } from 'rxjs';
 export class TaskService {
     private taskListSubject = new BehaviorSubject<void>(null!);
     taskList$ = this.taskListSubject.asObservable();
-    private apiUrl = 'http://localhost:3000/1/tasks';
+    private baseUrl = 'http://localhost:3000/todolist';
+    private todolistId: number = 1;
+    private apiUrl = `${this.baseUrl}/${this.todolistId}/tasks`;
     private apiUrlKanban = 'http://localhost:3000/kanban';
 
     constructor(private http: HttpClient) {}
+
+    setTodolistId(id: number): void {
+        this.todolistId = id;
+        this.apiUrl = `${this.baseUrl}/${this.todolistId}/tasks`;
+    }
 
     getAllTasks(): Observable<any> {
         return this.http.get<any>(`${this.apiUrl}`).pipe(

@@ -22,6 +22,7 @@ export class TaskListComponent {
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
+    this.taskService.setTodolistId(1);
     this.loadTasks();
   }
 

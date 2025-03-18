@@ -14,7 +14,7 @@ import { TagFormComponent } from '../tag-form/tag-form.component';
   styleUrl: './task-form.component.css'
 })
 export class TaskFormComponent implements OnInit, OnChanges {
-  @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date, done?: boolean};
+  @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date, done?: boolean, to_do_list_id: number };
   @Output() isFormVisible = new EventEmitter<boolean>();
   taskUpdated = new EventEmitter<boolean>();
 
@@ -92,7 +92,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
           due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
           priority: this.taskForm.value.priority,
           kanban_category: this.taskForm.value.kanban_category,
-          done: isDone
+          done: isDone,
         };
 
         this.taskService.updateTask(updatedTask).subscribe({

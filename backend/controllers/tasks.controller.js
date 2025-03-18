@@ -10,15 +10,9 @@ class Controller {
         this.deleteTask = this.deleteTask.bind(this);
     }
 
-    async getTdlid(req, res) {
-        try {
-            const tdlid = req.params.tdlid;
-            if(!tdlid) return res.status(404).json({message : "To-do list not found."});
-            res.status(200).json(tdlid);
-            return await tdlid;
-        } catch (err) {
-            res.status(500).json({message: err.message});
-        }
+    getTdlid(req, res) {
+        const tdlid = req.params.tdlid;
+        return tdlid;
     }
 
     async createNewTask(req, res) {
