@@ -2,9 +2,6 @@ const { query } = require("../config/database");
 const pool = require("../config/database");
 
 class Method {
-
-    // Attention : il faudra changer le "1" de to_do_list_id pour qu'il soit un paramètre, afin que la tâche soit ajoutée dans la bonne to-do list lorsqu'il y en aura plusieurs. 
-    // Ou alors changer la route pour qu'elle suive ce format : /:to-do-list/tasks
     async create(tdlid, data) {
         const { title, description, due_date, priority, kanban_category, done } = data;
 
@@ -17,12 +14,12 @@ class Method {
     }
 
     async readAll(tdlid) {
-        const result = await query(`SELECT * FROM tasks WHERE to_do_list_id = ${tdlid}`);
+        const result = await query(`SELECT * FROM tasks WHERE to_do_list_id = $1`, [tdlid]);
         return result.rows;
     }
 
     async readOne(id) {
-        const result = await query(`SELECT * FROM tasks WHERE id = ${id}`);
+        const result = await query(`SELECT * FROM tasks WHERE id = $1`, [id]);
         return result.rows;
     }
     
@@ -38,7 +35,7 @@ class Method {
     }
     
     async delete(id) {
-        const result = await query(`DELETE FROM tasks WHERE id = ${id}`);
+        const result = await query(`DELETE FROM tasks WHERE id = $1`, [id]);
         return result.rows;
     }
 };
