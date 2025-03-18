@@ -4,6 +4,7 @@ const cors = require('cors');
 const { query } = require('./config/database');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
+const todolistRoutes = require('./routes/todolist.route');
 const taskRoutes = require('./routes/tasks.route');
 const kanbanRoutes = require('./routes/kanban.route')
 // const tagRoutes = require('./routes/tags.route')
@@ -12,10 +13,12 @@ const port = process.env.SERV_PORT;
 
 app.use(cors()); 
 app.use(express.json());
-// Changer le 1 pour un paramètre :to-do-list
-app.use('/1/tasks', taskRoutes);
+
+app.use('/todolist', todolistRoutes);
+app.use('/todolist/:tdlid/tasks', taskRoutes);
 app.use('/kanban', kanbanRoutes);
 // app.use('/tags', tagRoutes);
+
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
