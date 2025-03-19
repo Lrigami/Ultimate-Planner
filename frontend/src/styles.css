@@ -205,15 +205,15 @@ task-list {
 /* cards */
 
 to-do-list-card {
+    width: 200px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
-    max-width: 150px;
-    padding: 5px 5px 10px 5px;
+    padding: 5px 5px 11px 5px;
+    position: relative;
 }
 
 task-card {

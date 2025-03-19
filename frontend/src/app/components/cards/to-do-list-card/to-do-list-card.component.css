@@ -1,0 +1,26 @@
+h3 {
+    margin: 5px 0;
+}
+
+p {
+    margin: 0;
+}
+
+.taskRatio, .taskPercentage {
+    position: absolute;
+    font-size: 24px;
+}
+
+.taskRatio {
+    bottom: 120px;
+}
+
+.taskPercentage {
+    bottom: 90px;
+}
+
+a {
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--text-black);
+}
