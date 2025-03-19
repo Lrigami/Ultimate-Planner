@@ -19,6 +19,9 @@ export class ToDoListsComponent {
   @Output() deleteList = new EventEmitter<Todolist>();
 
   todolists: Todolist[] = [];
+  totalTasksMap: { [key: number]: number } = {};
+  totalDoneTasksMap: { [key: number]: number } = {};
+  tasksPercentage: { [key: number]: number } = {};
 
   constructor(private todolistService: TodolistService) {}
 
@@ -30,6 +33,7 @@ export class ToDoListsComponent {
     this.todolistService.getAllLists().subscribe({
       next: (lists) => {
         this.todolists = lists;
+        this.countTasksAndDoneTasks();
       },
       error: (error) => console.error("Error fetching to-do lists: ", error)
     });
@@ -47,8 +51,45 @@ export class ToDoListsComponent {
     this.createList.emit();
   }
 
-  goToList(list: Todolist) {
-    const id = list.id;
-    // remplir cette fonction
+  countTasksAndDoneTasks() {
+    let pendingRequests = this.todolists.length * 2;
+  
+    this.todolists.forEach((list) => {
+      this.todolistService.countTasksInList(list.id).subscribe({
+        next: (total) => {
+          this.totalTasksMap[list.id] = total;
+          pendingRequests--;
+          this.checkAndCalculatePercentage(pendingRequests);
+        },
+        error: (error) => console.error(`Erreur de comptage des tâches pour la liste ${list.id}: `, error)
+      });
+
+      this.todolistService.countDoneTasksInList(list.id).subscribe({
+        next: (done) => {
+          this.totalDoneTasksMap[list.id] = done;
+          pendingRequests--;
+          this.checkAndCalculatePercentage(pendingRequests);
+        },
+        error: (error) => console.error(`Erreur de comptage des tâches terminées pour la liste ${list.id}: `, error)
+      });
+    });
+  }
+  
+  checkAndCalculatePercentage(pendingRequests: number) {
+    if (pendingRequests === 0) {
+      this.calculateTasksPercentage();
+    }
+  }
+
+  calculateTasksPercentage() {
+    this.todolists.forEach((list) => {
+      const totalTasks = this.totalTasksMap[list.id];
+      const doneTasks = this.totalDoneTasksMap[list.id];
+      if (totalTasks === 0) {
+        this.tasksPercentage[list.id] = 0.0; // Évite NaN
+      } else {
+        this.tasksPercentage[list.id] = Number(((doneTasks / totalTasks) * 100).toFixed(0));
+      }
+    })
   }
 }

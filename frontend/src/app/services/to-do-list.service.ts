@@ -47,4 +47,20 @@ export class TodolistService {
             })
         )
     }
+
+    countTasksInList(id: number): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/${id}/total`).pipe(
+            tap(() => {
+                this.todolistSubject.next();
+            })
+        )
+    }
+
+    countDoneTasksInList(id: number): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/${id}/done`).pipe(
+            tap(() => {
+                this.todolistSubject.next();
+            })
+        )
+    }
 }

@@ -22,8 +22,7 @@ export class TaskListComponent {
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
-    // changer ça pour que l'on prenne en paramètre la bonne to-do list et pas toujours 1
-    this.taskService.setTodolistId(1);
+    this.taskService.setTodolistId();
     this.loadTasks();
   }
 

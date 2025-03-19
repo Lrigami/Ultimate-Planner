@@ -23,6 +23,14 @@ class Functions {
     async deleteList(listId) {
         return await todolistMethods.delete(listId);
     }
+
+    async countTasks(listId) {
+        return await todolistMethods.countTasksInList(listId);
+    }
+
+    async countDoneTasks(listId) {
+        return await todolistMethods.countDoneTasksInList(listId);
+    }
 }
 
 module.exports = new Functions();

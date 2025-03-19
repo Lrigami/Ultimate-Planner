@@ -3,12 +3,15 @@
 <div class="to-do-list-card-list">
     <to-do-list-card
         *ngFor="let list of todolists"
-        [list]="list">
-        <!-- implementer 
+        [list]="list"
+        [totalTasks]="totalTasksMap[list.id] || 0"
+        [totalDoneTasks]="totalDoneTasksMap[list.id] || 0"
+        [percentage]="tasksPercentage[list.id] || 0">
+        <!-- implementer :
         
         (edit)="onEdit(list)"
         (delete)="onDelete(list)"
-        (click)="goToList(list)"
+        
         -->
     </to-do-list-card>
 </div>

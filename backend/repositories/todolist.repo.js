@@ -61,6 +61,24 @@ class Method {
             client.release();
         }
     }
+
+    async countTasksInList(listid) {
+        const query = `SELECT COUNT(id) FROM tasks WHERE to_do_list_id = $1`;
+
+        const values = [listid];
+
+        const result = await pool.query(query, values);
+        return result.rows[0].count;
+    }
+
+    async countDoneTasksInList(listid) {
+        const query = `SELECT COUNT(id) FROM tasks WHERE to_do_list_id = $1 AND done = $2`;
+
+        const values = [listid, true];
+
+        const result = await pool.query(query, values);
+        return result.rows[0].count;
+    }
 }
 
 module.exports = new Method("todolist");
