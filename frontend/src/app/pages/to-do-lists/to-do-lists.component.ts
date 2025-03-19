@@ -5,23 +5,26 @@ import { TodolistService } from '../../services/to-do-list.service';
 // importer title component, title form, to do list form
 import { ButtonComponent } from '../../components/buttons/button.component';
 import { ToDoListCardComponent } from '../../components/cards/to-do-list-card/to-do-list-card.component';
+import { ToDoListFormComponent } from '../../components/forms/to-do-list-form/to-do-list-form.component';
+import { DeleteFormComponent } from '../../components/forms/delete-form/delete-form.component';
 
 @Component({
   selector: 'to-do-lists',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, ToDoListCardComponent],
+  imports: [CommonModule, ButtonComponent, ToDoListCardComponent, ToDoListFormComponent, DeleteFormComponent],
   templateUrl: './to-do-lists.component.html',
   styleUrl: './to-do-lists.component.css'
 })
 export class ToDoListsComponent {
-  @Output() createList = new EventEmitter<any>();
-  @Output() editList = new EventEmitter<Todolist>();
-  @Output() deleteList = new EventEmitter<Todolist>();
-
   todolists: Todolist[] = [];
   totalTasksMap: { [key: number]: number } = {};
   totalDoneTasksMap: { [key: number]: number } = {};
   tasksPercentage: { [key: number]: number } = {};
+
+  selectedList: Todolist | null = null;
+  isAddFormVisible = false;
+  isEditFormVisible = false;
+  isDeleteFormVisible = false;
 
   constructor(private todolistService: TodolistService) {}
 
@@ -39,16 +42,34 @@ export class ToDoListsComponent {
     });
   }
 
-  onEdit(list: Todolist) {
-    this.editList.emit(list);
+  openNewListForm() {
+    if(this.isDeleteFormVisible || this.isEditFormVisible) {
+      return;
+    }
+    this.isAddFormVisible = true;
   }
 
-  onDelete(list: Todolist) {
-    this.deleteList.emit(list);
+  openEditForm(list: Todolist) {
+    if(this.isDeleteFormVisible || this.isAddFormVisible) {
+      return;
+    }
+    this.selectedList = list;
+    this.isEditFormVisible = true;
   }
 
-  onCreate() {
-    this.createList.emit();
+  openDeleteForm(list: Todolist) {
+    if(this.isEditFormVisible || this.isAddFormVisible) {
+      return;
+    }
+    this.selectedList = list;
+    this.isDeleteFormVisible = true;
+  }
+
+  handleFormClose() {
+    this.isEditFormVisible = false;
+    this.isDeleteFormVisible = false;
+    this.isAddFormVisible = false;
+    this.loadLists();
   }
 
   countTasksAndDoneTasks() {

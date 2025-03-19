@@ -6,14 +6,32 @@
         [list]="list"
         [totalTasks]="totalTasksMap[list.id] || 0"
         [totalDoneTasks]="totalDoneTasksMap[list.id] || 0"
-        [percentage]="tasksPercentage[list.id] || 0">
-        <!-- implementer :
-        
-        (edit)="onEdit(list)"
-        (delete)="onDelete(list)"
-        
-        -->
+        [percentage]="tasksPercentage[list.id] || 0"        
+        (edit)="openEditForm(list)"
+        (delete)="openDeleteForm(list)">
     </to-do-list-card>
 </div>
 
-<button app-button icon="add" text="Add" class="add-btn extended-fab-btn green-tonal-btn no-outline" (click)="onCreate()"></button>
+<button app-button icon="add" text="Add" class="add-btn extended-fab-btn green-tonal-btn no-outline" (click)="openNewListForm()"></button>
+
+<to-do-list-form
+    *ngIf="isEditFormVisible && selectedList" 
+    class="form"
+    [todolistData]="selectedList"
+    (isFormVisible)="handleFormClose()"
+    (todolistUpdated)="handleFormClose()">
+</to-do-list-form>
+
+<to-do-list-form
+    *ngIf="isAddFormVisible" 
+    class="form"
+    (isFormVisible)="handleFormClose()"
+    (todolistUpdated)="handleFormClose()">
+</to-do-list-form>
+
+<delete-form 
+    *ngIf="isDeleteFormVisible && selectedList"
+    class="form"
+    [todolistData]="selectedList"
+    (todolistDeleted)="handleFormClose()">
+</delete-form>

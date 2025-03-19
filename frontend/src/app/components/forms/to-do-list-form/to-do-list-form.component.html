@@ -1,1 +1,36 @@
-<p>to-do-list-form works!</p>
+<form [formGroup]="todolistForm">
+    <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="openSaveForm()"></button>
+    <div class="todolist-title">
+        <label for="list-title">Choose a name:</label>
+        <input type="text" maxlength="60" id="list-title" name="list-title" placeholder="My to-do list" formControlName="title">
+    </div>
+    <div class="todolist-color">
+        <label for="list-color">Pick a color:</label>
+        <button id="list-color"></button>
+        <!-- Insérer ici le choix de la couleur
+         Le formControlName="color" sur ce qui s'ouvre ensuite. Voir plus tard pour la gestion des couleurs. -->
+    </div>
+    <div class="todolist-pin">
+        <label for="pin-list"><span class="material-symbols-outlined">keep</span> Pin to the menu?</label>
+        <input type="checkbox" id="pin-list" name="pin-list-to-menu" formControlName="isPinned">
+        <span *ngIf="todolistForm.get('isPinned')?.value" class="check material-symbols-outlined">check</span>
+    </div>
+    <div class="choices-btn">
+        <button app-button text="Save" 
+            class="btn no-outline" 
+            [disabled]="todolistForm.invalid" 
+            [ngClass]="todolistForm.invalid ? 'grey-tonal-btn no-hover' : 'green-tonal-btn'" 
+            (click)="handleSaveFormClose(true)">
+        </button>
+        <button app-button text="Cancel" 
+            class="btn outlined grey-outline not-filled-btn" 
+            (click)="closeForm()">
+        </button>
+    </div>
+</form>
+
+<save-form 
+    *ngIf="isSaveFormVisible"
+    class="form" 
+    (saveData)="handleSaveFormClose($event)">
+</save-form>

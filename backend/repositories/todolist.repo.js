@@ -1,5 +1,4 @@
-const { query } = require("../config/database");
-const pool = require("../config/database");
+const { pool, query } = require("../config/database");
 
 class Method {
 
@@ -7,11 +6,12 @@ class Method {
         // créer une to-do list (titre, couleur, pinned)
         const { title, pinned, color } = data;
 
-        const query = `INSERT INTO to_do_lists (title, pinned, color) VALUES ($1, $2, $3) RETURNING *`;
+        const query = `INSERT INTO to_do_lists (user_id, title, pinned, color) VALUES ($1, $2, $3, $4) RETURNING *`;
 
-        const values = [title, pinned || false, color || 'grey'];
+        const values = [1, title, pinned || false, color || 'grey'];
 
         const result = await pool.query(query, values);
+
         return result.rows[0];
     }
 

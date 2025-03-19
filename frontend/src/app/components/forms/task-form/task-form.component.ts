@@ -117,7 +117,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
             this.taskUpdated.emit(true);
             this.closeForm();
           },
-          error: (error) => console.error("Update failed: ", error)
+          error: (error) => console.error("Create task failed: ", error)
         });
       }
     } else {

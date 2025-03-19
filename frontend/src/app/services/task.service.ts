@@ -17,11 +17,9 @@ export class TaskService {
 
     setTodolistId(): void {
         this.apiUrl = `${this.baseUrl}${this.router.url}`;
-        console.log("setTodoListId est appelée.");
     }
 
     getAllTasks(): Observable<any> {
-        console.log("apiUrl: ", this.apiUrl);
         return this.http.get<any>(`${this.apiUrl}/tasks`).pipe(
             tap(() => {
                 this.taskListSubject.next();
