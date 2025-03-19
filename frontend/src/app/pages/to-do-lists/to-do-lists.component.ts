@@ -8,6 +8,7 @@ import { ToDoListCardComponent } from '../../components/cards/to-do-list-card/to
 
 @Component({
   selector: 'to-do-lists',
+  standalone: true,
   imports: [CommonModule, ButtonComponent, ToDoListCardComponent],
   templateUrl: './to-do-lists.component.html',
   styleUrl: './to-do-lists.component.css'
@@ -46,7 +47,8 @@ export class ToDoListsComponent {
     this.createList.emit();
   }
 
-  goToList() {
+  goToList(list: Todolist) {
+    const id = list.id;
     // remplir cette fonction
   }
 }
