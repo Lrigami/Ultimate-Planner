@@ -11,7 +11,7 @@
          Le formControlName="color" sur ce qui s'ouvre ensuite. Voir plus tard pour la gestion des couleurs. -->
     </div>
     <div class="todolist-pin">
-        <label for="pin-list"><span class="material-symbols-outlined">keep</span> Pin to the menu?</label>
+        <label for="pin-list"><span class="keep-icon material-symbols-outlined">keep</span> Pin to the menu?</label>
         <input type="checkbox" id="pin-list" name="pin-list-to-menu" formControlName="isPinned">
         <span *ngIf="todolistForm.get('isPinned')?.value" class="check material-symbols-outlined">check</span>
     </div>

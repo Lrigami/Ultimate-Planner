@@ -3,6 +3,14 @@
     gap: 5px;
 }
 
+.keep-icon {
+    transition: 0.3s;
+}
+
+.keep-icon:hover {
+    rotate: 45deg;
+}
+
 h3 {
     margin: 5px 0;
 }
