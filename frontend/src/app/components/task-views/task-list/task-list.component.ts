@@ -105,6 +105,17 @@ export class TaskListComponent {
       this.tasks = [...keptTasks];
     }
 
+    const idList: number[] = [];
+    const finalTasks: Task[] = [];
+    this.tasks.forEach(task => {
+      if (!idList.includes(task.id)) {
+        idList.push(task.id);
+        finalTasks.push(task);
+      }
+    });
+
+    this.tasks = [...finalTasks];
+
     this.sortTasks();
   }
 
