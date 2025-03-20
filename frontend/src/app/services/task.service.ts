@@ -11,7 +11,6 @@ export class TaskService {
     taskList$ = this.taskListSubject.asObservable();
     private baseUrl = 'http://localhost:3000';
     private apiUrl = `${this.baseUrl}`;
-    private apiUrlKanban = 'http://localhost:3000/kanban';
 
     constructor(private router: Router, private http: HttpClient) {}
 
@@ -58,7 +57,15 @@ export class TaskService {
     // kanban_category 
 
     getAllKanban() {
-        return this.http.get<string[]>(`${this.apiUrlKanban}`).pipe(
+        return this.http.get<string[]>(`${this.apiUrl}/enums/kanban`).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
+
+    getAllPriority() {
+        return this.http.get<string[]>(`${this.apiUrl}/enums/priority`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })

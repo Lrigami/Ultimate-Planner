@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Todolist } from '../../../models/todolist.model';
 import { TodolistService } from '../../../services/to-do-list.service';
 import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
   selector: 'to-do-list-card',
-  imports: [RouterLink, RouterOutlet, CommonModule, ButtonComponent],
+  imports: [RouterLink, CommonModule, ButtonComponent],
   templateUrl: './to-do-list-card.component.html',
   styleUrl: './to-do-list-card.component.css'
 })

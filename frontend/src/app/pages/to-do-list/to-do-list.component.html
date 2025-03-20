@@ -1,7 +1,28 @@
 <!-- Changer le nom du titre pour celui de la to-do list dans la prochaine branche -->
 <h2>To-do list title</h2>
 
-<div class="list-controls"></div>
+<div class="list-controls">
+    <!-- insérer ici le segmented button pour la vue en list / kanban -->
+    <div class="filters">
+        <p>Filter by: </p>
+        <!-- S'occuper plus tard du style des select -->
+        <mat-form-field>
+            <mat-label>Priority</mat-label>
+            <mat-select multiple name="priority-filter" id="priority-filter" [formControl]="priority" (selectionChange)="onPriorityChange($event)">
+                <mat-option *ngFor="let priority_level of priorityLevels" [value]="priority_level">{{ priority_level }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Due date</mat-label>
+            <mat-select multiple name="due-date-filter" id="due-date-filter" [formControl]="dueDate" (selectionChange)="onDueDateChange($event)">
+                <mat-option value="today">Today</mat-option>
+                <mat-option value="tomorrow">Tomorrow</mat-option>
+                <mat-option value="this-week">This week</mat-option>
+                <mat-option value="this month">This month</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
 
 <task-list 
     (editTask)="openEditForm($event)" 

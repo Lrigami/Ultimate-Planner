@@ -1,0 +1,14 @@
+.list-controls {
+    display: flex;
+}
+
+.filters {
+    display: flex;
+    width: 60%;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filters p {
+    width: 100px;
+}
