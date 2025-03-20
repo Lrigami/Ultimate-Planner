@@ -57,7 +57,7 @@ export class TaskService {
     // kanban_category 
 
     getAllKanban() {
-        return this.http.get<string[]>(`${this.apiUrl}/enums/kanban`).pipe(
+        return this.http.get<string[]>(`${this.baseUrl}/enums/kanban`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -65,7 +65,7 @@ export class TaskService {
     }
 
     getAllPriority() {
-        return this.http.get<string[]>(`${this.apiUrl}/enums/priority`).pipe(
+        return this.http.get<string[]>(`${this.baseUrl}/enums/priority`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })

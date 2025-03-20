@@ -71,13 +71,11 @@ export class ToDoListComponent {
 
   onPriorityChange(event: MatSelectChange) {
     this.selectedPriority = event.value;
-    console.log("Priorités sélectionnées: ", this.selectedPriority);
     this.filterTasks();
   }
 
   onDueDateChange(event: MatSelectChange) {
     this.selectedDueDate = event.value;
-    console.log("due date sélectionnées: ", this.selectedDueDate);
     this.filterTasks();
   }
 

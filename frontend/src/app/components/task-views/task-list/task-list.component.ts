@@ -31,7 +31,6 @@ export class TaskListComponent {
       this.taskService.getAllTasks().subscribe({
         next: (tasks) => {
           this.tasks = tasks;
-          console.log("loadTasks: ", this.tasks);
           this.sortTasks();
           resolve();
         },
@@ -68,8 +67,6 @@ export class TaskListComponent {
   }
 
   private applyFilters(priorityArray: [], dueDateArray: []) {
-    console.log("priorités filtrées: ", priorityArray);
-    console.log("due dates filtrées: ", dueDateArray);
 
     let keptTasks: Task[] = [];
 
@@ -83,14 +80,16 @@ export class TaskListComponent {
     if (dueDateArray.length > 0) {
       dueDateArray.forEach(duedate => {
         if (duedate === "today") {
-          const dateTasks = this.tasks.filter(task => task.due_date? task.due_date <= this.addDays(new Date(), 0) : null);
+          const dateTasks = this.tasks.filter(task => task.due_date? new Date(task.due_date).toDateString() == this.addDays(new Date(), 0).toDateString() : null);
           keptTasks.push(...dateTasks);
         } else if (duedate === "tomorrow") {
-          const dateTasks = this.tasks.filter(task => task.due_date? task.due_date <= this.addDays(new Date(), 1) : null);
+          const dateTasks = this.tasks.filter(task => task.due_date? new Date(task.due_date).toDateString() == this.addDays(new Date(), 1).toDateString() : null);
           keptTasks.push(...dateTasks);
         } else if (duedate === "this week") {
+          const today = this.addDays(new Date(), 0);
           const remainingDays = 6 - new Date().getDay();
-          const dateTasks = this.tasks.filter(task => task.due_date? task.due_date <= this.addDays(new Date(), remainingDays) : null);
+          const endOfWeek = this.addDays(new Date(), remainingDays);
+          const dateTasks = this.tasks.filter(task => task.due_date ? new Date(task.due_date).getFullYear() === today.getFullYear() && new Date(task.due_date).getMonth() === today.getMonth() && new Date(task.due_date).getDate() >= today.getDate() && new Date(task.due_date).getDate() <= endOfWeek.getDate() : null);
           keptTasks.push(...dateTasks);
         } else if (duedate === "this month") {
           const thismonth = new Date().getMonth();
