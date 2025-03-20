@@ -132,6 +132,8 @@ Ce projet est sous licence ``exemple: WTFTPL`` - voir le fichier [LICENSE.md](LI
 
 Use this space to list resources you find helpful and would like to give credit to.
 
+[Svg Circle Progress](https://github.com/bootsoon/ng-circle-progress/tree/master)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Authors
