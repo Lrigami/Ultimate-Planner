@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Task } from '../../models/task.model';
+import { TodolistService } from '../../services/to-do-list.service';
 import { TaskService } from '../../services/task.service';
 import { TaskListComponent } from '../../components/task-views/task-list/task-list.component';
 import { TaskFormComponent } from '../../components/forms/task-form/task-form.component';
@@ -20,6 +22,7 @@ export class ToDoListComponent {
   priorityLevels: string[] = [];
   priority = new FormControl('');
   dueDate = new FormControl('');
+  listTitle: string = '';
 
   isAddFormVisible = false;
   isEditFormVisible = false;
@@ -28,12 +31,21 @@ export class ToDoListComponent {
   selectedPriority: [] = [];
   selectedDueDate: [] = [];
 
-  constructor (public taskService: TaskService) {}
+  constructor (public taskService: TaskService, public todolistService: TodolistService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.taskService.getAllPriority().subscribe({
       next: (allPriority) => this.priorityLevels = allPriority,
       error: (error) => console.error("Get Priority failed: ", error)
+    });
+    this.route.paramMap.subscribe(params => {
+      const listId = params.get('tdlid');
+      this.todolistService.getList(Number(listId)).subscribe({
+        next: (list) => {
+          this.listTitle = list[0].title;
+        },
+        error: (error) => console.error("Get list title failed: ", error)
+      });
     });
   }
 
