@@ -6,11 +6,6 @@ import { ToDoListComponent } from './pages/to-do-list/to-do-list.component';
 
 export const routes: Routes = [
     {
-        path: '',
-        title: 'Home Page',
-        component: AppComponent,
-    },
-    {
         path: 'todolist',
         title: 'My To Do lists',
         component: ToDoListsComponent,
