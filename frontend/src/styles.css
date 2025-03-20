@@ -235,7 +235,6 @@ task-card {
     height: 80px;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid var(--grey-outline);
     margin-bottom: 10px;
     gap: 15px;
     position: relative;
@@ -338,3 +337,5 @@ task-form {
 .green {
     background-color: var(--green-personalised);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

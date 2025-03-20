@@ -1,7 +1,8 @@
 .task-card-content {
     display: flex;
     flex-direction: column;
-    min-width: 50%;
+    min-width: 85%;
+    border-bottom: 1px solid var(--grey-outline);
 }
 
 .task-card-content p {
