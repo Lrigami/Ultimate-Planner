@@ -14,12 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 const todolistRoutes = require('./routes/todolist.route');
 const taskRoutes = require('./routes/tasks.route');
-const kanbanRoutes = require('./routes/kanban.route')
+const enumsRoutes = require('./routes/enums.route')
 // const tagRoutes = require('./routes/tags.route')
 
 app.use('/todolist', todolistRoutes);
 app.use('/todolist/:tdlid/tasks', taskRoutes);
-app.use('/kanban', kanbanRoutes);
+app.use('/enums', enumsRoutes);
 // app.use('/tags', tagRoutes);
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
