@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgCircleProgressModule, CircleProgressOptions } from 'ng-circle-progress';
+import { circleProgressConfig } from '../../../circle-progress.config';
 import { RouterLink } from '@angular/router';
 import { Todolist } from '../../../models/todolist.model';
 import { TodolistService } from '../../../services/to-do-list.service';
@@ -7,7 +9,9 @@ import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
   selector: 'to-do-list-card',
-  imports: [RouterLink, CommonModule, ButtonComponent],
+  standalone: true,
+  imports: [RouterLink, CommonModule, NgCircleProgressModule, ButtonComponent],
+  providers: [{ provide: CircleProgressOptions, useValue: circleProgressConfig }],
   templateUrl: './to-do-list-card.component.html',
   styleUrl: './to-do-list-card.component.css'
 })
