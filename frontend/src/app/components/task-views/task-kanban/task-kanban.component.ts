@@ -55,17 +55,14 @@ export class TaskKanbanComponent {
 
   sortTasks() {
     this.tasks.sort((a, b) => b.id - a.id);
-    const taskNotDone = this.tasks.filter(task => !task.done);
-    const taskDone = this.tasks.filter(task => task.done);
-    this.tasks = [...taskNotDone, ...taskDone];
   }
 
   onEdit(task: Task) {
-    this.editTask.emit(task); // Émet un événement vers le parent
+    this.editTask.emit(task);
   }
 
   onDelete(task: Task) {
-    this.deleteTask.emit(task); // Émet un événement vers le parent
+    this.deleteTask.emit(task); 
   }
 
   onCreate() {

@@ -1,5 +1,6 @@
 ul {
     display: flex;
+    gap: 30px;
 }
 
 ul li {
@@ -8,4 +9,11 @@ ul li {
 
 task-card {
     max-width: 100%;
+}
+
+.kanban-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 10px 40px ;
 }
