@@ -65,7 +65,7 @@ export class TaskKanbanComponent {
     this.deleteTask.emit(task); 
   }
 
-  onCreate() {
-    this.createTask.emit();
+  onCreate(kanban: string) {
+    this.createTask.emit(kanban);
   }
 }

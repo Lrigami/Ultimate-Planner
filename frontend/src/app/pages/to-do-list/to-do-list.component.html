@@ -43,13 +43,21 @@
     *ngIf="chosenView === 'kanban'"
     (editTask)="openEditForm($event)" 
     (deleteTask)="openDeleteForm($event)"
-    (createTask)="openNewTaskForm()">
+    (createTask)="openNewTaskKanbanForm($event)">
 </task-kanban>
 
 <task-form
     *ngIf="isEditFormVisible && selectedTask" 
     class="form"
     [taskData]="selectedTask"
+    (isFormVisible)="handleFormClose()"
+    (taskUpdated)="handleFormClose()">
+</task-form>
+
+<task-form
+    *ngIf="isAddKanbanFormVisible && selectedKanban" 
+    class="form"
+    [kanbanData]="selectedKanban"
     (isFormVisible)="handleFormClose()"
     (taskUpdated)="handleFormClose()">
 </task-form>

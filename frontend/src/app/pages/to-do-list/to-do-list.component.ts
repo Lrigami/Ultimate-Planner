@@ -22,12 +22,14 @@ export class ToDoListComponent {
   @ViewChild(TaskListComponent) taskListComponent!: TaskListComponent;
   @ViewChild(TaskKanbanComponent) taskKanbanComponent!: TaskKanbanComponent;
   selectedTask: Task | null = null;
+  selectedKanban: string = '';
   priorityLevels: string[] = [];
   priority = new FormControl('');
   dueDate = new FormControl('');
   listTitle: string = '';
 
   isAddFormVisible = false;
+  isAddKanbanFormVisible = false;
   isEditFormVisible = false;
   isDeleteFormVisible = false;
 
@@ -55,14 +57,22 @@ export class ToDoListComponent {
   }
 
   openNewTaskForm() {
-    if(this.isDeleteFormVisible || this.isEditFormVisible) {
+    if(this.isDeleteFormVisible || this.isEditFormVisible || this.isAddKanbanFormVisible) {
       return;
     }
     this.isAddFormVisible = true;
   }
 
+  openNewTaskKanbanForm(kanban: string) {
+    if (this.isDeleteFormVisible || this.isEditFormVisible || this.isAddFormVisible) {
+      return;
+    }
+    this.selectedKanban = kanban;
+    this.isAddKanbanFormVisible = true;
+  }
+
   openEditForm(task: Task) {
-    if(this.isDeleteFormVisible || this.isAddFormVisible) {
+    if(this.isDeleteFormVisible || this.isAddFormVisible || this.isAddKanbanFormVisible) {
       return;
     }
     this.selectedTask = task;
@@ -70,7 +80,7 @@ export class ToDoListComponent {
   }
 
   openDeleteForm(task: Task) {
-    if(this.isEditFormVisible || this.isAddFormVisible) {
+    if(this.isEditFormVisible || this.isAddFormVisible || this.isAddKanbanFormVisible) {
       return;
     }
     this.selectedTask = task;
@@ -81,6 +91,7 @@ export class ToDoListComponent {
     this.isEditFormVisible = false;
     this.isDeleteFormVisible = false;
     this.isAddFormVisible = false;
+    this.isAddKanbanFormVisible = false;
     if (this.taskListComponent) {
       this.taskListComponent.loadTasks();
     } else if (this.taskKanbanComponent) {

@@ -15,6 +15,7 @@ import { TagFormComponent } from '../tag-form/tag-form.component';
 })
 export class TaskFormComponent implements OnInit, OnChanges {
   @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date, done?: boolean, to_do_list_id: number };
+  @Input() kanbanData!: string;
   @Output() isFormVisible = new EventEmitter<boolean>();
   taskUpdated = new EventEmitter<boolean>();
 
@@ -59,6 +60,10 @@ export class TaskFormComponent implements OnInit, OnChanges {
         kanban_category: this.taskData.kanban_category ?? 'to-do',
         due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toISOString().split('T')[0] : '',
         isChecked: this.taskData.done
+      });
+    } else if (this.kanbanData) {
+      this.taskForm.patchValue({
+        kanban_category: this.kanbanData ?? 'to-do'
       });
     }
   }
