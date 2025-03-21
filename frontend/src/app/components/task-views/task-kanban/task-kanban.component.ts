@@ -57,6 +57,22 @@ export class TaskKanbanComponent {
     this.tasks.sort((a, b) => b.id - a.id);
   }
 
+  async filterTasks(priorityArray: [], chosenOperator: string, dueDateArray: []) {
+    await this.loadTasks();
+    this.applyFilters(priorityArray, chosenOperator, dueDateArray);
+  }
+
+  private applyFilters(priorityArray: [], chosenOperator: string, dueDateArray: []) {
+    const priority = priorityArray;
+    const operator = chosenOperator;
+    const duedate = dueDateArray;
+    this.taskService.filterTask({ priority, operator, duedate }).subscribe({
+      next: (tasks) => this.tasks = tasks,
+      error: (error) => console.error(error)
+    });
+    this.sortTasks();
+  }
+
   onEdit(task: Task) {
     this.editTask.emit(task);
   }

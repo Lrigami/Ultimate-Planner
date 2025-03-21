@@ -117,6 +117,8 @@ export class ToDoListComponent {
   async filterTasks() {
     if (this.taskListComponent) {
       await this.taskListComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate);
+    } else if (this.taskKanbanComponent) {
+      await this.taskKanbanComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate);
     }
   }
 

@@ -4,7 +4,7 @@ ul {
 }
 
 ul li {
-    max-width: 30dvw;
+    width: 30dvw;
 }
 
 task-card {
