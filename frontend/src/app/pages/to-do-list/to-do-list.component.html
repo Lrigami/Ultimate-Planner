@@ -12,6 +12,10 @@
                 <mat-option *ngFor="let priority_level of priorityLevels" [value]="priority_level">{{ priority_level }}</mat-option>
             </mat-select>
         </mat-form-field>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="chosenOperator" (change)="onOperatorChange($event)">
+            <mat-button-toggle value="AND">And</mat-button-toggle>
+            <mat-button-toggle value="OR">Or</mat-button-toggle>
+        </mat-button-toggle-group>
         <mat-form-field>
             <mat-label>Due date</mat-label>
             <mat-select multiple name="due-date-filter" id="due-date-filter" [formControl]="dueDate" (selectionChange)="onDueDateChange($event)">

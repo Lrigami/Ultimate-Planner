@@ -8,6 +8,7 @@ class Controller {
         this.readOneTask = this.readOneTask.bind(this);
         this.updateTask = this.updateTask.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
+        this.filterTasks = this.filterTasks.bind(this);
     }
 
     getTdlid(req, res) {
@@ -60,6 +61,17 @@ class Controller {
             const deletedTask = await taskFunctions.deleteTask(req.params.id);
             if (!deletedTask) return res.status(404).json({message: "Task not Found."});
             res.status(200).json(deletedTask);
+        } catch (err) {
+            res.status(500).json({message: err.message});
+        }
+    }
+
+    async filterTasks(req, res) {
+        try {  
+            const tdlid = this.getTdlid(req);
+            const filteredTasks = await taskFunctions.filterTasks(tdlid, req.body);
+            if (!filteredTasks) return res.status(404).json({message: "Tasks not found."});
+            res.status(201).json(filteredTasks);
         } catch (err) {
             res.status(500).json({message: err.message});
         }

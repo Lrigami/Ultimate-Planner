@@ -36,7 +36,7 @@ export class TaskListComponent {
         },
         error: (error) => {
           console.error("Error fetching tasks: ", error);
-          reject(error);
+          reject(new Error(error));
         }
       });
     });
@@ -61,61 +61,19 @@ export class TaskListComponent {
     this.tasks = [...taskNotDone, ...taskDone];
   }
 
-  async filterTasks(priorityArray: [], dueDateArray: []) {
+  async filterTasks(priorityArray: [], chosenOperator: string, dueDateArray: []) {
     await this.loadTasks();
-    this.applyFilters(priorityArray, dueDateArray);
+    this.applyFilters(priorityArray, chosenOperator, dueDateArray);
   }
 
-  private applyFilters(priorityArray: [], dueDateArray: []) {
-
-    let keptTasks: Task[] = [];
-
-    if (priorityArray.length > 0) {
-      priorityArray.forEach(priority => {
-        const priorityTasks = this.tasks.filter(task => task.priority === priority);
-        keptTasks.push(...priorityTasks);
-      });
-    }
-
-    if (dueDateArray.length > 0) {
-      dueDateArray.forEach(duedate => {
-        if (duedate === "today") {
-          const dateTasks = this.tasks.filter(task => task.due_date? new Date(task.due_date).toDateString() == this.addDays(new Date(), 0).toDateString() : null);
-          keptTasks.push(...dateTasks);
-        } else if (duedate === "tomorrow") {
-          const dateTasks = this.tasks.filter(task => task.due_date? new Date(task.due_date).toDateString() == this.addDays(new Date(), 1).toDateString() : null);
-          keptTasks.push(...dateTasks);
-        } else if (duedate === "this week") {
-          const today = this.addDays(new Date(), 0);
-          const remainingDays = 6 - new Date().getDay();
-          const endOfWeek = this.addDays(new Date(), remainingDays);
-          const dateTasks = this.tasks.filter(task => task.due_date ? new Date(task.due_date).getFullYear() === today.getFullYear() && new Date(task.due_date).getMonth() === today.getMonth() && new Date(task.due_date).getDate() >= today.getDate() && new Date(task.due_date).getDate() <= endOfWeek.getDate() : null);
-          keptTasks.push(...dateTasks);
-        } else if (duedate === "this month") {
-          const thismonth = new Date().getMonth();
-          const dateTasks = this.tasks.filter(task => task.due_date? new Date(task.due_date).getMonth() === thismonth : null);
-          keptTasks.push(...dateTasks);
-        }
-      })
-    }
-    
-    if (priorityArray.length === 0 && dueDateArray.length === 0 ){
-      this.tasks = this.tasks;
-    } else {
-      this.tasks = [...keptTasks];
-    }
-
-    const idList: number[] = [];
-    const finalTasks: Task[] = [];
-    this.tasks.forEach(task => {
-      if (!idList.includes(task.id)) {
-        idList.push(task.id);
-        finalTasks.push(task);
-      }
+  private applyFilters(priorityArray: [], chosenOperator: string, dueDateArray: []) {
+    const priority = priorityArray;
+    const operator = chosenOperator;
+    const duedate = dueDateArray;
+    this.taskService.filterTask({ priority, operator, duedate }).subscribe({
+      next: (tasks) => this.tasks = tasks,
+      error: (error) => console.error(error)
     });
-
-    this.tasks = [...finalTasks];
-
     this.sortTasks();
   }
 

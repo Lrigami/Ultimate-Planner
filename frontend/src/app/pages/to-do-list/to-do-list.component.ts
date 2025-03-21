@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatButtonToggle, MatButtonToggleGroup,MatButtonToggleChange } from '@angular/material/button-toggle';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Task } from '../../models/task.model';
 import { TodolistService } from '../../services/to-do-list.service';
@@ -12,7 +13,7 @@ import { DeleteFormComponent } from '../../components/forms/delete-form/delete-f
 
 @Component({
   selector: 'to-do-list',
-  imports: [CommonModule, MatSelectModule, FormsModule, ReactiveFormsModule, TaskListComponent, TaskFormComponent, DeleteFormComponent],
+  imports: [CommonModule, MatSelectModule, MatButtonToggle, MatButtonToggleGroup, FormsModule, ReactiveFormsModule, TaskListComponent, TaskFormComponent, DeleteFormComponent],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css'
 })
@@ -30,6 +31,7 @@ export class ToDoListComponent {
 
   selectedPriority: [] = [];
   selectedDueDate: [] = [];
+  chosenOperator: string = "AND";
 
   constructor (public taskService: TaskService, public todolistService: TodolistService, private route: ActivatedRoute) {}
 
@@ -91,9 +93,14 @@ export class ToDoListComponent {
     this.filterTasks();
   }
 
+  onOperatorChange(event: MatButtonToggleChange) {
+    this.chosenOperator = event.value;
+    this.filterTasks();
+  }
+
   async filterTasks() {
     if (this.taskListComponent) {
-      await this.taskListComponent.filterTasks(this.selectedPriority, this.selectedDueDate);
+      await this.taskListComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate);
     }
   }
 }

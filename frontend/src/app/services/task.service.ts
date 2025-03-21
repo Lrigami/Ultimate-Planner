@@ -54,7 +54,15 @@ export class TaskService {
         )
     }
 
-    // kanban_category 
+    filterTask(filters: {priority: Array<any>, operator: string, duedate: Array<any>}): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/tasks/filter`, filters).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
+
+    // enums
 
     getAllKanban() {
         return this.http.get<string[]>(`${this.baseUrl}/enums/kanban`).pipe(
