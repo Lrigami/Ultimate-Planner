@@ -14,16 +14,16 @@
     /* main action buttons : hover */
 
     --grey-tonal-btn: #E6E6E6;
+    --green-tonal-btn-hover: hsl(84, 47%, 75%);
 
     /* main action buttons : disabled */
 
 
 
-    /* main action buttons : focused */
+    /* main action buttons : focused and pressed */
 
-
-    /* main action buttons : pressed */
-
+    --grey-tonal-btn-active: hsl(0, 0%, 85%);
+    --green-tonal-btn-active: hsl(84, 47%, 70%);
 
     /* main action buttons : dragged */
 
@@ -185,6 +185,14 @@ header a {
     background-color: var(--green-tonal-btn);
 }
 
+.green-tonal-btn:hover {
+    background-color: var(--green-tonal-btn-hover);
+}
+
+.green-tonal-btn:active, .green-tonal-btn:focus {
+    background-color: var(--green-tonal-btn-active);
+}
+
 .grey-tonal-btn {
     background-color: var(--grey-tonal-btn);
 }
@@ -195,6 +203,14 @@ header a {
 
 .not-filled-btn {
     background-color: transparent;
+}
+
+.not-filled-btn:hover {
+    background-color: var(--grey-tonal-btn);
+}
+
+.not-filled-btn:active, .not-filled-btn:focus {
+    background-color: var(--grey-tonal-btn-active);
 }
 
 .white-text-btn {
@@ -234,6 +250,7 @@ task-list {
 
 to-do-list-card {
     width: 200px;
+    min-width: 200px;
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
