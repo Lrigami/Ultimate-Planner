@@ -1,11 +1,11 @@
 <div class="task-list">
     <task-card 
-    *ngFor="let task of tasks" 
-    [task]="task" 
-    class="task-card" 
-    (edit)="onEdit(task)"
-    (delete)="onDelete(task)"
-    (checked)="loadTasks()">
+        *ngFor="let task of tasks" 
+        [task]="task" 
+        class="task-card" 
+        (edit)="onEdit(task)"
+        (delete)="onDelete(task)"
+        (checked)="loadTasks()">
     </task-card>
 </div>
 

@@ -1,10 +1,12 @@
 ul {
     display: flex;
     gap: 30px;
+    max-height: 60dvh;
 }
 
 ul li {
     width: 30dvw;
+    max-height: 100%;
 }
 
 task-card {
@@ -15,5 +17,13 @@ task-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px 10px 40px ;
+    padding: 0 10px 0px 40px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: var(--grey-tonal-btn);
+}
+
+.kanban-task-list {
+    overflow-y: scroll;
+    max-height: 100%;
 }

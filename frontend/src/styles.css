@@ -73,6 +73,7 @@
 /* header */
 
 header {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -239,11 +240,27 @@ header a {
     align-items: center;
 }
 
+mat-button-toggle-group {
+    max-height: 40px;
+    width: auto;
+}
+
+mat-button-toggle {
+    text-align: center;
+    padding: 0 6px;
+}
+
 /* pages */
 
 task-list {
     position: relative;
     display: flex;
+}
+
+to-do-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* cards */
