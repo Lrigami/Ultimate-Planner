@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatButtonToggle, MatButtonToggleGroup,MatButtonToggleChange } from '@angular/material/button-toggle';
@@ -14,7 +15,7 @@ import { DeleteFormComponent } from '../../components/forms/delete-form/delete-f
 
 @Component({
   selector: 'to-do-list',
-  imports: [CommonModule, MatSelectModule, MatButtonToggle, MatButtonToggleGroup, FormsModule, ReactiveFormsModule, TaskListComponent, TaskKanbanComponent, TaskFormComponent, DeleteFormComponent],
+  imports: [CommonModule, RouterLink, MatSelectModule, MatButtonToggle, MatButtonToggleGroup, FormsModule, ReactiveFormsModule, TaskListComponent, TaskKanbanComponent, TaskFormComponent, DeleteFormComponent],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css'
 })

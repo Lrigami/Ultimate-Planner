@@ -70,6 +70,20 @@
     --text-white: #FFFFFF;
 }
 
+/* header */
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+header a {
+    position: absolute;
+    left: 15px;
+}
+
 /* buttons */
 
 .btn {
