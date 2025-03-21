@@ -40,7 +40,10 @@
 </task-list>
 
 <task-kanban
-    *ngIf="chosenView === 'kanban'">
+    *ngIf="chosenView === 'kanban'"
+    (editTask)="openEditForm($event)" 
+    (deleteTask)="openDeleteForm($event)"
+    (createTask)="openNewTaskForm()">
 </task-kanban>
 
 <task-form

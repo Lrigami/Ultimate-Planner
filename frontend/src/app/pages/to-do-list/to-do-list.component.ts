@@ -20,6 +20,7 @@ import { DeleteFormComponent } from '../../components/forms/delete-form/delete-f
 })
 export class ToDoListComponent {
   @ViewChild(TaskListComponent) taskListComponent!: TaskListComponent;
+  @ViewChild(TaskKanbanComponent) taskKanbanComponent!: TaskKanbanComponent;
   selectedTask: Task | null = null;
   priorityLevels: string[] = [];
   priority = new FormControl('');
@@ -82,6 +83,8 @@ export class ToDoListComponent {
     this.isAddFormVisible = false;
     if (this.taskListComponent) {
       this.taskListComponent.loadTasks();
+    } else if (this.taskKanbanComponent) {
+      this.taskKanbanComponent.loadTasks();
     }
   }
 
