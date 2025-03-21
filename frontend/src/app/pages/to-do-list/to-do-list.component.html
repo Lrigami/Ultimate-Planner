@@ -3,6 +3,10 @@
 
 <div class="list-controls">
     <!-- insérer ici le segmented button pour la vue en list / kanban -->
+    <mat-button-toggle-group name="view choice" aria-label="View Choice" [(ngModel)]="chosenView" (change)="onViewChange($event)">
+        <mat-button-toggle value="list">List</mat-button-toggle>
+        <mat-button-toggle value="kanban">Kanban</mat-button-toggle>
+    </mat-button-toggle-group>
     <div class="filters">
         <p>Filter by: </p>
         <!-- S'occuper plus tard du style des select -->
@@ -12,7 +16,7 @@
                 <mat-option *ngFor="let priority_level of priorityLevels" [value]="priority_level">{{ priority_level }}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="chosenOperator" (change)="onOperatorChange($event)">
+        <mat-button-toggle-group name="operator-choice" aria-label="operator choice" [(ngModel)]="chosenOperator" (change)="onOperatorChange($event)">
             <mat-button-toggle value="AND">And</mat-button-toggle>
             <mat-button-toggle value="OR">Or</mat-button-toggle>
         </mat-button-toggle-group>
@@ -29,10 +33,15 @@
 </div>
 
 <task-list 
+    *ngIf="chosenView === 'list'"
     (editTask)="openEditForm($event)" 
     (deleteTask)="openDeleteForm($event)"
     (createTask)="openNewTaskForm()">
 </task-list>
+
+<task-kanban
+    *ngIf="chosenView === 'kanban'">
+</task-kanban>
 
 <task-form
     *ngIf="isEditFormVisible && selectedTask" 

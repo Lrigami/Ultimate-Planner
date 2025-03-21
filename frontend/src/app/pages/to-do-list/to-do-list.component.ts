@@ -8,12 +8,13 @@ import { Task } from '../../models/task.model';
 import { TodolistService } from '../../services/to-do-list.service';
 import { TaskService } from '../../services/task.service';
 import { TaskListComponent } from '../../components/task-views/task-list/task-list.component';
+import { TaskKanbanComponent } from '../../components/task-views/task-kanban/task-kanban.component';
 import { TaskFormComponent } from '../../components/forms/task-form/task-form.component';
 import { DeleteFormComponent } from '../../components/forms/delete-form/delete-form.component';
 
 @Component({
   selector: 'to-do-list',
-  imports: [CommonModule, MatSelectModule, MatButtonToggle, MatButtonToggleGroup, FormsModule, ReactiveFormsModule, TaskListComponent, TaskFormComponent, DeleteFormComponent],
+  imports: [CommonModule, MatSelectModule, MatButtonToggle, MatButtonToggleGroup, FormsModule, ReactiveFormsModule, TaskListComponent, TaskKanbanComponent, TaskFormComponent, DeleteFormComponent],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css'
 })
@@ -32,6 +33,7 @@ export class ToDoListComponent {
   selectedPriority: [] = [];
   selectedDueDate: [] = [];
   chosenOperator: string = "AND";
+  chosenView: string = "list";
 
   constructor (public taskService: TaskService, public todolistService: TodolistService, private route: ActivatedRoute) {}
 
@@ -102,5 +104,9 @@ export class ToDoListComponent {
     if (this.taskListComponent) {
       await this.taskListComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate);
     }
+  }
+
+  onViewChange(event: MatButtonToggleChange) {
+    this.chosenView = event.value;
   }
 }
