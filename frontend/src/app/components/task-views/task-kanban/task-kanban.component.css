@@ -1,0 +1,11 @@
+ul {
+    display: flex;
+}
+
+ul li {
+    max-width: 30dvw;
+}
+
+task-card {
+    max-width: 100%;
+}
