@@ -8,11 +8,9 @@
             <p>Category:
                 <select name="kanban-categories" id="kanban-categories" formControlName="kanban_category">
                     <option *ngFor="let kanban_category of kanbanCategories" [value]="kanban_category">{{ kanban_category }}</option>
-                    <!-- Pour chaque catégorie existante du type kanban_category : afficher une option -->
                 </select>
             </p>
             </div>
-            <!-- Au click : le formulaire se ferme -->
             <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="openSaveForm()"></button>
         </div>
         <div class="description-div">

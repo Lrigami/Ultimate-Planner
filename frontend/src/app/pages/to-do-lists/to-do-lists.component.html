@@ -1,1 +1,42 @@
-<p>to-do-lists works!</p>
+<header>
+    <h2>My To-Do Lists</h2>
+</header>
+
+<div class="to-do-lists">
+    <button app-button icon="add" text="Add" class="add-btn extended-fab-btn green-tonal-btn no-outline" (click)="openNewListForm()"></button>
+
+    <div class="to-do-list-card-list">
+        <to-do-list-card
+            *ngFor="let list of todolists"
+            [list]="list"
+            [totalTasks]="totalTasksMap[list.id] || 0"
+            [totalDoneTasks]="totalDoneTasksMap[list.id] || 0"
+            [percentage]="tasksPercentage[list.id] || 0"        
+            (edit)="openEditForm(list)"
+            (delete)="openDeleteForm(list)">
+        </to-do-list-card>
+    </div>
+</div>
+
+
+<to-do-list-form
+    *ngIf="isEditFormVisible && selectedList" 
+    class="form"
+    [todolistData]="selectedList"
+    (isFormVisible)="handleFormClose()"
+    (todolistUpdated)="handleFormClose()">
+</to-do-list-form>
+
+<to-do-list-form
+    *ngIf="isAddFormVisible" 
+    class="form"
+    (isFormVisible)="handleFormClose()"
+    (todolistUpdated)="handleFormClose()">
+</to-do-list-form>
+
+<delete-form 
+    *ngIf="isDeleteFormVisible && selectedList"
+    class="form"
+    [todolistData]="selectedList"
+    (todolistDeleted)="handleFormClose()">
+</delete-form>

@@ -1,0 +1,41 @@
+.edit-supp {
+    display: flex;
+    gap: 5px;
+}
+
+.keep-icon {
+    transition: 0.3s;
+}
+
+.keep-icon:hover {
+    rotate: 45deg;
+}
+
+.pinned {
+    rotate: 45deg;
+    transition: 0.3s;
+}
+
+.pinned:hover {
+    rotate: 0deg;
+}
+
+
+
+h3 {
+    margin: 5px 0;
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    box-sizing: border-box;
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--text-black);
+}

@@ -1,6 +1,6 @@
 .task-list {
     position: relative;
-    max-height: 90dvh;
+    max-height: 72dvh;
     overflow-y: scroll;
     padding-top: 10px;
 }
@@ -8,5 +8,5 @@
 .add-btn {
     position: absolute;
     bottom: 30px;
-    left: 500px;
+    left: 480px;
 }

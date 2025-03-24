@@ -1,1 +1,20 @@
-<p>task-kanban works!</p>
+<ul type="none">
+    <li *ngFor="let kanban of kanbanCategories">
+        <div class="kanban-column-header">
+            <h3>{{kanban}}</h3>
+            <button app-button icon="add" class="icon-btn green-tonal-btn no-outline" (click)="onCreate(kanban)"></button>
+        </div>
+        <div class="kanban-task-list">
+            <ng-container *ngFor="let task of tasks">
+                <task-card 
+                    *ngIf="task.kanban_category === kanban"
+                    [task]="task" 
+                    class="task-card" 
+                    (edit)="onEdit(task)"
+                    (delete)="onDelete(task)"
+                    (checked)="loadTasks()">
+                </task-card>
+            </ng-container>
+        </div>
+    </li>
+</ul>
