@@ -16,6 +16,7 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() task!: Task;
   @Output() edit = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<Task>();
+  @Output() checked = new EventEmitter<any>();
 
   title?: string;
   description?: string;
@@ -99,6 +100,7 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
       next: () => {
         this.dateColor();
         this.updateCard();
+        this.checked.emit();
       }, 
       error: (error) => console.error("Error checking task: ", error)
     });

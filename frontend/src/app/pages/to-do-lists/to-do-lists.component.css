@@ -1,4 +1,16 @@
+.to-do-lists {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.to-do-lists button {
+    max-width: 150px;
+}
+
 .to-do-list-card-list {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }

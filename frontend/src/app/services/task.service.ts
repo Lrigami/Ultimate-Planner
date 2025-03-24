@@ -54,10 +54,18 @@ export class TaskService {
         )
     }
 
-    // kanban_category 
+    filterTask(filters: {priority: Array<any>, operator: string, duedate: Array<any>}): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/tasks/filter`, filters).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
+
+    // enums
 
     getAllKanban() {
-        return this.http.get<string[]>(`${this.apiUrl}/enums/kanban`).pipe(
+        return this.http.get<string[]>(`${this.baseUrl}/enums/kanban`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -65,7 +73,7 @@ export class TaskService {
     }
 
     getAllPriority() {
-        return this.http.get<string[]>(`${this.apiUrl}/enums/priority`).pipe(
+        return this.http.get<string[]>(`${this.baseUrl}/enums/priority`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })

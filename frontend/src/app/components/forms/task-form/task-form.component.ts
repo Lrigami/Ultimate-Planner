@@ -15,6 +15,7 @@ import { TagFormComponent } from '../tag-form/tag-form.component';
 })
 export class TaskFormComponent implements OnInit, OnChanges {
   @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date, done?: boolean, to_do_list_id: number };
+  @Input() kanbanData!: string;
   @Output() isFormVisible = new EventEmitter<boolean>();
   taskUpdated = new EventEmitter<boolean>();
 
@@ -57,8 +58,12 @@ export class TaskFormComponent implements OnInit, OnChanges {
         description: this.taskData.description ?? '',
         priority: this.taskData.priority ?? 'undefined',
         kanban_category: this.taskData.kanban_category ?? 'to-do',
-        due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toISOString().split('T')[0] : '',
+        due_date: this.taskData.due_date ? new Date(this.taskData.due_date).toLocaleDateString('fr-CA') : '',
         isChecked: this.taskData.done
+      });
+    } else if (this.kanbanData) {
+      this.taskForm.patchValue({
+        kanban_category: this.kanbanData ?? 'to-do'
       });
     }
   }
@@ -68,7 +73,19 @@ export class TaskFormComponent implements OnInit, OnChanges {
   }
 
   openSaveForm() {
-    this.isSaveFormVisible = true;
+    if (this.taskData) {
+      if (this.taskData.title === this.taskForm.value.title && (this.taskData.description === this.taskForm.value.description || !this.taskData.description) && new Date(this.taskData.due_date ? this.taskData.due_date : '').toDateString() === new Date(this.taskForm.value.due_date).toDateString() && this.taskData.priority === this.taskForm.value.priority && this.taskData.kanban_category === this.taskForm.value.kanban_category && this.taskData.done === this.taskForm.value.isChecked) {
+        this.closeForm();
+      } else {
+        this.isSaveFormVisible = true;
+      }
+    } else {
+      if (!this.taskForm.value.title && !this.taskForm.value.description) {
+        this.closeForm();
+      } else {
+        this.isSaveFormVisible = true;
+      }
+    }
   }
 
   openNewTagForm() {

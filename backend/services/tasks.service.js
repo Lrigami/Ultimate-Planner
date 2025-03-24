@@ -24,6 +24,12 @@ class Functions {
     async deleteTask(taskId) {
         return await taskMethods.delete(taskId);
     }
+
+    async filterTasks(tdlid, filters) {
+        const { priority, operator, duedate } = filters;
+        const safeOperator = operator.toUpperCase() === 'AND' ? 'AND' : 'OR';
+        return await taskMethods.filter(tdlid, priority, safeOperator, duedate);
+    }
 }
 
 module.exports = new Functions();
