@@ -13,4 +13,4 @@ const query = (text, params) => pool.query(text, params);
 // text = la requête SQL
 // params = les paramètres de la requête afin d'empêcher les attaques par injection SQL
 
-module.exports = { query };
+module.exports = { pool, query };

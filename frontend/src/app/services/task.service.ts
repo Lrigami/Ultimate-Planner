@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -8,13 +9,17 @@ import { Observable, tap, BehaviorSubject } from 'rxjs';
 export class TaskService {
     private taskListSubject = new BehaviorSubject<void>(null!);
     taskList$ = this.taskListSubject.asObservable();
-    private apiUrl = 'http://localhost:3000/1/tasks';
-    private apiUrlKanban = 'http://localhost:3000/kanban';
+    private baseUrl = 'http://localhost:3000';
+    private apiUrl = `${this.baseUrl}`;
 
-    constructor(private http: HttpClient) {}
+    constructor(private router: Router, private http: HttpClient) {}
+
+    setTodolistId(): void {
+        this.apiUrl = `${this.baseUrl}${this.router.url}`;
+    }
 
     getAllTasks(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}`).pipe(
+        return this.http.get<any>(`${this.apiUrl}/tasks`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -22,7 +27,7 @@ export class TaskService {
     }
 
     getTask(id: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+        return this.http.get<any>(`${this.apiUrl}/tasks/${id}`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -30,11 +35,11 @@ export class TaskService {
     }
 
     createTask(task: {title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
-        return this.http.post<any>(this.apiUrl, task);
+        return this.http.post<any>(`${this.apiUrl}/tasks`, task);
     }
 
     updateTask(task: {id: number, title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
-        return this.http.put<any>(`${this.apiUrl}/${task.id}`, task).pipe(
+        return this.http.put<any>(`${this.apiUrl}/tasks/${task.id}`, task).pipe(
             tap(() => {  
                 this.taskListSubject.next();
             })
@@ -42,17 +47,33 @@ export class TaskService {
     }
 
     deleteTask(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+        return this.http.delete<any>(`${this.apiUrl}/tasks/${id}`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
         )
     }
 
-    // kanban_category 
+    filterTask(filters: {priority: Array<any>, operator: string, duedate: Array<any>}): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}/tasks/filter`, filters).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
+
+    // enums
 
     getAllKanban() {
-        return this.http.get<string[]>(`${this.apiUrlKanban}`).pipe(
+        return this.http.get<string[]>(`${this.baseUrl}/enums/kanban`).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
+
+    getAllPriority() {
+        return this.http.get<string[]>(`${this.baseUrl}/enums/priority`).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })

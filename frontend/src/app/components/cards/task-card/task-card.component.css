@@ -1,7 +1,8 @@
 .task-card-content {
     display: flex;
     flex-direction: column;
-    min-width: 50%;
+    min-width: 81%;
+    border-bottom: 1px solid var(--grey-outline);
 }
 
 .task-card-content p {
@@ -11,6 +12,7 @@
 
 .task-card-content p:first-of-type {
     display: flex;
+    flex-wrap: wrap;
     gap: 5px;
 }
 
@@ -19,16 +21,11 @@
 }
 
 .edit-supp {
-    top: calc(50% - 45px);
-    position: absolute;
-    right: 5px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     justify-content: center;
     align-items: center;
     padding: 0 5px;
-    max-height: 100%;
 }
 
 .description-date {

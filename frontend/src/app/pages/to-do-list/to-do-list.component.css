@@ -1,0 +1,27 @@
+.list-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.filters {
+    display: flex;
+    width: 80%;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.filters p {
+    width: 100px;
+}
+
+mat-form-field {
+    height: 100%;
+    max-width: 150px;
+}
+
+task-kanban {
+    max-height: 72dvh;
+}
