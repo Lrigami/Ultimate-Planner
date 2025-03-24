@@ -70,6 +70,24 @@
     --text-white: #FFFFFF;
 }
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* header */
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+header a {
+    position: absolute;
+    left: 15px;
+}
+
 /* buttons */
 
 .btn {
@@ -179,6 +197,14 @@
     filter: drop-shadow(3px 3px 1px var(--grey-outline));
 }
 
+.sign-in-btn {
+    background-color: var(--sign-in);
+}
+
+.sign-up-btn {
+    background-color: var(--sign-up);
+}
+
 .not-filled-btn {
     background-color: transparent;
 }
@@ -200,6 +226,18 @@
 task-list {
     position: relative;
     display: flex;
+}
+
+to-do-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+sign-in {
+    display: flex;
+    width: 150dvw;
+    overflow-x: hidden;
 }
 
 /* cards */

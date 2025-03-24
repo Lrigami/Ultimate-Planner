@@ -1,0 +1,29 @@
+<form>
+    <label for="sign-in-email">Email</label>
+    <input id="sign-in-email" name="sign-in-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
+    <div *ngIf="isInvalid()" class="error-message">
+        <span *ngIf="emailFormControl.hasError('required')">Email is <strong>required</strong>.</span>
+        <span *ngIf="emailFormControl.hasError('email')">Please enter a valid email address.</span>
+    </div>
+
+    <div id="password-container">
+        <label for="sign-in-password">Password</label>
+        <input 
+            id="sign-in-password" 
+            name="sign-in-password" 
+            [type]="isPasswordVisible ? 'text' : 'password'"
+            [formControl]="passwordFormControl"
+            (keydown)="onKeyDown($event)">
+
+        <button app-button [icon]="isPasswordVisible ? 'visibility' : 'visibility_off'" class="" (click)="togglePasswordVisibility()"></button>
+
+        <p *ngIf="isCapsLockOn" class="error-message">
+            <span class="material-symbols-outlined">warning</span> Caps Lock is on!
+        </p>
+
+        <a href="">Forgot your password?</a> 
+    </div>
+    
+    <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid"></button>
+</form>
+  

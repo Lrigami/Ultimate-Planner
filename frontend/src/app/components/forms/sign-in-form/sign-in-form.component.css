@@ -1,0 +1,9 @@
+.input-field.ng-touched.ng-invalid {
+    border-color: red;
+}
+  
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
