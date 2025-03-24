@@ -1,25 +1,34 @@
 <form>
-    <label for="sign-in-email">Email</label>
-    <input id="sign-in-email" name="sign-in-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
-    <div *ngIf="isInvalid()" class="error-message">
-        <span *ngIf="emailFormControl.hasError('required')">Email is <strong>required</strong>.</span>
-        <span *ngIf="emailFormControl.hasError('email')">Please enter a valid email address.</span>
+    <div class="email-container">
+        <div class="email-label-input">
+            <label for="sign-in-email">Email</label>
+            <input id="sign-in-email" name="sign-in-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
+        </div>
+        <div *ngIf="isInvalid()" class="error-message">
+            <span *ngIf="emailFormControl.hasError('required')">Email is <strong>required</strong>.</span>
+            <span *ngIf="emailFormControl.hasError('email')">Please enter a valid email address.</span>
+        </div>
     </div>
 
-    <div id="password-container">
+    <div class="password-container">
         <label for="sign-in-password">Password</label>
-        <input 
+
+        <div class="password-input-button">
+            <input 
             id="sign-in-password" 
             name="sign-in-password" 
             [type]="isPasswordVisible ? 'text' : 'password'"
             [formControl]="passwordFormControl"
             (keydown)="onKeyDown($event)">
 
-        <button app-button [icon]="isPasswordVisible ? 'visibility' : 'visibility_off'" class="" (click)="togglePasswordVisibility()"></button>
+            <button app-button [icon]="isPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility()"></button>
+        </div>        
 
-        <p *ngIf="isCapsLockOn" class="error-message">
-            <span class="material-symbols-outlined">warning</span> Caps Lock is on!
-        </p>
+        <div class="capslock">
+            <p *ngIf="isCapsLockOn" class="error-message">
+                <span class="material-symbols-outlined">warning</span> Caps Lock is on!
+            </p>
+        </div>
 
         <a href="">Forgot your password?</a> 
     </div>

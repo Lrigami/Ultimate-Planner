@@ -1,1 +1,49 @@
-<p>sign-up-form works!</p>
+<form>
+    <div class="email-container">
+        <div class="email-label-input">
+            <label for="sign-up-email">Email</label>
+            <input id="sign-up-email" name="sign-up-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
+        </div>
+        <div class="error-message">
+            <span *ngIf="emailFormControl.hasError('required')">Email is <strong>required</strong>.</span>
+            <span *ngIf="emailFormControl.hasError('email')">Please enter a valid email address.</span>
+        </div>
+    </div>
+
+    <div class="password-container">
+        <label for="sign-up-password">Password</label>
+
+        <div class="password-input-button">
+            <input 
+            id="sign-up-password" 
+            name="sign-up-password" 
+            [type]="isFirstPasswordVisible ? 'text' : 'password'"
+            [formControl]="passwordFormControl"
+            (keydown)="onKeyDown($event)">
+
+            <button app-button [icon]="isFirstPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('first')"></button>
+        </div> 
+
+        <label for="sign-up-password-confirmation">Password</label>
+        
+        <div class="password-input-button">
+            <input 
+            id="sign-up-password-confirmation" 
+            name="sign-up-password-confirmation" 
+            [type]="isSecondPasswordVisible ? 'text' : 'password'"
+            [formControl]="passwordFormControl"
+            (keydown)="onKeyDown($event)">
+
+            <button app-button [icon]="isSecondPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('second')"></button>
+        </div>      
+
+        <div class="capslock">
+            <p *ngIf="isCapsLockOn" class="error-message">
+                <span class="material-symbols-outlined">warning</span> Caps Lock is on!
+            </p>
+        </div>
+    </div>
+    
+    <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid"></button>
+</form>
+  
