@@ -1,3 +1,18 @@
+.sign-in-container {
+    position: absolute;
+    display: flex;
+    width: 150dvw;
+    height: 100dvh;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
 section {
     width: 50dvw;
     margin: auto;

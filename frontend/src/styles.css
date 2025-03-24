@@ -281,12 +281,6 @@ to-do-list {
     align-items: center;
 }
 
-sign-in {
-    display: flex;
-    width: 150dvw;
-    height: 100dvh;
-}
-
 to-do-list-card {
     width: 200px;
     min-width: 200px;

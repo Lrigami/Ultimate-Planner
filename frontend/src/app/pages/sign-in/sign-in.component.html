@@ -1,28 +1,33 @@
-<section aria-labelledby="Sign in">
-    <div>
-        <h2>Weelcome back</h2>
-        <p>Enter your account details</p>
+<div class="sign-in-container" [ngClass]="position">
+    
+    <section aria-labelledby="Sign in">
+        <div>
+            <h2>Weelcome back</h2>
+            <p>Enter your account details</p>
 
-        <sign-in-form></sign-in-form>
+            <sign-in-form></sign-in-form>
 
-        <p class="account">Don't have an account yet? 
-            <a (click)="goToSignUp()">Sign up</a>
-        </p>
-    </div>
-</section>
+            <p class="account">Don't have an account yet? 
+                <a (click)="goToSignUp()">Sign up</a>
+            </p>
+        </div>
+    </section>
 
-<section aria-labelledby="Sign in and sing up animation">
-    <p>ANIMATION A VENIR</p>
-</section>
+    <section aria-labelledby="Sign in and sing up animation">
+        <p>ANIMATION A VENIR</p>
+    </section>
 
-<section aria-labelledby="Sign up">
-    <div>
-        <h2>Keep your life on track</h2>
+    <section aria-labelledby="Sign up">
+        <div>
+            <h2>Keep your life on track</h2>
 
-        <sign-up-form></sign-up-form>
+            <sign-up-form></sign-up-form>
 
-        <p class="account">Already have an account?
-            <a (click)="goToSignIn()">Sign in</a>
-        </p>
-    </div>
-</section>
+            <p class="account">Already have an account?
+                <a (click)="goToSignIn()">Sign in</a>
+            </p>
+        </div>
+    </section>
+
+</div>
+
