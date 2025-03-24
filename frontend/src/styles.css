@@ -280,7 +280,7 @@ to-do-list-card {
 
 task-card {
     width: 700px;
-    height: 80px;
+    min-height: 55px;
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
