@@ -70,6 +70,9 @@
     --text-white: #FFFFFF;
 }
 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 /* header */
 
 header {
@@ -202,6 +205,14 @@ header a {
     filter: drop-shadow(3px 3px 1px var(--grey-outline));
 }
 
+.sign-in-btn {
+    background-color: var(--sign-in);
+}
+
+.sign-up-btn {
+    background-color: var(--sign-up);
+}
+
 .not-filled-btn {
     background-color: transparent;
 }
@@ -263,7 +274,11 @@ to-do-list {
     align-items: center;
 }
 
-/* cards */
+sign-in {
+    display: flex;
+    width: 150dvw;
+    overflow-x: hidden;
+}
 
 to-do-list-card {
     width: 200px;
@@ -385,5 +400,3 @@ task-form {
 .green {
     background-color: var(--green-personalised);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
