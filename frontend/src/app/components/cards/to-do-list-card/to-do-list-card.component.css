@@ -11,6 +11,17 @@
     rotate: 45deg;
 }
 
+.pinned {
+    rotate: 45deg;
+    transition: 0.3s;
+}
+
+.pinned:hover {
+    rotate: 0deg;
+}
+
+
+
 h3 {
     margin: 5px 0;
     text-align: center;

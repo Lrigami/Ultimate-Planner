@@ -1,5 +1,5 @@
 <div class="action-btn">
-    <button app-button icon="keep" class="keep-icon icon-btn no-outline not-filled-btn"></button>
+    <button app-button icon="keep" class="icon-btn no-outline not-filled-btn" [ngClass]="list.pinned ? 'pinned' : 'keep-icon'"></button>
     <div class="edit-supp">
         <button app-button icon="edit" class="icon-btn no-outline not-filled-btn" (click)="edit.emit(list)"></button>
         <button app-button icon="delete" class="icon-btn no-outline not-filled-btn" (click)="delete.emit(list)"></button>
