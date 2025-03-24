@@ -42,9 +42,22 @@ export class ToDoListFormComponent {
   closeForm() {
     this.isFormVisible.emit(false);
   }
+  
 
   openSaveForm() {
-    this.isSaveFormVisible = true;
+    if (this.todolistData) {
+      if (this.todolistData.title === this.todolistForm.value.title && this.todolistData.pinned === this.todolistForm.value.isPinned) {
+        this.closeForm();
+      } else {
+        this.isSaveFormVisible = true;
+      }
+    } else {
+      if (!this.todolistForm.value.title) {
+        this.closeForm();
+      } else {
+        this.isSaveFormVisible = true;
+      }
+    }
   }
 
   handleSaveFormClose(isSaved: boolean) {
