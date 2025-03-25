@@ -4,8 +4,6 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const authenticateToken = (req, res, next) => {
     const token = req.header('Authorization')?.split(' ')[1]; // pour récupérer sans Bearer
 
-    console.log("token: ", token);
-
     if (!token) {
         return res.status(401).json({ message: "Unauthorized access, missing token" });
     }

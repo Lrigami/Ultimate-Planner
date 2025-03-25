@@ -37,5 +37,5 @@ input {
 }
 
 .capslock {
-    height: 40px;
+    min-height: 40px;
 }
