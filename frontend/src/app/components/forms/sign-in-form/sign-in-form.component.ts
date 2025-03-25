@@ -15,6 +15,7 @@ import { ButtonComponent } from '../../buttons/button.component';
 export class SignInFormComponent {
   isCapsLockOn = false;
   isPasswordVisible = false;
+  errorMessage: string | null = null;
 
   constructor (public authService: AuthService, private router: Router) {}
 
@@ -35,8 +36,12 @@ export class SignInFormComponent {
 
   login() {
     this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).subscribe({
-      next: () => {
-        this.router.navigate(['/todolist']);
+      next: (response) => {
+        if (response.token) {
+          this.router.navigate(['/todolist']);
+        } else {
+          this.errorMessage = 'Incorrect password or email';
+        }
       },
       error: (error) => console.error({message: error})
     });

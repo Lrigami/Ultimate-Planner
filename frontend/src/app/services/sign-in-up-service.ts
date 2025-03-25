@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, BehaviorSubject } from 'rxjs';
+import { Observable, of, catchError, tap, BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -23,9 +23,16 @@ export class AuthService {
     login(email: string, password: string): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password }).pipe(
           tap(response => {
-            console.log("response: ", response);
             localStorage.setItem(this.authTokenKey, response.token);
             this.isAuthenticatedSubject.next(true);
+          }),
+          catchError((error) => {
+            if (error.status === 401) {
+              console.error('Authentication failed:', error.message);
+              return of({ token: '' });
+            }
+            console.error('An error occurred:', error.message);
+            return of({ token: '' });
           })
         );
     }

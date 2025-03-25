@@ -28,6 +28,7 @@
             <p *ngIf="isCapsLockOn" class="error-message">
                 <span class="material-symbols-outlined">warning</span> Caps Lock is on!
             </p>
+            <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
         </div>
 
         <a href="">Forgot your password?</a> 
