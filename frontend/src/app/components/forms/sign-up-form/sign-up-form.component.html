@@ -1,7 +1,7 @@
 <form>
     <div class="email-container">
         <div class="email-label-input">
-            <label for="sign-up-email">Email</label>
+            <label for="sign-up-email">Email*</label>
             <input id="sign-up-email" name="sign-up-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
         </div>
         <div class="error-message">
@@ -12,7 +12,7 @@
 
     <div class="password-container">
         <div class="label-tooltip">
-            <label for="sign-up-password">Password</label>
+            <label for="sign-up-password">Password*</label>
             <div class="tooltip">
                 <span class="material-symbols-outlined">info</span>
                 <div class="tooltip-content">
@@ -45,7 +45,7 @@
             <span *ngIf="passwordFormControl.hasError('missingSpecialChar')">Password must contain at least one special character.</span>
         </div>
 
-        <label for="sign-up-password-confirmation">Password confirmation</label>
+        <label for="sign-up-password-confirmation">Password confirmation*</label>
         
         <div class="password-input-button">
             <input 

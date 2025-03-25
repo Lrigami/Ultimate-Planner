@@ -1,7 +1,7 @@
 <form>
     <div class="email-container">
         <div class="email-label-input">
-            <label for="sign-in-email">Email</label>
+            <label for="sign-in-email">Email*</label>
             <input id="sign-in-email" name="sign-in-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
         </div>
         <div *ngIf="isInvalid()" class="error-message">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="password-container">
-        <label for="sign-in-password">Password</label>
+        <label for="sign-in-password">Password*</label>
 
         <div class="password-input-button">
             <input 
