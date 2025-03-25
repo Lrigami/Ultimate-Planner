@@ -66,6 +66,6 @@
         </div>
     </div>
     
-    <button app-button text="Sign up" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid || passwordConfirmationFormControl.invalid"></button>
+    <button app-button text="Sign up" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid || passwordConfirmationFormControl.invalid" (click)="handleSignUp()"></button>
 </form>
   
