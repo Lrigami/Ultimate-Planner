@@ -11,9 +11,18 @@ class Method {
 
         const hashed_password = await bcrypt.hash(password, salt);
 
+        console.log("email: ", email);
+        console.log("password: ", password);
+        console.log("salt: ", salt);
+        console.log("hashed_password: ", hashed_password);
+
         const query = `INSERT INTO users (email, salt, hashed_password, username, profile_picture, role) VALUES ($1, $2, $3, $4, $5, $6)`;
 
+        console.log("query: ", query);
+
         const values = [email, salt, hashed_password, 'new user', null, 'user'];
+
+        console.log("values: ", values);
 
         const result = await pool.query(query, values);
 
@@ -58,3 +67,5 @@ class Method {
         }
     }
 }
+
+module.exports = new Method("user");
