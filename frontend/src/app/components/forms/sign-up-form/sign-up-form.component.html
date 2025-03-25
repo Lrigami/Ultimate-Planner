@@ -25,7 +25,6 @@
                 </div>
             </div>
         </div>
-        
 
         <div class="password-input-button">
             <input 
@@ -38,6 +37,14 @@
             <button app-button [icon]="isFirstPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('first')"></button>
         </div> 
 
+        <div class="error-message password-control">
+            <span *ngIf="passwordFormControl.hasError('required')">A password is required.</span>
+            <span *ngIf="passwordFormControl.hasError('passwordTooShort')">Password must be at least 8 characters.</span>
+            <span *ngIf="passwordFormControl.hasError('missingUppercase')">Password must contain at least one capital letter.</span>
+            <span *ngIf="passwordFormControl.hasError('missingNumber')">Password must contain at least one digit.</span>
+            <span *ngIf="passwordFormControl.hasError('missingSpecialChar')">Password must contain at least one special character.</span>
+        </div>
+
         <label for="sign-up-password-confirmation">Password confirmation</label>
         
         <div class="password-input-button">
@@ -45,19 +52,20 @@
             id="sign-up-password-confirmation" 
             name="sign-up-password-confirmation" 
             [type]="isSecondPasswordVisible ? 'text' : 'password'"
-            [formControl]="passwordFormControl"
+            [formControl]="passwordConfirmationFormControl"
             (keydown)="onKeyDown($event)">
 
             <button app-button [icon]="isSecondPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('second')"></button>
         </div>      
 
-        <div class="capslock">
+        <div class="password-control">
             <p *ngIf="isCapsLockOn" class="error-message">
                 <span class="material-symbols-outlined">warning</span> Caps Lock is on!
             </p>
+            <span *ngIf="passwordConfirmationFormControl.hasError('nonMatchingPassword')" class="error-message">Passwords must be the same.</span>
         </div>
     </div>
     
-    <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid"></button>
+    <button app-button text="Sign up" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid || passwordConfirmationFormControl.invalid"></button>
 </form>
   
