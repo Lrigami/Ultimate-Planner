@@ -75,9 +75,6 @@ class Method {
 
         query += `);`;
 
-        console.log("query: ", query);
-        console.log("values: ", values);
-
         const result = await pool.query(query, values);
         return result.rows;
     }
