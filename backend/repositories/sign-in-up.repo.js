@@ -1,13 +1,19 @@
 const { pool, query } = require("../config/database");
+const bcrypt = require('bcrypt');
 
 class Method {
     
     async create(data) {
-        const { email, salt, hashed_password, username, profile_picture, role } = data;
+        const { email, password } = data;
+
+        const saltRounds = 10; // Détermine la complexité du salt (plus c'est élevé, plus c'est sécurisé mais lent)
+        const salt = await bcrypt.genSalt(saltRounds);
+
+        const hashed_password = await bcrypt.hash(password, salt);
 
         const query = `INSERT INTO users (email, salt, hashed_password, username, profile_picture, role) VALUES ($1, $2, $3, $4, $5, $6)`;
 
-        const values = [email, salt, hashed_password, username || 'new user', profile_picture || null, role || 'user'];
+        const values = [email, salt, hashed_password, 'new user', null, 'user'];
 
         const result = await pool.query(query, values);
 
