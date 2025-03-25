@@ -33,6 +33,6 @@
         <a href="">Forgot your password?</a> 
     </div>
     
-    <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid"></button>
+    <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid" (click)="login()"></button>
 </form>
   

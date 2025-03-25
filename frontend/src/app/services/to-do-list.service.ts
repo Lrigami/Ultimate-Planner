@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,18 @@ export class TodolistService {
 
     constructor (private http: HttpClient) {}
 
+    private getAuthHeaders() {
+        const token = localStorage.getItem('auth_token'); 
+        return new HttpHeaders({
+            Authorization: `Bearer ${token}`
+        });
+    }
+
+    // to-do-lists functions
+
     getAllLists(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<any>(`${this.apiUrl}`, { headers }).pipe(
             tap(() => {
                 this.todolistSubject.next();
             })
@@ -21,7 +31,8 @@ export class TodolistService {
     }
 
     getList(id: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<any>(`${this.apiUrl}/${id}`, { headers }).pipe(
             tap(() => {
                 this.todolistSubject.next();
             })
@@ -29,11 +40,13 @@ export class TodolistService {
     }
 
     createList(list: {title: string, pinned: boolean, color: string}): Observable<any> {
-        return this.http.post<any>(this.apiUrl, list);
+        const headers = this.getAuthHeaders();
+        return this.http.post<any>(this.apiUrl, list, { headers });
     }
 
     updateList(list: {id: number, title: string, pinned: boolean, color: string}): Observable<any> {
-        return this.http.put<any>(`${this.apiUrl}/${list.id}`, list).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.put<any>(`${this.apiUrl}/${list.id}`, list, { headers }).pipe(
             tap(() => {
                 this.todolistSubject.next();
             })
@@ -41,7 +54,8 @@ export class TodolistService {
     }
 
     deleteList(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers }).pipe(
             tap(() => {
                 this.todolistSubject.next();
             })
@@ -49,7 +63,8 @@ export class TodolistService {
     }
 
     countTasksInList(id: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/${id}/total`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<any>(`${this.apiUrl}/${id}/total`, { headers }).pipe(
             tap(() => {
                 this.todolistSubject.next();
             })
@@ -57,7 +72,8 @@ export class TodolistService {
     }
 
     countDoneTasksInList(id: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/${id}/done`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<any>(`${this.apiUrl}/${id}/done`, { headers }).pipe(
             tap(() => {
                 this.todolistSubject.next();
             })

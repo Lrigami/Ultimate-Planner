@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -14,12 +14,22 @@ export class TaskService {
 
     constructor(private router: Router, private http: HttpClient) {}
 
+    private getAuthHeaders() {
+        const token = localStorage.getItem('auth_token'); 
+        return new HttpHeaders({
+            Authorization: `Bearer ${token}`
+        });
+    }
+
+    // tasks functions
+
     setTodolistId(): void {
         this.apiUrl = `${this.baseUrl}${this.router.url}`;
     }
 
     getAllTasks(): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/tasks`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<any>(`${this.apiUrl}/tasks`, { headers }).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -27,7 +37,8 @@ export class TaskService {
     }
 
     getTask(id: number): Observable<any> {
-        return this.http.get<any>(`${this.apiUrl}/tasks/${id}`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<any>(`${this.apiUrl}/tasks/${id}`, { headers }).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -35,11 +46,13 @@ export class TaskService {
     }
 
     createTask(task: {title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}/tasks`, task);
+        const headers = this.getAuthHeaders();
+        return this.http.post<any>(`${this.apiUrl}/tasks`, task, { headers });
     }
 
     updateTask(task: {id: number, title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
-        return this.http.put<any>(`${this.apiUrl}/tasks/${task.id}`, task).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.put<any>(`${this.apiUrl}/tasks/${task.id}`, task, { headers }).pipe(
             tap(() => {  
                 this.taskListSubject.next();
             })
@@ -47,7 +60,8 @@ export class TaskService {
     }
 
     deleteTask(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.apiUrl}/tasks/${id}`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.delete<any>(`${this.apiUrl}/tasks/${id}`, { headers }).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -55,7 +69,8 @@ export class TaskService {
     }
 
     filterTask(filters: {priority: Array<any>, operator: string, duedate: Array<any>}): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}/tasks/filter`, filters).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.post<any>(`${this.apiUrl}/tasks/filter`, filters, { headers }).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -65,7 +80,8 @@ export class TaskService {
     // enums
 
     getAllKanban() {
-        return this.http.get<string[]>(`${this.baseUrl}/enums/kanban`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<string[]>(`${this.baseUrl}/enums/kanban`, { headers }).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
@@ -73,7 +89,8 @@ export class TaskService {
     }
 
     getAllPriority() {
-        return this.http.get<string[]>(`${this.baseUrl}/enums/priority`).pipe(
+        const headers = this.getAuthHeaders();
+        return this.http.get<string[]>(`${this.baseUrl}/enums/priority`, { headers }).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })
