@@ -11,7 +11,21 @@
     </div>
 
     <div class="password-container">
-        <label for="sign-up-password">Password</label>
+        <div class="label-tooltip">
+            <label for="sign-up-password">Password</label>
+            <div class="tooltip">
+                <span class="material-symbols-outlined">info</span>
+                <div class="tooltip-content">
+                    <ul>Password must contain:
+                        <li>at least 8 characters;</li>
+                        <li>at least one capital letter;</li>
+                        <li>at least one digit;</li>
+                        <li>at least one special character.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
 
         <div class="password-input-button">
             <input 
@@ -24,7 +38,7 @@
             <button app-button [icon]="isFirstPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('first')"></button>
         </div> 
 
-        <label for="sign-up-password-confirmation">Password</label>
+        <label for="sign-up-password-confirmation">Password confirmation</label>
         
         <div class="password-input-button">
             <input 
