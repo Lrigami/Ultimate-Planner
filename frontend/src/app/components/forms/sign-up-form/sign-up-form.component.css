@@ -17,7 +17,7 @@ form {
 }
 
 .password-control {
-    margin-bottom: 10px;
+    min-height: 25px;
 }
 
 .email-container {
