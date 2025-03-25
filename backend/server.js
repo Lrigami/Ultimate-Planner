@@ -12,11 +12,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
+const authRoutes = require('./routes/sign-in-up.route');
 const todolistRoutes = require('./routes/todolist.route');
 const taskRoutes = require('./routes/tasks.route');
 const enumsRoutes = require('./routes/enums.route')
 // const tagRoutes = require('./routes/tags.route')
 
+app.use('/auth', authRoutes);
 app.use('/todolist', todolistRoutes);
 app.use('/todolist/:tdlid/tasks', taskRoutes);
 app.use('/enums', enumsRoutes);

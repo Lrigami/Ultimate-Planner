@@ -40,19 +40,16 @@ class Method {
     }
 
     async delete(id) {
-        // pour supprimer une to-do list (attention il faut aussi supprimer toutes les tâches qu'elle contient).
-        const client = await pool.connect(); // Un client représente une connexion active à la base de données. 
-
+        const client = await pool.connect();
+    
         try {
             // J'utilise BEGIN, COMMIT, ROLLBACK pour éviter que tout soit perdu en cas de problème.
             await client.query('BEGIN');
-
-            await client.query('DELETE FROM tasks WHERE to_do_list_id = $1', [id]);
-
+    
             const result = await client.query('DELETE FROM to_do_lists WHERE id = $1 RETURNING *', [id]);
-
+    
             await client.query('COMMIT');
-
+    
             return result.rows[0];
         } catch (err) {
             await client.query('ROLLBACK');
