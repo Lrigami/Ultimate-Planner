@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ButtonComponent } from '../../components/buttons/button.component';
 import { SignInFormComponent } from '../../components/forms/sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from '../../components/forms/sign-up-form/sign-up-form.component';
 
 @Component({
   selector: 'sign-in',
-  imports: [CommonModule, ButtonComponent, SignInFormComponent, SignUpFormComponent],
+  imports: [CommonModule, SignInFormComponent, SignUpFormComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
