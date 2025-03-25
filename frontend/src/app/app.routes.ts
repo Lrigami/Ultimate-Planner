@@ -22,4 +22,8 @@ export const routes: Routes = [
         path: 'auth',
         component: SignInComponent,
     },
+    { path: '', 
+        redirectTo: '/auth', 
+        pathMatch: 'full',
+    },
 ];
