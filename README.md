@@ -50,14 +50,16 @@ Statistics are displayed for trackers, and a dashboard brings together all the i
 The project is currently in the development phase. The project has been initiated. 
 
 Here is the project roadmap for the moment: 
-- [ ] To-do list and task management (#13); 
-- [ ] Management of several to-do lists (#17);
-- [ ] Kanban view;
+- [x] To-do list and task management (#13); 
+- [x] Management of several to-do lists (#17);
+- [x] Kanban view (#18);
+- [ ] User management (#24);
+- [ ] Menu and dashboard;
+- [ ] Custom management (color, pin, tags);
 - [ ] Management of notes;
 - [ ] Tracker management (water, mood, sleep); 
 - [ ] Habit management;
 - [ ] Event management and display;
-- [ ] User management;
 - [ ] Advanced settings.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
