@@ -57,7 +57,6 @@ class Controller {
             const token = await authFunctions.login(email, password);
             res.json({ token });
         } catch (error) {
-            console.error('Connexion error :', error);
             res.status(error.status || 500).json({ message: error.message });
         }
     };
