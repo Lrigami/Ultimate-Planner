@@ -13,15 +13,15 @@ class Functions {
         return await taskMethods.readAll(tdlid, userId);
     }
 
-    async readOneTask(taskId, userId) {
+    async readOneTask(taskId, tdlid, userId) {
         return await taskMethods.readOne(taskId, tdlid, userId);
     }
 
-    async updateTask(taskId, taskData, userId) {
+    async updateTask(taskId, taskData, tdlid, userId) {
         return await taskMethods.update(taskId, taskData, tdlid, userId);
     }
 
-    async deleteTask(taskId, userId) {
+    async deleteTask(taskId, tdlid, userId) {
         return await taskMethods.delete(taskId, tdlid, userId);
     }
 
