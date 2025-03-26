@@ -59,7 +59,12 @@ class Method {
         }
     }
 
-    async getUserByEmail(emailToVerify) {
+    async getUserByEmail(email) {
+        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        return result.rows[0] || null;
+    };
+
+    async isEmailTaken(emailToVerify) {
         const query = 'SELECT * FROM users WHERE email = $1';
         const values = [emailToVerify.email];
         const result = await pool.query(query, values);

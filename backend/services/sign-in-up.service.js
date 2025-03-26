@@ -41,7 +41,7 @@ class Functions {
     };
 
     async verifiyEmail(email) {
-        return await authMethods.getUserByEmail(email);
+        return await authMethods.isEmailTaken(email);
     }
 }
 
