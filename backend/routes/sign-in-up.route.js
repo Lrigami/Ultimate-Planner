@@ -7,5 +7,6 @@ router.get('/:id', authController.getOneUser);
 router.put('/:id', authController.updateUser);
 router.delete('/:id', authController.deleteUser);
 router.post('/login', authController.login);
+router.post('/emailverif', authController.verifiyEmail);
 
 module.exports = router;

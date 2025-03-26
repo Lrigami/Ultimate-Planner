@@ -1,6 +1,7 @@
 import { Component, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, FormControl, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import { FormsModule, FormControl, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn} from '@angular/forms';
+import { Observable, of, map, catchError } from 'rxjs';
 import { AuthService } from '../../../services/sign-in-up-service';
 import { ButtonComponent } from '../../buttons/button.component';
 
@@ -17,6 +18,23 @@ export class SignUpFormComponent {
   isSecondPasswordVisible = false;
 
   constructor(public authService: AuthService) {}
+
+  emailFormControl!: FormControl<string>;
+  passwordFormControl!: FormControl<string>;
+  passwordConfirmationFormControl!: FormControl<string>;
+
+  emailValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.value) {
+        return of(null);
+      }
+  
+      return this.authService.isEmailTaken(control.value).pipe(
+        map(status => (status === 200 ? { existingEmail: true } : null)),
+        catchError(() => of(null))
+      );
+    };
+  }
 
   passwordValidator(minLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -54,9 +72,23 @@ export class SignUpFormComponent {
     };
   }
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]) as FormControl<string>;
-  passwordFormControl = new FormControl('', [Validators.required, this.passwordValidator(8)]) as FormControl<string>;
-  passwordConfirmationFormControl = new FormControl('', [Validators.required, this.passwordConfirmationValidator()]) as FormControl<string>;
+  ngOnInit() {
+    this.emailFormControl = new FormControl(
+      '', 
+      [Validators.required, Validators.email], 
+      [this.emailValidator()] // Ajout du validateur asynchrone ici
+    ) as FormControl<string>;
+
+    this.passwordFormControl = new FormControl(
+      '', 
+      [Validators.required, this.passwordValidator(8)]
+    ) as FormControl<string>;
+
+    this.passwordConfirmationFormControl = new FormControl(
+      '', 
+      [Validators.required, this.passwordConfirmationValidator()]
+    ) as FormControl<string>;
+  }
 
   isInvalid(): boolean {
     return this.emailFormControl.invalid && (this.emailFormControl.dirty || this.emailFormControl.touched);
@@ -79,6 +111,7 @@ export class SignUpFormComponent {
     this.authService.createUser(newUser).subscribe({
       next: () => {
         this.userCreated.emit(true);
+        window.scrollBy({ left: -window.innerWidth * 0.5, behavior: 'smooth' });
       },
       error: (error) => console.error("Create user failed: ", error)
     });

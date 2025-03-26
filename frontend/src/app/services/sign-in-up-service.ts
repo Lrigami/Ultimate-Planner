@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, catchError, tap, BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, catchError, tap, map, BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +19,20 @@ export class AuthService {
     }
 
     // authentification
+
+    isEmailTaken(email: string): Observable<any> {
+      return this.http.post(`${this.apiUrl}/emailverif`, { email }, {observe: 'response'}).pipe(
+        tap(response => {
+          if (response.status === 200) {
+            this.isAuthenticatedSubject.next(false);
+          }
+        }),
+        map((response) => response.status),
+        catchError((error: HttpErrorResponse) => {
+          return of(error.status);
+        })
+      )
+    }
 
     login(email: string, password: string): Observable<{ token: string }> {
         return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password }).pipe(

@@ -59,8 +59,10 @@ class Method {
         }
     }
 
-    async getUserByEmail(email) {
-        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    async getUserByEmail(emailToVerify) {
+        const query = 'SELECT * FROM users WHERE email = $1';
+        const values = [emailToVerify.email];
+        const result = await pool.query(query, values);
         return result.rows[0] || null;
     };
 }

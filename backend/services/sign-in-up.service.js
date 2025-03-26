@@ -39,6 +39,10 @@ class Functions {
     
         return jwt.sign({ userId: user.id, email: user.email }, SECRET_KEY, { expiresIn: '24h' });
     };
+
+    async verifiyEmail(email) {
+        return await authMethods.getUserByEmail(email);
+    }
 }
 
 module.exports = new Functions();

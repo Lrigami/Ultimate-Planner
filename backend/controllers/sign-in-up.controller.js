@@ -7,6 +7,7 @@ class Controller {
         this.updateUser = this.updateUser.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
         this.login = this.login.bind(this);
+        this.verifiyEmail = this.verifiyEmail.bind(this);
     }
 
     async createNewUser(req, res) {
@@ -60,6 +61,16 @@ class Controller {
             res.status(error.status || 500).json({ message: error.message });
         }
     };
+
+    async verifiyEmail(req, res) {
+        try {
+            const email = await authFunctions.verifiyEmail(req.body);
+            if (!email) return res.status(404).json({message: "Email doesn't exist."});
+            res.status(200).json(email);
+        } catch (error) {
+            res.status(error.status || 500).json({message: error.message});
+        }
+    }
 }
 
 module.exports = new Controller();
