@@ -51,6 +51,20 @@ export class TaskFormComponent implements OnInit, OnChanges {
     this.priorityColor();
   }
 
+  onKanbanChange() {
+    const selectedCategory = this.taskForm.get('kanban_category')?.value;
+    this.taskForm.patchValue({
+      isChecked: selectedCategory === 'done'
+    });
+  }
+
+  onCheckboxChange(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.taskForm.patchValue({
+      kanban_category: isChecked ? 'done' : 'to-do'
+    });
+  }
+
   updateForm() {
     if (this.taskData) {
       this.taskForm.patchValue({
@@ -94,13 +108,6 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   handleSaveFormClose(isSaved: boolean) {
     if (isSaved) {
-      let isDone;
-      if (this.taskForm.value.kanban_category === 'done' || this.taskForm.value.isChecked) {
-        isDone = true;
-        this.taskForm.value.kanban_category = 'done';
-      } else {
-        isDone = false;
-      }
       if (this.taskData) {
         const updatedTask = {
           id: this.taskData.id,
@@ -109,7 +116,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
           due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
           priority: this.taskForm.value.priority,
           kanban_category: this.taskForm.value.kanban_category,
-          done: isDone,
+          done: this.taskForm.value.isChecked,
         };
 
         this.taskService.updateTask(updatedTask).subscribe({
@@ -126,7 +133,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
           due_date: this.taskForm.value.due_date ? new Date(this.taskForm.value.due_date) : undefined,
           priority: this.taskForm.value.priority,
           kanban_category: this.taskForm.value.kanban_category,
-          done: isDone
+          done: this.taskForm.value.isChecked,
         };
 
         this.taskService.createTask(newTask).subscribe({

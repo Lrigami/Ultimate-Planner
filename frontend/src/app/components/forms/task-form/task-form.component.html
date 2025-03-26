@@ -1,18 +1,19 @@
 <form [formGroup]="taskForm">    
     <div class="form-elements">
         <div class="main-info">
-            <input type="checkbox" id="checktask" name="checktask" formControlName="isChecked">
+            <input type="checkbox" id="checktask" name="checktask" formControlName="isChecked" (change)="onCheckboxChange($event)">
             <span *ngIf="taskForm.get('isChecked')?.value" class="check material-symbols-outlined">check</span>
             <div>
-            <input type="text" maxlength="60" id="task-title" name="task-title" placeholder="Title" formControlName="title">
-            <p>Category:
-                <select name="kanban-categories" id="kanban-categories" formControlName="kanban_category">
-                    <option *ngFor="let kanban_category of kanbanCategories" [value]="kanban_category">{{ kanban_category }}</option>
-                </select>
-            </p>
+                <input type="text" maxlength="60" id="task-title" name="task-title" placeholder="Title" formControlName="title">
+                <p>Category:
+                    <select name="kanban-categories" id="kanban-categories" formControlName="kanban_category" (change)="onKanbanChange()">
+                        <option *ngFor="let kanban_category of kanbanCategories" [value]="kanban_category">{{ kanban_category }}</option>
+                    </select>
+                </p>
             </div>
             <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="openSaveForm()"></button>
         </div>
+
         <div class="description-div">
             <textarea cols="40" rows="6" placeholder="Description" formControlName="description"></textarea>
         </div>
