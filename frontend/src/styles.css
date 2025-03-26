@@ -80,6 +80,11 @@ body {
     overflow: hidden;
 }
 
+app-root {
+    display: block;
+    height: 100%;
+}
+
 /* header */
 
 header {
@@ -275,10 +280,12 @@ task-list {
     display: flex;
 }
 
-to-do-list {
+to-do-list, to-do-lists {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    height: 100%;
 }
 
 to-do-list-card {
@@ -369,7 +376,13 @@ delete-form {
 task-form {
     max-height: 600px;
     max-width: 400px;
-    position: relative;
+    position: absolute;
+    top: calc(50dvh - 215px);
+}
+
+to-do-list-form {
+    position: absolute;
+    top: calc(50dvh - 150px);
 }
 
 /* personalised colors */
