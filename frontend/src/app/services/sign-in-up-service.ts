@@ -42,10 +42,8 @@ export class AuthService {
           }),
           catchError((error) => {
             if (error.status === 401) {
-              console.error('Authentication failed:', error.message);
               return of({ token: '' });
             }
-            console.error('An error occurred:', error.message);
             return of({ token: '' });
           })
         );
