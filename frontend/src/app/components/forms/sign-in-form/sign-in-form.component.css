@@ -17,8 +17,16 @@
     position: relative;
 }
 
-.password-container a {
+.password-container > button {
     align-self: flex-end;
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.password-container > button:active, .password-container > button:focus {
+    color: var(--grey-outline);
 }
 
 .password-input-button {

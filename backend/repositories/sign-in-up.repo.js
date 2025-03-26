@@ -70,6 +70,48 @@ class Method {
         const result = await pool.query(query, values);
         return result.rows[0] || null;
     };
+
+    // password 
+
+    async storePasswordToken(email, hashedToken) {
+        const query = `UPDATE users SET reset_password_token = $1, reset_token_expiration = NOW() + INTERVAL '1 hour' WHERE email = $2`;
+
+        const values = [hashedToken, email];
+
+        const result = await pool.query(query, values);
+
+        return result.rowCount > 0; 
+    };
+
+    async reset(password, hashedToken) {
+        const userQuery = `SELECT * FROM users WHERE reset_password_token = $1`;
+        const userValues = [hashedToken]
+        const userResult = await pool.query(userQuery, userValues);
+
+        if (userResult.rows.length === 0) {
+            throw new Error('Invalid or expired token.');
+        }
+
+        const user = userResult.rows[0];
+
+        const expirationDate = user.reset_token_expiration;
+        const currentDate = new Date();
+
+        if (currentDate > expirationDate) {
+            throw new Error('Reset link has expired.');
+        }
+
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const updateQuery = `UPDATE users SET hashed_password = $1, reset_password_token = NULL, reset_token_expiration = NULL WHERE reset_password_token = $2`;
+        const updateValues = [hashedPassword, hashedToken];
+
+        await pool.query(updateQuery, updateValues);
+
+        return { message: 'Password successfully reset.' };
+    }
 }
 
 module.exports = new Method("user");

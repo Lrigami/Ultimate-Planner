@@ -32,7 +32,7 @@
             <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
         </div>
 
-        <a href="">Forgot your password?</a> 
+        <button (click)="goToForgotPassword()">Forgot your password?</button> 
     </div>
     
     <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid" (click)="login()" (keydown.enter)="login()"></button>

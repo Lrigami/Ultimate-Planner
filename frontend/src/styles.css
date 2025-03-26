@@ -121,7 +121,7 @@ header a {
 }
 
 .text-only-btn {
-    padding: 24px 0px;
+    padding: 0 24px;
 }
 
 .text-and-icon-btn {
@@ -243,6 +243,10 @@ header a {
 
 .grey-text-btn {
     color: var(--text-grey);
+}
+
+.black-text-btn {
+    color: var(--text-black);
 }
 
 .no-hover:hover {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, catchError, tap, map, BehaviorSubject } from 'rxjs';
+import { Token } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root',
@@ -65,4 +66,24 @@ export class AuthService {
     private hasToken(): boolean {
         return !!localStorage.getItem(this.authTokenKey);
     }
-}
+
+    // passwords
+
+
+    // modifier la fonction une fois que je saurai la réponse
+    forgotPassword(email: string): Observable<any> {
+      return this.http.post(`${this.apiUrl}/forgotpassword`, { email }).pipe(
+        tap(() => {
+          this.isAuthenticatedSubject.next(true);
+        })
+      )
+    }
+
+    resetPassword(token: string, password: string): Observable<any> {
+      return this.http.post(`${this.apiUrl}/resetpassword/${token}`, { password }).pipe(
+        tap(() => {
+          this.isAuthenticatedSubject.next(true);
+        })
+      )
+    }
+ }

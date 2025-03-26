@@ -8,6 +8,8 @@ class Controller {
         this.deleteUser = this.deleteUser.bind(this);
         this.login = this.login.bind(this);
         this.verifiyEmail = this.verifiyEmail.bind(this);
+        this.forgotPassword = this.forgotPassword.bind(this);
+        this.resetPassword = this.resetPassword.bind(this);
     }
 
     async createNewUser(req, res) {
@@ -66,6 +68,30 @@ class Controller {
             const email = await authFunctions.verifiyEmail(req.body);
             if (!email) return res.status(404).json({message: "Email doesn't exist."});
             res.status(200).json(email);
+        } catch (error) {
+            res.status(error.status || 500).json({message: error.message});
+        }
+    }
+
+    // password
+
+    async forgotPassword(req, res) {
+        try {
+            const email = req.body.email;
+            const EmailExist = await authFunctions.verifiyEmail(email);
+            if (!EmailExist) await authFunctions.forgotPassword(email);
+            res.status(200).json({message: 'Reset password email sent successfully.'});
+        } catch (error) {
+            res.status(error.status || 500).json({message: error.message});
+        }
+    }
+
+    async resetPassword(req, res) {
+        try {
+            const newPassword = req.body.password;
+            const token = req.params.token;
+            await authFunctions.resetPassword(newPassword, token);
+            res.status(200).json({message: 'Password was successfully reset.'});
         } catch (error) {
             res.status(error.status || 500).json({message: error.message});
         }

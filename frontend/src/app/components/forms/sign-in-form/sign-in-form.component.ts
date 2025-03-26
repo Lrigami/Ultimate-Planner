@@ -46,4 +46,8 @@ export class SignInFormComponent {
       error: (error) => console.error({message: error})
     });
   }
+
+  goToForgotPassword() {
+    this.router.navigate(['/forgotpassword']);
+  }
 }
