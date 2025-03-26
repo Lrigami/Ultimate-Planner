@@ -2,7 +2,7 @@
     <div class="email-container">
         <div class="email-label-input">
             <label for="sign-in-email">Email*</label>
-            <input id="sign-in-email" name="sign-in-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
+            <input id="sign-in-email" name="sign-in-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl" (keydown.enter)="login()">
         </div>
         <div *ngIf="isInvalid()" class="error-message">
             <span *ngIf="emailFormControl.hasError('required')">Email is <strong>required</strong>.</span>
@@ -19,7 +19,8 @@
             name="sign-in-password" 
             [type]="isPasswordVisible ? 'text' : 'password'"
             [formControl]="passwordFormControl"
-            (keydown)="onKeyDown($event)">
+            (keydown)="onKeyDown($event)"
+            (keydown.enter)="login()">
 
             <button app-button [icon]="isPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility()"></button>
         </div>        
@@ -34,6 +35,6 @@
         <a href="">Forgot your password?</a> 
     </div>
     
-    <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid" (click)="login()"></button>
+    <button app-button text="Sign in" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid" (click)="login()" (keydown.enter)="login()"></button>
 </form>
   

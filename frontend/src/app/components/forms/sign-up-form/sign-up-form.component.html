@@ -2,7 +2,7 @@
     <div class="email-container">
         <div class="email-label-input">
             <label for="sign-up-email">Email*</label>
-            <input id="sign-up-email" name="sign-up-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl">
+            <input id="sign-up-email" name="sign-up-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl" (keydown.enter)="handleSignUp()">
         </div>
         <div class="error-message">
             <span *ngIf="emailFormControl.hasError('required')">Email is <strong>required</strong>.</span>
@@ -33,7 +33,8 @@
             name="sign-up-password" 
             [type]="isFirstPasswordVisible ? 'text' : 'password'"
             [formControl]="passwordFormControl"
-            (keydown)="onKeyDown($event)">
+            (keydown)="onKeyDown($event)"
+            (keydown.enter)="handleSignUp()">
 
             <button app-button [icon]="isFirstPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('first')"></button>
         </div> 
@@ -54,7 +55,8 @@
             name="sign-up-password-confirmation" 
             [type]="isSecondPasswordVisible ? 'text' : 'password'"
             [formControl]="passwordConfirmationFormControl"
-            (keydown)="onKeyDown($event)">
+            (keydown)="onKeyDown($event)"
+            (keydown.enter)="handleSignUp()">
 
             <button app-button [icon]="isSecondPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('second')"></button>
         </div>      
@@ -67,6 +69,6 @@
         </div>
     </div>
     
-    <button app-button text="Sign up" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid || passwordConfirmationFormControl.invalid" (click)="handleSignUp()"></button>
+    <button app-button text="Sign up" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid || passwordConfirmationFormControl.invalid" (click)="handleSignUp()" (keydown.enter)="handleSignUp()"></button>
 </form>
   
