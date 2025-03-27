@@ -114,6 +114,10 @@ To launch the project, navigate to the frontend directory :
 
 `cd Ultimate-Planner/frontend`
 
+Install the dependencies : 
+
+`npm install`
+
 Then run the following command:
 
 `ng serve`
