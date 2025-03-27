@@ -17,6 +17,10 @@ export class ForgotPasswordComponent {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]) as FormControl<string>;
 
+  isInvalid(): boolean {
+    return this.emailFormControl.invalid && (this.emailFormControl.dirty || this.emailFormControl.touched);
+  }
+
   sendResetMail() {
     this.authService.forgotPassword(this.emailFormControl.value).subscribe({
         next: () => this.isMailSent = true, 
