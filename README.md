@@ -1,6 +1,6 @@
 <a id="readme-top"></a>
 [![Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
+[![AGPL License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <h1 align="center">Title of Project</h1>
