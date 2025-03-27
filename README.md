@@ -36,12 +36,13 @@
 
 ## About the Project
 
-Ultimate Planner is an application for organisation and planning. It has a number of features: 
-- management of to-do lists and customised tasks, with a list or kanban view;
-- calendar management with personalised events, with a daily, weekly or monthly view;
-- creating notes so you don't forget anything; 
-- and tracking of several markers: water, mood, sleep, as well as multiple personalised habits. 
-Statistics are displayed for trackers, and a dashboard brings together all the important elements of the day for the user. 
+Ultimate Planner is a comprehensive application designed to help you organize and plan your day-to-day tasks. With features that span from to-do list management to tracking habits, this app is built to improve productivity and daily planning. The app includes:
+
+- To-do lists and task management, with both list and kanban views.
+- Calendar management for personalized event creation, offering daily, weekly, and monthly views.
+- Note creation to help you stay on top of important reminders.
+- Tracker management for keeping tabs on water intake, mood, sleep, and habits.
+- Dashboard view that brings together the key elements of your day, with stats from trackers and habits.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -53,9 +54,11 @@ Here is the project roadmap for the moment:
 - [x] To-do list and task management (#13); 
 - [x] Management of several to-do lists (#17);
 - [x] Kanban view (#18);
-- [ ] User management (#24);
-- [ ] Menu and dashboard;
+- [x] User management (#24);
+- [ ] Menu
 - [ ] Custom management (color, pin, tags);
+- [ ] Settings
+- [ ] Dashboard;
 - [ ] Management of notes;
 - [ ] Tracker management (water, mood, sleep); 
 - [ ] Habit management;
@@ -66,36 +69,52 @@ Here is the project roadmap for the moment:
 
 ## Get Started
 
-Entrez ici les instructions pour bien débuter avec votre projet...
+Follow the instructions below to get started with the Ultimate Planner project. You'll need to set up the environment and install some dependencies before running the app.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Prerequisites
 
-Ce qu'il est requis pour commencer avec votre projet...
+Before installing, make sure you have the following software installed on your system:
+- Node.js (Version 14.x or higher)
+- npm (Node Package Manager) or Yarn
+- PostgreSQL (for the database)
 
-- Programme 1
-- Programme 2
-- etc...
+You can download [Node.js from here](https://nodejs.org/fr).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Installation
 
-Les étapes pour installer votre programme....
+Clone this repository:
 
-Dites ce qu'il faut faire...
+`git clone https://github.com/Lrigami/Ultimate-Planner.git`
 
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
+Navigate to the project directory:
 
+`cd Ultimate-Planner`
 
-Ensuite vous pouvez montrer ce que vous obtenez à la fin...
+Install the dependencies:
+
+`npm install`
+
+Set up the database by configuring the PostgreSQL connection in .env file.
+
+Start the development server:
+
+`npm start`
+
+Now, the application should be running locally at http://localhost:3000.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Launching
 
-Dites comment faire pour lancer votre projet
+To launch the project, run the following command:
+
+`npm run dev`
+
+This will start the project in development mode. You can access it via your browser at http://localhost:3000.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -110,31 +129,28 @@ Dites comment faire pour lancer votre projet
 
 ## Contributing
 
-Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://example.org) pour savoir comment le faire.
+If you'd like to contribute to the development of Ultimate Planner, please read our CONTRIBUTING.md for guidelines on how to submit a contribution.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Versions
-Listez les versions ici 
-_exemple :_
-**Dernière version stable :** 5.0
-**Dernière version :** 5.1
-Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)
+
+Latest stable version: 1.0
+Latest release: 1.1
+You can see the full list of releases here.
 _(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
 
-Ce projet est sous licence ``exemple: WTFTPL`` - voir le fichier [LICENSE.md](LICENSE.md) pour plus d'informations
+Ce projet est sous licence ``GNU AFFERO GENERAL PUBLIC`` - voir le fichier [LICENSE](LICENSE) pour plus d'informations
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to.
-
-[Svg Circle Progress](https://github.com/bootsoon/ng-circle-progress/tree/master)
+[Angular UI](https://material.angular.io/) - For providing a great utility-first CSS framework that helped with the UI.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -156,7 +172,7 @@ Lisez la liste des [contributeurs](https://github.com/your/project/contributors)
 [issues-shield]: https://img.shields.io/github/issues/Lrigami/Ultimate-Planner.svg?style=for-the-badge
 [issues-url]: https://github.com/Lrigami/Ultimate-Planner/issues
 [license-shield]: https://img.shields.io/github/license/Lrigami/Ultimate-Planner.svg?style=for-the-badge
-[license-url]: https://github.com/Lrigami/Ultimate-Planner/LICENSE.md
+[license-url]: https://github.com/Lrigami/Ultimate-Planner/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/prune-thiry-6886a6136
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
