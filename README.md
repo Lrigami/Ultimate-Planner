@@ -165,8 +165,6 @@ Ce projet est sous licence ``GNU AFFERO GENERAL PUBLIC`` - voir le fichier [LICE
 Listez le(s) auteur(s) du projet ici !
 * **THIRY Prune** _alias_ [@Lrigami](https://github.com/Lrigami)
 
-Lisez la liste des [contributeurs](https://github.com/your/project/contributors) pour voir qui à aidé au projet !
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
