@@ -383,6 +383,8 @@ delete-form {
     flex-direction: column;
     height: 200px;
     max-width: 400px;
+    position: absolute;
+    top: calc(50dvh - 101px);
 }
 
 task-form {
