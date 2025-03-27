@@ -20,8 +20,6 @@
     rotate: 0deg;
 }
 
-
-
 h3 {
     margin: 5px 0;
     text-align: center;
@@ -31,11 +29,4 @@ h3 {
 
 p {
     margin: 0;
-}
-
-a {
-    box-sizing: border-box;
-    font-size: 18px;
-    text-decoration: none;
-    color: var(--text-black);
 }

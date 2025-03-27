@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgCircleProgressModule, CircleProgressOptions } from 'ng-circle-progress';
 import { circleProgressConfig } from '../../../circle-progress.config';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { Todolist } from '../../../models/todolist.model';
 import { TodolistService } from '../../../services/to-do-list.service';
 import { ButtonComponent } from '../../buttons/button.component';
@@ -10,7 +10,7 @@ import { ButtonComponent } from '../../buttons/button.component';
 @Component({
   selector: 'to-do-list-card',
   standalone: true,
-  imports: [RouterLink, CommonModule, NgCircleProgressModule, ButtonComponent],
+  imports: [CommonModule, NgCircleProgressModule, ButtonComponent],
   providers: [{ provide: CircleProgressOptions, useValue: circleProgressConfig }],
   templateUrl: './to-do-list-card.component.html',
   styleUrl: './to-do-list-card.component.css'
@@ -29,7 +29,7 @@ export class ToDoListCardComponent {
   pinned?: boolean; 
   color?: string;
 
-  constructor(private todolistService: TodolistService) {}
+  constructor(private todolistService: TodolistService, private router: Router) {}
 
   ngOnInit() {
     this.updateList();
@@ -38,5 +38,9 @@ export class ToDoListCardComponent {
   updateList() {
     this.title = this.list.title;
     this.listId.emit(this.list.id);
+  }
+
+  goToList() {
+    this.router.navigate([`/todolist/${this.list.id}`]);
   }
 }
