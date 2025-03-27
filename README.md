@@ -1,6 +1,6 @@
 <a id="readme-top"></a>
 [![Issues][issues-shield]][issues-url]
-[![Unlicense License][license-shield]][license-url]
+[![License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <h1 align="center">Title of Project</h1>
@@ -137,8 +137,7 @@ If you'd like to contribute to the development of Ultimate Planner, please read 
 
 Latest stable version: 1.0
 Latest release: 1.1
-You can see the full list of releases here.
-_(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
+[You can see the full list of releases here.](https://github.com/Lrigami/Ultimate-Planner/tags)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
