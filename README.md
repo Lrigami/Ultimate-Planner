@@ -92,7 +92,7 @@ Clone this repository:
 
 Navigate to the project directory:
 
-`cd Ultimate-Planner`
+`cd Ultimate-Planner/backend`
 
 Install the dependencies:
 
@@ -102,7 +102,7 @@ Set up the database by configuring the PostgreSQL connection in .env file.
 
 Start the development server:
 
-`npm start`
+`npm run start`
 
 Now, the application should be running locally at http://localhost:3000.
 
@@ -110,11 +110,15 @@ Now, the application should be running locally at http://localhost:3000.
 
 ## Launching
 
-To launch the project, run the following command:
+To launch the project, navigate to the frontend directory : 
 
-`npm run dev`
+`cd Ultimate-Planner/frontend`
 
-This will start the project in development mode. You can access it via your browser at http://localhost:3000.
+Then run the following command:
+
+`ng serve`
+
+This will start the project. You can access it via your browser at http://localhost:4200.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
