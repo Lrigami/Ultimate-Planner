@@ -19,4 +19,4 @@
 </circle-progress>
 <!-- changer la couleur des strokes en fonction du paramètre choisi par l'utilisateur -->
 
-<a routerLink='/todolist/{{list.id}}' role="button" class="btn outlined grey-outline not-filled-btn">View</a>
+<button app-button text="View" class="btn outlined grey-outline not-filled-btn" (click)="goToList()"></button>

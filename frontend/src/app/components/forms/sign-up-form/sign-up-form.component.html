@@ -1,0 +1,74 @@
+<form>
+    <div class="email-container">
+        <div class="email-label-input">
+            <label for="sign-up-email">Email*</label>
+            <input id="sign-up-email" name="sign-up-email" type="email" placeholder="john.doe@example.com" [formControl]="emailFormControl" (keydown.enter)="handleSignUp()">
+        </div>
+        <div class="error-message">
+            <span *ngIf="emailFormControl.hasError('required')">Email is <strong>required</strong>.</span>
+            <span *ngIf="emailFormControl.hasError('email')">Please enter a valid email address.</span>
+            <span *ngIf="emailFormControl.hasError('existingEmail')">Email is already taken.</span>
+        </div>
+    </div>
+
+    <div class="password-container">
+        <div class="label-tooltip">
+            <label for="sign-up-password">Password*</label>
+            <div class="tooltip">
+                <span class="material-symbols-outlined">info</span>
+                <div class="tooltip-content">
+                    <ul>Password must contain:
+                        <li>at least 8 characters;</li>
+                        <li>at least one capital letter;</li>
+                        <li>at least one digit;</li>
+                        <li>at least one special character.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="password-input-button">
+            <input 
+            id="sign-up-password" 
+            name="sign-up-password" 
+            [type]="isFirstPasswordVisible ? 'text' : 'password'"
+            [formControl]="passwordFormControl"
+            (keydown)="onKeyDown($event)"
+            (keydown.enter)="handleSignUp()">
+
+            <button app-button [icon]="isFirstPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('first')"></button>
+        </div> 
+
+        <div class="error-message password-control">
+            <span *ngIf="passwordFormControl.hasError('required')">A password is required.</span>
+            <span *ngIf="passwordFormControl.hasError('passwordTooShort')">Password must be at least 8 characters.</span>
+            <span *ngIf="passwordFormControl.hasError('missingUppercase')">Password must contain at least one capital letter.</span>
+            <span *ngIf="passwordFormControl.hasError('missingNumber')">Password must contain at least one digit.</span>
+            <span *ngIf="passwordFormControl.hasError('missingSpecialChar')">Password must contain at least one special character.</span>
+        </div>
+
+        <label for="sign-up-password-confirmation">Password confirmation*</label>
+        
+        <div class="password-input-button">
+            <input 
+            id="sign-up-password-confirmation" 
+            name="sign-up-password-confirmation" 
+            [type]="isSecondPasswordVisible ? 'text' : 'password'"
+            [formControl]="passwordConfirmationFormControl"
+            (keydown)="onKeyDown($event)"
+            (keydown.enter)="handleSignUp()">
+
+            <button app-button [icon]="isSecondPasswordVisible ? 'visibility' : 'visibility_off'" class="icon-btn not-filled-btn no-outline" (click)="togglePasswordVisibility('second')"></button>
+        </div>      
+
+        <div class="password-control">
+            <p *ngIf="isCapsLockOn" class="error-message">
+                <span class="material-symbols-outlined">warning</span> Caps Lock is on!
+            </p>
+            <span *ngIf="passwordConfirmationFormControl.hasError('nonMatchingPassword')" class="error-message">Passwords must be the same.</span>
+        </div>
+    </div>
+    
+    <button app-button text="Sign up" class="btn sign-in-btn no-outline" [disabled]="passwordFormControl.invalid || emailFormControl.invalid || passwordConfirmationFormControl.invalid" (click)="handleSignUp()" (keydown.enter)="handleSignUp()"></button>
+</form>
+  

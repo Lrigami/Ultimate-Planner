@@ -1,16 +1,17 @@
 ul {
+    padding-left: 0;
     display: flex;
-    gap: 30px;
+    gap: 20px;
     max-height: 60dvh;
 }
 
 ul li {
-    width: 30dvw;
+    width: 31dvw;
     max-height: 100%;
 }
 
 task-card {
-    max-width: 100%;
+    max-width: 90%;
 }
 
 .kanban-column-header {

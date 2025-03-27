@@ -1,0 +1,99 @@
+form {
+    gap: 0;
+}
+
+.input-field.ng-touched.ng-invalid {
+    border-color: red;
+}
+  
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 20px;
+    margin-bottom: 4px;
+}
+
+.password-control {
+    min-height: 25px;
+}
+
+.email-container {
+    margin-bottom: 6px;
+}
+
+.email-container, .password-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.password-container a {
+    align-self: flex-end;
+}
+
+.password-container div:first-of-type {
+    margin-bottom: 0;
+}
+
+.password-input-button {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.password-input-button:first-of-type {
+    margin-bottom: 0;
+}
+
+input {
+    width: 100%;
+    height: 30px;
+    border: none;
+}
+
+.email-label-input, .password-input-button {
+    border-bottom: 1px solid var(--grey-outline);
+}
+
+.capslock {
+    height: 30px;
+}
+
+.sign-in-btn {
+    margin-top: 10px;
+}
+
+.label-tooltip {
+    display: flex;
+    gap: 5px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .material-symbols-outlined {
+    font-size: 16px;
+    color: var(--text-grey);
+}
+
+.tooltip .tooltip-content {
+    visibility: hidden;
+    width: 300px;
+    background-color: white;
+    color: var(--text-grey);
+    border-radius: 5px;
+    border: 1px solid var(--grey-outline);
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    filter: drop-shadow(10px 10px 5px var(--grey-outline));
+}
+
+.tooltip:hover .tooltip-content {
+    visibility: visible;
+}

@@ -70,6 +70,21 @@
     --text-white: #FFFFFF;
 }
 
+html, body {
+     height: 100%; 
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    overflow: hidden;
+}
+
+app-root {
+    display: block;
+    height: 100%;
+}
+
 /* header */
 
 header {
@@ -106,7 +121,7 @@ header a {
 }
 
 .text-only-btn {
-    padding: 24px 0px;
+    padding: 0 24px;
 }
 
 .text-and-icon-btn {
@@ -202,6 +217,14 @@ header a {
     filter: drop-shadow(3px 3px 1px var(--grey-outline));
 }
 
+.sign-in-btn {
+    background-color: var(--sign-in);
+}
+
+.sign-up-btn {
+    background-color: var(--sign-up);
+}
+
 .not-filled-btn {
     background-color: transparent;
 }
@@ -220,6 +243,10 @@ header a {
 
 .grey-text-btn {
     color: var(--text-grey);
+}
+
+.black-text-btn {
+    color: var(--text-black);
 }
 
 .no-hover:hover {
@@ -257,13 +284,13 @@ task-list {
     display: flex;
 }
 
-to-do-list {
+to-do-list, to-do-lists {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    height: 100%;
 }
-
-/* cards */
 
 to-do-list-card {
     width: 200px;
@@ -286,6 +313,14 @@ task-card {
     margin-bottom: 10px;
     gap: 15px;
     position: relative;
+}
+
+forgot-password, reset-password {
+    max-width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* forms */
@@ -348,12 +383,20 @@ delete-form {
     flex-direction: column;
     height: 200px;
     max-width: 400px;
+    position: absolute;
+    top: calc(50dvh - 101px);
 }
 
 task-form {
     max-height: 600px;
     max-width: 400px;
-    position: relative;
+    position: absolute;
+    top: calc(50dvh - 215px);
+}
+
+to-do-list-form {
+    position: absolute;
+    top: calc(50dvh - 150px);
 }
 
 /* personalised colors */
@@ -385,5 +428,3 @@ task-form {
 .green {
     background-color: var(--green-personalised);
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

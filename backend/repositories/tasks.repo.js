@@ -2,8 +2,28 @@ const { query } = require("../config/database");
 const pool = require("../config/database");
 
 class Method {
-    async create(tdlid, data) {
+    async checkOwnership(tdlid, userId) {
+        // pour vérifier qu'une liste appartient bien à l'utilisateur avant de toucher aux tâches contenues
+        const query = `
+            SELECT 1
+            FROM to_do_lists
+            WHERE id = $1 AND user_id = $2
+        `;
+        const values = [tdlid, userId];
+    
+        const result = await pool.query(query, values);
+    
+        if (result.rows.length === 0) {
+            throw new Error('Unauthorized access to this to-do list');
+        }
+    
+        return true;
+    }
+
+    async create(tdlid, data, userId) {
         const { title, description, due_date, priority, kanban_category, done } = data;
+
+        await this.checkOwnership(tdlid, userId);
 
         const query = `INSERT INTO tasks (to_do_list_id, title, description, due_date, priority, kanban_category, done) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING *`;
 
@@ -13,17 +33,20 @@ class Method {
         return result.rows[0];
     }
 
-    async readAll(tdlid) {
-        const result = await query(`SELECT * FROM tasks WHERE to_do_list_id = $1`, [tdlid]);
+    async readAll(tdlid, userId) {
+        await this.checkOwnership(tdlid, userId);
+        const result = await query(`SELECT * FROM tasks WHERE to_do_list_id = $1 `, [tdlid]);
         return result.rows;
     }
 
-    async readOne(id) {
+    async readOne(id, tdlid, userId) {
+        await this.checkOwnership(tdlid, userId);
         const result = await query(`SELECT * FROM tasks WHERE id = $1`, [id]);
         return result.rows;
     }
     
-    async update(id, data) {
+    async update(id, data, tdlid, userId) {
+        await this.checkOwnership(tdlid, userId);
         const { title, description, due_date, priority, kanban_category, done } = data;
 
         const query = `UPDATE tasks SET title = $1, description = $2, due_date = $3, priority = $4, kanban_category = $5, done = $6 WHERE id = $7 RETURNING *`;
@@ -34,12 +57,14 @@ class Method {
         return result.rows[0];
     }
     
-    async delete(id) {
+    async delete(id, tdlid, userId) {
+        await this.checkOwnership(tdlid, userId);
         const result = await query(`DELETE FROM tasks WHERE id = $1`, [id]);
         return result.rows;
     }
 
-    async filter(tdlid, priorityArray, safeOperator, dueDateArray) {
+    async filter(tdlid, priorityArray, safeOperator, dueDateArray, userId) {
+        await this.checkOwnership(tdlid, userId);
         let query = `SELECT * FROM tasks WHERE to_do_list_id = $1 AND (`;
         let values = [tdlid];
 
@@ -74,9 +99,6 @@ class Method {
         }
 
         query += `);`;
-
-        console.log("query: ", query);
-        console.log("values: ", values);
 
         const result = await pool.query(query, values);
         return result.rows;

@@ -1,0 +1,49 @@
+.input-field.ng-touched.ng-invalid {
+    border-color: red;
+}
+  
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.email-container, .password-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.password-container > button {
+    align-self: flex-end;
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.password-container > button:active, .password-container > button:focus {
+    color: var(--grey-outline);
+}
+
+.password-input-button {
+    display: flex;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    height: 30px;
+    border: none;
+}
+
+.email-label-input, .password-input-button {
+    border-bottom: 1px solid var(--grey-outline);
+}
+
+.capslock {
+    min-height: 40px;
+}

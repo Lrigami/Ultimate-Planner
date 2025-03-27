@@ -6,20 +6,23 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
 const app = express();
 const port = process.env.SERV_PORT;
+const authenticateToken = require('./middlewares/auth.middleware');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
+const authRoutes = require('./routes/sign-in-up.route');
 const todolistRoutes = require('./routes/todolist.route');
 const taskRoutes = require('./routes/tasks.route');
 const enumsRoutes = require('./routes/enums.route')
 // const tagRoutes = require('./routes/tags.route')
 
-app.use('/todolist', todolistRoutes);
-app.use('/todolist/:tdlid/tasks', taskRoutes);
-app.use('/enums', enumsRoutes);
+app.use('/auth', authRoutes);
+app.use('/todolist', authenticateToken, todolistRoutes);
+app.use('/todolist/:tdlid/tasks', authenticateToken, taskRoutes);
+app.use('/enums', authenticateToken, enumsRoutes);
 // app.use('/tags', tagRoutes);
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

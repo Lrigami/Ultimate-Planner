@@ -1,0 +1,61 @@
+.sign-in-container {
+    position: absolute;
+    display: flex;
+    width: 150dvw;
+    height: 100dvh;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
+section {
+    width: 50dvw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+section div {
+    width: 40%;
+    min-width: 300px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section div h2, section div p {
+    text-align: center;
+    margin: 0;
+}
+
+.account {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+sign-in-form, sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+section:nth-of-type(2) {
+    background-color: var(--grey-tonal-btn);
+}
