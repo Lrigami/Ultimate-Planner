@@ -23,7 +23,10 @@ export class ForgotPasswordComponent {
 
   sendResetMail() {
     this.authService.forgotPassword(this.emailFormControl.value).subscribe({
-        next: () => this.isMailSent = true, 
+        next: () => {
+          this.isMailSent = true;
+          this.emailFormControl.reset();
+        }, 
         error: (err) => console.error("Mail error:", err) 
     });
 }

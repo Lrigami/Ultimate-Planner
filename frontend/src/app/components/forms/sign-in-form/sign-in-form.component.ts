@@ -38,6 +38,8 @@ export class SignInFormComponent {
     this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).subscribe({
       next: (response) => {
         if (response.token) {
+          this.emailFormControl.reset();
+          this.passwordFormControl.reset();
           this.router.navigate(['/todolist']);
         } else {
           this.errorMessage = 'Incorrect password or email';

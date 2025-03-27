@@ -111,6 +111,9 @@ export class SignUpFormComponent {
     this.authService.createUser(newUser).subscribe({
       next: () => {
         this.userCreated.emit(true);
+        this.emailFormControl.reset();
+        this.passwordFormControl.reset();
+        this.passwordConfirmationFormControl.reset();
         window.scrollBy({ left: -window.innerWidth * 0.5, behavior: 'smooth' });
       },
       error: (error) => console.error("Create user failed: ", error)
