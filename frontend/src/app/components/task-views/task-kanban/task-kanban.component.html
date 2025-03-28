@@ -1,20 +1,26 @@
-<ul type="none">
-    <li *ngFor="let kanban of kanbanCategories">
-        <div class="kanban-column-header">
+<ul type="none" cdkDropListGroup>
+    <li *ngFor="let kanban of kanbanCategories" 
+        cdkDropList
+        [cdkDropListData]="tasksByCategory[kanban]"
+        (cdkDropListDropped)="drop($event)">
+        <div class="kanban-column-header"
+            cdkDrag
+            [cdkDragDisabled]="true">
             <h3>{{kanban}}</h3>
             <button app-button icon="add" class="icon-btn green-tonal-btn no-outline" (click)="onCreate(kanban)"></button>
         </div>
         <div class="kanban-task-list">
-            <ng-container *ngFor="let task of tasks">
+            @for (task of tasksByCategory[kanban]; track task.id) {
                 <task-card 
                     *ngIf="task.kanban_category === kanban"
+                    cdkDrag
                     [task]="task" 
                     class="task-card" 
                     (edit)="onEdit(task)"
                     (delete)="onDelete(task)"
                     (checked)="loadTasks()">
                 </task-card>
-            </ng-container>
+            }
         </div>
     </li>
 </ul>

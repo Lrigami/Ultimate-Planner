@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CdkDragDrop, CdkDrag, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from '../../../models/task.model';
 import { TaskService } from '../../../services/task.service';
 import { TaskCardComponent } from '../../cards/task-card/task-card.component';
@@ -7,7 +8,7 @@ import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
   selector: 'task-kanban',
-  imports: [CommonModule, TaskCardComponent, ButtonComponent],
+  imports: [CommonModule, CdkDropListGroup, CdkDropList, CdkDrag, TaskCardComponent, ButtonComponent],
   templateUrl: './task-kanban.component.html',
   styleUrl: './task-kanban.component.css'
 })
@@ -19,6 +20,7 @@ export class TaskKanbanComponent {
 
   kanbanCategories: string[] = [];
   tasks: Task[] = [];
+  tasksByCategory: { [key: string]: Task[]} = {};
 
   constructor (public taskService: TaskService) {}
 
@@ -43,6 +45,7 @@ export class TaskKanbanComponent {
       this.taskService.getAllTasks().subscribe({
         next: (tasks) => {
           this.tasks = tasks;
+          this.organizeTasksByCategory();
           resolve();
         },
         error: (error) => {
@@ -50,6 +53,13 @@ export class TaskKanbanComponent {
           reject(new Error(error));
         }
       });
+    });
+  }
+
+  organizeTasksByCategory() {
+    this.tasksByCategory = {};
+    this.kanbanCategories.forEach(category => {
+      this.tasksByCategory[category] = this.tasks.filter(task => task.kanban_category === category);
     });
   }
 
@@ -83,5 +93,43 @@ export class TaskKanbanComponent {
 
   onCreate(kanban: string) {
     this.createTask.emit(kanban);
+  }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      const task = event.previousContainer.data[event.previousIndex - 1];
+      console.log('tâche: ', task);
+      console.log("event.currentContainer: ", event.container);
+      console.log("event.previousContainer: ", event.previousContainer);
+      console.log("event.currentIndex: ", event.currentIndex);
+      console.log("event.previousIndex: ", event.previousIndex);
+      console.log("data: ", event.previousContainer.data[event.previousIndex - 1]);
+      if (!task) return;
+  
+      const newCategory = this.kanbanCategories.find(category => 
+        this.tasksByCategory[category] === event.container.data
+      );
+  
+      if (newCategory) {
+        task.kanban_category = newCategory;
+      }
+  
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex - 1,
+        event.currentIndex
+      );
+
+      this.tasksByCategory[task.kanban_category ? task.kanban_category : 'to-do' ] = event.container.data;
+  
+      this.taskService.updateTask(task).subscribe();
+    }
+  }
+
+  getId(task: Task) {
+    console.log(task.id);
   }
 }
