@@ -76,32 +76,50 @@ Follow the instructions below to get started with the Ultimate Planner project. 
 
 ### Prerequisites
 
-Before installing, make sure you have the following software installed on your system:
-- Node.js (Version 14.x or higher)
+Before proceeding with the installation, please ensure that the following software is installed on your system:
+- Node.js (Version 14.x or higher). You can download [Node.js from here](https://nodejs.org/fr).
 - npm (Node Package Manager) or Yarn
 - PostgreSQL (for the database)
 
-You can download [Node.js from here](https://nodejs.org/fr).
+For Windows: 
+- Git Bash (to run the database creation script). You can download [Git bash from here](https://git-scm.com/downloads).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Installation
 
-Clone this repository:
+**Clone this repository:**
 
 `git clone https://github.com/Lrigami/Ultimate-Planner.git`
 
-Navigate to the project directory:
+**Navigate to the project directory:**
 
 `cd Ultimate-Planner/backend`
 
-Install the dependencies:
+**Install the dependencies:**
 
 `npm install`
 
 Set up the database by configuring the PostgreSQL connection in .env file.
 
-Start the development server:
+**Create the database :**
+**On Linux/macOs:**
+
+```sh
+chmod +x setup_db.sh
+./setupdb.sh
+``` 
+
+**On Windows:**
+
+Make sure that Git Bash is configured to use PostgreSQL, i.e. `psql` must be installed and available in the PATH of the Git Bash environment.
+Open Git Bash in the project directory.
+
+`./setupdb.sh`
+
+Follow the instructions in the terminal to create and import the database.
+
+**Start the development server:**
 
 `npm run start`
 
