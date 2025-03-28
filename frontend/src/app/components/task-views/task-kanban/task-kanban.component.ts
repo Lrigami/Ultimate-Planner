@@ -97,15 +97,13 @@ export class TaskKanbanComponent {
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      const task = event.previousContainer.data[event.previousIndex - 1];
-      console.log('tâche: ', task);
+      moveItemInArray(event.container.data, event.previousIndex -1, event.currentIndex - 1);
       console.log("event.currentContainer: ", event.container);
-      console.log("event.previousContainer: ", event.previousContainer);
       console.log("event.currentIndex: ", event.currentIndex);
       console.log("event.previousIndex: ", event.previousIndex);
-      console.log("data: ", event.previousContainer.data[event.previousIndex - 1]);
+      console.log("data: ", event.previousContainer.data);
+    } else {
+      const task = event.previousContainer.data[event.previousIndex - 1];
       if (!task) return;
   
       const newCategory = this.kanbanCategories.find(category => 
@@ -114,13 +112,14 @@ export class TaskKanbanComponent {
   
       if (newCategory) {
         task.kanban_category = newCategory;
+        task.done = newCategory === "done";
       }
   
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex - 1,
-        event.currentIndex
+        event.currentIndex - 1
       );
 
       this.tasksByCategory[task.kanban_category ? task.kanban_category : 'to-do' ] = event.container.data;
