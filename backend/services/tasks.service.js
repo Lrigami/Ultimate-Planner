@@ -30,6 +30,10 @@ class Functions {
         const safeOperator = operator.toUpperCase() === 'AND' ? 'AND' : 'OR';
         return await taskMethods.filter(tdlid, priority, safeOperator, duedate, userId);
     }
+
+    async sortTaskOrder(tdlid, sortorder, userId) {
+        return await taskMethods.sortOrder(tdlid, sortorder, userId);
+    }
 }
 
 module.exports = new Functions();

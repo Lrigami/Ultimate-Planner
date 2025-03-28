@@ -50,7 +50,7 @@ export class TaskService {
         return this.http.post<any>(`${this.apiUrl}/tasks`, task, { headers });
     }
 
-    updateTask(task: {id: number, title: string, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
+    updateTask(task: {id: number, title: string, sort_order?: number, description?: string, due_date?: Date, priority?: string, kanban_category?: string, done?: boolean}): Observable<any> {
         const headers = this.getAuthHeaders();
         return this.http.put<any>(`${this.apiUrl}/tasks/${task.id}`, task, { headers }).pipe(
             tap(() => {  
@@ -71,6 +71,15 @@ export class TaskService {
     filterTask(filters: {priority: Array<any>, operator: string, duedate: Array<any>}): Observable<any> {
         const headers = this.getAuthHeaders();
         return this.http.post<any>(`${this.apiUrl}/tasks/filter`, filters, { headers }).pipe(
+            tap(() => {
+                this.taskListSubject.next();
+            })
+        )
+    }
+
+    updateTaskOrder(sortOrder: {id: number, kanban_category?: string, done: boolean, sort_order: number}[]): Observable<any> {
+        const headers = this.getAuthHeaders();
+        return this.http.post<any>(`${this.apiUrl}/tasks/sortOrder`, sortOrder, { headers }).pipe(
             tap(() => {
                 this.taskListSubject.next();
             })

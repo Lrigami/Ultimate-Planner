@@ -34,6 +34,7 @@ export class TaskKanbanComponent {
     this.taskService.getAllKanban().subscribe({
       next: (kanban_category) => {
         this.kanbanCategories = kanban_category;
+        this.organizeTasksByCategory();
         this.sortTasks();
       },
       error: (error) => console.error(error)
@@ -46,6 +47,7 @@ export class TaskKanbanComponent {
         next: (tasks) => {
           this.tasks = tasks;
           this.organizeTasksByCategory();
+          this.sortTasks();
           resolve();
         },
         error: (error) => {
@@ -56,15 +58,15 @@ export class TaskKanbanComponent {
     });
   }
 
+  sortTasks() {
+    this.tasks.sort((a, b) => a.sort_order - b.sort_order);
+  }
+
   organizeTasksByCategory() {
     this.tasksByCategory = {};
     this.kanbanCategories.forEach(category => {
       this.tasksByCategory[category] = this.tasks.filter(task => task.kanban_category === category);
     });
-  }
-
-  sortTasks() {
-    this.tasks.sort((a, b) => b.id - a.id);
   }
 
   async filterTasks(priorityArray: [], chosenOperator: string, dueDateArray: []) {
@@ -80,7 +82,6 @@ export class TaskKanbanComponent {
       next: (tasks) => this.tasks = tasks,
       error: (error) => console.error(error)
     });
-    this.sortTasks();
   }
 
   onEdit(task: Task) {
@@ -98,17 +99,15 @@ export class TaskKanbanComponent {
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex -1, event.currentIndex - 1);
-      console.log("event.currentContainer: ", event.container);
-      console.log("event.currentIndex: ", event.currentIndex);
-      console.log("event.previousIndex: ", event.previousIndex);
-      console.log("data: ", event.previousContainer.data);
+      this.updateSortOrder(event.container.data);
     } else {
       const task = event.previousContainer.data[event.previousIndex - 1];
       if (!task) return;
   
-      const newCategory = this.kanbanCategories.find(category => 
+      const newCategory = this.kanbanCategories.find(category =>
         this.tasksByCategory[category] === event.container.data
       );
+      console.log("new category: ", newCategory);
   
       if (newCategory) {
         task.kanban_category = newCategory;
@@ -123,12 +122,19 @@ export class TaskKanbanComponent {
       );
 
       this.tasksByCategory[task.kanban_category ? task.kanban_category : 'to-do' ] = event.container.data;
-  
-      this.taskService.updateTask(task).subscribe();
+
+      this.updateSortOrder(event.container.data);
     }
   }
 
-  getId(task: Task) {
-    console.log(task.id);
+  updateSortOrder(updatedTasks: Task[]) {
+    const updatedTasksArray = updatedTasks.map((task, index) => ({
+      id: task.id,
+      kanban_category: task.kanban_category,
+      done: task.done,
+      sort_order: index + 1
+    }));
+    
+    this.taskService.updateTaskOrder(updatedTasksArray).subscribe();
   }
 }

@@ -1,5 +1,4 @@
-const { query } = require("../config/database");
-const pool = require("../config/database");
+const { pool, query } = require("../config/database");
 
 class Method {
     async checkOwnership(tdlid, userId) {
@@ -47,11 +46,11 @@ class Method {
     
     async update(id, data, tdlid, userId) {
         await this.checkOwnership(tdlid, userId);
-        const { title, description, due_date, priority, kanban_category, done } = data;
+        const { title, sort_order, description, due_date, priority, kanban_category, done } = data;
 
-        const query = `UPDATE tasks SET title = $1, description = $2, due_date = $3, priority = $4, kanban_category = $5, done = $6 WHERE id = $7 RETURNING *`;
+        const query = `UPDATE tasks SET title = $1, sort_order = $2, description = $3, due_date = $4, priority = $5, kanban_category = $6, done = $7 WHERE id = $8 RETURNING *`;
 
-        const values = [title, description || null, due_date || null, priority || 'undefined', kanban_category || 'to-do', done || false, id];
+        const values = [title,  sort_order || null, description || null, due_date || null, priority || 'undefined', kanban_category || 'to-do', done || false, id];
 
         const result = await pool.query(query, values);
         return result.rows[0];
@@ -102,6 +101,40 @@ class Method {
 
         const result = await pool.query(query, values);
         return result.rows;
+    }
+
+    async sortOrder(tdlid, sortOrderData, userId) {
+        await this.checkOwnership(tdlid, userId);
+        const client = await pool.connect();
+
+        try {
+            await client.query('BEGIN');
+    
+            for (const { id, kanban_category, done, sort_order } of sortOrderData) {
+                const result = await client.query(
+                    'UPDATE tasks SET sort_order = $1, kanban_category = $2, done = $3 WHERE id = $4 RETURNING id',
+                    [sort_order, kanban_category, done, id]
+                );
+    
+                if (result.rowCount === 0) {
+                    throw new Error(`Task with id ${id} not found.`);
+                }
+            }
+    
+            await client.query('COMMIT');
+    
+            const result = await client.query(
+                'SELECT * FROM tasks WHERE to_do_list_id = $1 ORDER BY sort_order ASC',
+                [tdlid]
+            );
+    
+            return result.rows;
+        } catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        } finally {
+            client.release();
+        }
     }
 };
 
