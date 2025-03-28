@@ -1,6 +1,7 @@
 <a id="readme-top"></a>
 [![Issues][issues-shield]][issues-url]
 [![AGPL License][license-shield]][license-url]
+[![Commercial License](https://img.shields.io/badge/💼%20Licence-Commerciale-blue?style=for-the-badge)](BUSINESS-LICENSE.md)
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <h1 align="center">Title of Project</h1>
@@ -143,15 +144,16 @@ If you'd like to contribute to the development of Ultimate Planner, please read 
 
 ## Versions
 
-Latest stable version: 1.0
-Latest release: 1.1
+Latest stable version: 1.0.0
+Latest release: 1.0.0
 [You can see the full list of releases here.](https://github.com/Lrigami/Ultimate-Planner/tags)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
 
-Ce projet est sous licence ``GNU AFFERO GENERAL PUBLIC`` - voir le fichier [LICENSE](LICENSE) pour plus d'informations
+This project is under ``GNU AFFERO GENERAL PUBLIC`` license - see [LICENSE](LICENSE) file for more informations.
+If you need a commercial license, please contact me. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -176,7 +178,7 @@ Listez le(s) auteur(s) du projet ici !
 [stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Lrigami/Ultimate-Planner.svg?style=for-the-badge
 [issues-url]: https://github.com/Lrigami/Ultimate-Planner/issues
-[license-shield]: https://img.shields.io/github/license/Lrigami/Ultimate-Planner.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/Lrigami/Ultimate-Planner.svg?style=for-the-badge&color=green
 [license-url]: https://github.com/Lrigami/Ultimate-Planner/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/prune-thiry-6886a6136
