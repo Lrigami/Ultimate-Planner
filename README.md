@@ -52,19 +52,22 @@ Ultimate Planner is a comprehensive application designed to help you organize an
 The project is currently in the development phase. The project has been initiated. 
 
 Here is the project roadmap for the moment: 
-- [x] To-do list and task management (#13); 
-- [x] Management of several to-do lists (#17);
-- [x] Kanban view (#18);
-- [x] User management (#24);
-- [ ] Menu
-- [ ] Custom management (color, pin, tags);
-- [ ] Settings
-- [ ] Dashboard;
-- [ ] Management of notes;
-- [ ] Tracker management (water, mood, sleep); 
-- [ ] Habit management;
-- [ ] Event management and display;
-- [ ] Advanced settings.
+- [x] MVP (v. 1.0.0):
+    - [x] To-do list and task management (#13); 
+    - [x] Management of several to-do lists (#17);
+    - [x] Kanban view (#18);
+    - [x] User management (#24);
+- [ ] V1 (v. 1.1.0): 
+    - [ ] Menu (#30);
+    - [ ] Custom management (color, pin, tags) (#29);
+    - [ ] Settings (#31);
+    - [ ] Management of notes (#32);
+- [ ] Later:
+    - [ ] Dashboard;
+    - [ ] Tracker management (water, mood, sleep); 
+    - [ ] Habit management;
+    - [ ] Event management and display;
+    - [ ] Advanced settings.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
