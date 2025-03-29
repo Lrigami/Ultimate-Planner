@@ -150,7 +150,6 @@ This will start the project. You can access it via your browser at http://localh
 
 ## Built with
 
-* [Tailwind.css](https://tailwindcss.com/) - CSS Framework (front-end)
 * [Angular](https://angular.dev/) - Web Application Framework
 * [Node.js](https://nodejs.org/fr) - Runtime Environment
 * [PostgreSQL](https://www.postgresql.org/) - Relational Database Management System (RDBMS)
