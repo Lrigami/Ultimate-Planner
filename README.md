@@ -165,16 +165,16 @@ If you'd like to contribute to the development of Ultimate Planner, please read 
 
 ## Versions
 
-Latest stable version: 1.0.0
-Latest release: 1.0.0
-[You can see the full list of releases here.](https://github.com/Lrigami/Ultimate-Planner/tags)
+<p>Latest stable version: 1.0.0</p>
+<p>Latest release: 1.0.0</p>
+<p>[You can see the full list of releases here.](https://github.com/Lrigami/Ultimate-Planner/tags)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
 
 This project is under ``GNU AFFERO GENERAL PUBLIC`` license - see [LICENSE](LICENSE) file for more informations.
-If you need a commercial license, please contact me. 
+**If you need a commercial license, please contact me.** 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -185,7 +185,7 @@ If you need a commercial license, please contact me.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Authors
-Listez le(s) auteur(s) du projet ici !
+
 * **THIRY Prune** _alias_ [@Lrigami](https://github.com/Lrigami)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
