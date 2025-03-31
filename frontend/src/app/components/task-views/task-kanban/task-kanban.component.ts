@@ -40,7 +40,7 @@ export class TaskKanbanComponent {
       error: (error) => console.error(error)
     });
   }
-
+  
   loadTasks(): Promise<void>{
     return new Promise ((resolve, reject) => {
       this.taskService.getAllTasks().subscribe({
@@ -139,7 +139,6 @@ export class TaskKanbanComponent {
       const newCategory = this.kanbanCategories.find(category =>
         this.tasksByCategory[category] === event.container.data
       );
-      console.log("new category: ", newCategory);
   
       if (newCategory) {
         task.kanban_category = newCategory;
