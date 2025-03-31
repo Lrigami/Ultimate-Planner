@@ -3,6 +3,7 @@
     flex-direction: column;
     min-width: 81%;
     border-bottom: 1px solid var(--grey-outline);
+    cursor: grab;
 }
 
 .task-card-content p {
