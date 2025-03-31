@@ -60,6 +60,7 @@ export class TaskKanbanComponent {
 
   sortTasks() {
     this.tasks.sort((a, b) => a.sort_order - b.sort_order);
+    this.organizeTasksByCategory();
   }
 
   sortTasksByParameter(sortingParameter: string, isAscending: boolean) {
@@ -87,6 +88,7 @@ export class TaskKanbanComponent {
     } else {
       this.loadTasks();
     }
+    this.organizeTasksByCategory();
   }
 
   organizeTasksByCategory() {
@@ -106,7 +108,10 @@ export class TaskKanbanComponent {
     const operator = chosenOperator;
     const duedate = dueDateArray;
     this.taskService.filterTask({ priority, operator, duedate }).subscribe({
-      next: (tasks) => this.tasks = tasks,
+      next: (tasks) => {
+        this.tasks = tasks;
+        this.organizeTasksByCategory();
+      },
       error: (error) => console.error(error)
     });
   }
