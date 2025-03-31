@@ -79,4 +79,13 @@ export class TodolistService {
             })
         )
     }
+
+    updateTodolistOrder(sortOrder: {id: number, sort_order: number}[]): Observable<any> {
+        const headers = this.getAuthHeaders();
+        return this.http.post<any>(`${this.apiUrl}/sortOrder`, sortOrder, { headers }).pipe(
+            tap(() => {
+                this.todolistSubject.next();
+            })
+        )
+    }
 }
