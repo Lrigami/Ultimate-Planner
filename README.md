@@ -52,19 +52,22 @@ Ultimate Planner is a comprehensive application designed to help you organize an
 The project is currently in the development phase. The project has been initiated. 
 
 Here is the project roadmap for the moment: 
-- [x] To-do list and task management (#13); 
-- [x] Management of several to-do lists (#17);
-- [x] Kanban view (#18);
-- [x] User management (#24);
-- [ ] Menu
-- [ ] Custom management (color, pin, tags);
-- [ ] Settings
-- [ ] Dashboard;
-- [ ] Management of notes;
-- [ ] Tracker management (water, mood, sleep); 
-- [ ] Habit management;
-- [ ] Event management and display;
-- [ ] Advanced settings.
+- [x] MVP (v. 1.0.0):
+    - [x] To-do list and task management (#13); 
+    - [x] Management of several to-do lists (#17);
+    - [x] Kanban view (#18);
+    - [x] User management (#24);
+- [ ] V1 (v. 1.1.0): 
+    - [ ] Menu (#30);
+    - [ ] Custom management (color, pin, tags) (#29);
+    - [ ] Settings (#31);
+    - [ ] Management of notes (#32);
+- [ ] Later:
+    - [ ] Dashboard;
+    - [ ] Tracker management (water, mood, sleep); 
+    - [ ] Habit management;
+    - [ ] Event management and display;
+    - [ ] Advanced settings.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -147,7 +150,6 @@ This will start the project. You can access it via your browser at http://localh
 
 ## Built with
 
-* [Tailwind.css](https://tailwindcss.com/) - CSS Framework (front-end)
 * [Angular](https://angular.dev/) - Web Application Framework
 * [Node.js](https://nodejs.org/fr) - Runtime Environment
 * [PostgreSQL](https://www.postgresql.org/) - Relational Database Management System (RDBMS)
@@ -162,16 +164,16 @@ If you'd like to contribute to the development of Ultimate Planner, please read 
 
 ## Versions
 
-Latest stable version: 1.0.0
-Latest release: 1.0.0
-[You can see the full list of releases here.](https://github.com/Lrigami/Ultimate-Planner/tags)
+<p>Latest stable version: 1.0.0</p>
+<p>Latest release: 1.0.0</p>
+<p>[You can see the full list of releases here.](https://github.com/Lrigami/Ultimate-Planner/tags)</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
 
 This project is under ``GNU AFFERO GENERAL PUBLIC`` license - see [LICENSE](LICENSE) file for more informations.
-If you need a commercial license, please contact me. 
+**If you need a commercial license, please contact me.** 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -182,7 +184,7 @@ If you need a commercial license, please contact me.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Authors
-Listez le(s) auteur(s) du projet ici !
+
 * **THIRY Prune** _alias_ [@Lrigami](https://github.com/Lrigami)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
