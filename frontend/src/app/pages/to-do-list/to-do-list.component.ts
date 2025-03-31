@@ -8,6 +8,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Task } from '../../models/task.model';
 import { TodolistService } from '../../services/to-do-list.service';
 import { TaskService } from '../../services/task.service';
+import { ButtonComponent } from '../../components/buttons/button.component';
 import { TaskListComponent } from '../../components/task-views/task-list/task-list.component';
 import { TaskKanbanComponent } from '../../components/task-views/task-kanban/task-kanban.component';
 import { TaskFormComponent } from '../../components/forms/task-form/task-form.component';
@@ -15,7 +16,7 @@ import { DeleteFormComponent } from '../../components/forms/delete-form/delete-f
 
 @Component({
   selector: 'to-do-list',
-  imports: [CommonModule, RouterLink, MatSelectModule, MatButtonToggle, MatButtonToggleGroup, FormsModule, ReactiveFormsModule, TaskListComponent, TaskKanbanComponent, TaskFormComponent, DeleteFormComponent],
+  imports: [CommonModule, RouterLink, MatSelectModule, MatButtonToggle, MatButtonToggleGroup, FormsModule, ReactiveFormsModule, ButtonComponent, TaskListComponent, TaskKanbanComponent, TaskFormComponent, DeleteFormComponent],
   templateUrl: './to-do-list.component.html',
   styleUrl: './to-do-list.component.css'
 })
@@ -27,6 +28,7 @@ export class ToDoListComponent {
   priorityLevels: string[] = [];
   priority = new FormControl('');
   dueDate = new FormControl('');
+  sortingParameters = new FormControl('');
   listTitle: string = '';
 
   isAddFormVisible = false;
@@ -37,6 +39,8 @@ export class ToDoListComponent {
   selectedPriority: [] = [];
   selectedDueDate: [] = [];
   chosenOperator: string = "AND";
+  sortingParameter: string = '';
+  isAscending: boolean = true;
   chosenView: string = "list";
 
   constructor (public taskService: TaskService, public todolistService: TodolistService, private route: ActivatedRoute) {}
@@ -100,6 +104,7 @@ export class ToDoListComponent {
     }
   }
 
+  // Filtering tasks
   onPriorityChange(event: MatSelectChange) {
     this.selectedPriority = event.value;
     this.filterTasks();
@@ -115,15 +120,26 @@ export class ToDoListComponent {
     this.filterTasks();
   }
 
-  async filterTasks() {
-    if (this.taskListComponent) {
-      await this.taskListComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate);
-    } else if (this.taskKanbanComponent) {
-      await this.taskKanbanComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate);
-    }
-  }
-
   onViewChange(event: MatButtonToggleChange) {
     this.chosenView = event.value;
+  }
+
+  async filterTasks() {
+    this.taskListComponent ? await this.taskListComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate) : await this.taskKanbanComponent.filterTasks(this.selectedPriority, this.chosenOperator, this.selectedDueDate);
+  }
+
+  // Sorting tasks
+  onParameterChange(event: MatSelectChange) {
+    this.sortingParameter = event.value;
+    this.sortTasks();
+  }
+
+  onOrderChange() {
+    this.isAscending = !this.isAscending;
+    this.sortTasks();
+  }
+
+  async sortTasks() {
+    this.taskListComponent ? this.taskListComponent.sortTasksByParameter(this.sortingParameter, this.isAscending) : this.taskKanbanComponent.sortTasksByParameter(this.sortingParameter, this.isAscending);
   }
 }

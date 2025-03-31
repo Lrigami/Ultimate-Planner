@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Todolist } from '../../models/todolist.model';
 import { TodolistService } from '../../services/to-do-list.service';
 // importer title component, title form, to do list form
@@ -11,7 +12,7 @@ import { DeleteFormComponent } from '../../components/forms/delete-form/delete-f
 @Component({
   selector: 'to-do-lists',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, ToDoListCardComponent, ToDoListFormComponent, DeleteFormComponent],
+  imports: [CommonModule, CdkDropList, CdkDrag, ButtonComponent, ToDoListCardComponent, ToDoListFormComponent, DeleteFormComponent],
   templateUrl: './to-do-lists.component.html',
   styleUrl: './to-do-lists.component.css'
 })
@@ -36,6 +37,7 @@ export class ToDoListsComponent {
     this.todolistService.getAllLists().subscribe({
       next: (lists) => {
         this.todolists = lists;
+        this.todolists.sort((a, b) => a.sort_order - b.sort_order);
         this.countTasksAndDoneTasks();
       },
       error: (error) => console.error("Error fetching to-do lists: ", error)
@@ -107,10 +109,24 @@ export class ToDoListsComponent {
       const totalTasks = this.totalTasksMap[list.id];
       const doneTasks = this.totalDoneTasksMap[list.id];
       if (totalTasks === 0) {
-        this.tasksPercentage[list.id] = 0.0; // Évite NaN
+        this.tasksPercentage[list.id] = 0.0;
       } else {
         this.tasksPercentage[list.id] = Number(((doneTasks / totalTasks) * 100).toFixed(0));
       }
     })
+  }
+
+  drop(event: CdkDragDrop<Todolist[]>) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      this.updateSortOrder(event.container.data);
+  }
+
+  updateSortOrder(updatedTodolist: Todolist[]) {
+      const updatedTodolistArray = updatedTodolist.map((list, index) => ({
+        id: list.id,
+        sort_order: index + 1
+      }));
+      
+      this.todolistService.updateTodolistOrder(updatedTodolistArray).subscribe();
   }
 }

@@ -31,6 +31,10 @@ class Functions {
     async countDoneTasks(listId, userId) {
         return await todolistMethods.countDoneTasksInList(listId, userId);
     }
+
+    async sortTodolistsOrder(sortorder, userId) {
+        return await todolistMethods.sortOrder(sortorder, userId);
+    }
 }
 
 module.exports = new Functions();

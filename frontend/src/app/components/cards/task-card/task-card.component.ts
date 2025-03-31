@@ -16,7 +16,7 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() task!: Task;
   @Output() edit = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<Task>();
-  @Output() checked = new EventEmitter<any>();
+  @Output() checked = new EventEmitter<void>();
 
   title?: string;
   description?: string;
@@ -95,7 +95,7 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
   // clicker sur check = done (changement de colonne)
   checkTask() {
     this.task.done = !this.task.done;
-    this.task.done ? this.task.kanban_category = 'done' : this.task.kanban_category = 'to-do';
+    this.task.kanban_category = this.task.done ? 'done' : 'to-do';
     this.taskService.updateTask(this.task).subscribe({
       next: () => {
         this.dateColor();

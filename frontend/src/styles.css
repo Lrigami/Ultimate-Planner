@@ -315,6 +315,10 @@ task-card {
     position: relative;
 }
 
+.cdk-drop-list-dragging, .cdk-drop-list-receiving {
+    cursor: grabbing !important;
+}
+
 forgot-password, reset-password {
     max-width: 80%;
     margin: auto;

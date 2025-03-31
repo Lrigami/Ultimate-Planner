@@ -1,13 +1,13 @@
 .list-controls {
+    width: 90%;
     display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-.filters {
+.filters, .sort-tasks {
     display: flex;
-    width: 80%;
     gap: 30px;
     justify-content: center;
     align-items: center;

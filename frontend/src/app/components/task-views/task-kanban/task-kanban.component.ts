@@ -40,7 +40,7 @@ export class TaskKanbanComponent {
       error: (error) => console.error(error)
     });
   }
-
+  
   loadTasks(): Promise<void>{
     return new Promise ((resolve, reject) => {
       this.taskService.getAllTasks().subscribe({
@@ -60,6 +60,35 @@ export class TaskKanbanComponent {
 
   sortTasks() {
     this.tasks.sort((a, b) => a.sort_order - b.sort_order);
+    this.organizeTasksByCategory();
+  }
+
+  sortTasksByParameter(sortingParameter: string, isAscending: boolean) {
+    if (sortingParameter == 'priority') {
+      const taskHigh = this.tasks.filter(task => task.priority === 'high');
+      const taskMedium = this.tasks.filter(task => task.priority === 'medium');
+      const taskLow = this.tasks.filter(task => task.priority === 'low');
+      this.tasks = isAscending ? [...taskLow, ...taskMedium, ...taskHigh] : [...taskHigh, ...taskMedium, ...taskLow];
+    } else if (sortingParameter == 'due_date') {
+      const dueDateTasks = this.tasks.filter((task): task is Task & { due_date: Date } => !!task.due_date);
+      const noDueDateTasks = this.tasks.filter(task => !task.due_date);
+      if (isAscending) {
+        dueDateTasks.sort((a, b) => new Date(a.due_date).getTime() - new Date(b.due_date).getTime());
+        this.tasks = [...noDueDateTasks, ...dueDateTasks];
+      } else {
+        dueDateTasks.sort((a, b) => new Date(b.due_date).getTime() - new Date(a.due_date).getTime());
+        this.tasks = [...dueDateTasks, ...noDueDateTasks];
+      }
+    } else if (sortingParameter == 'created_at') {
+      if (isAscending) {
+        this.tasks.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+      } else {
+        this.tasks.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      }
+    } else {
+      this.loadTasks();
+    }
+    this.organizeTasksByCategory();
   }
 
   organizeTasksByCategory() {
@@ -79,7 +108,10 @@ export class TaskKanbanComponent {
     const operator = chosenOperator;
     const duedate = dueDateArray;
     this.taskService.filterTask({ priority, operator, duedate }).subscribe({
-      next: (tasks) => this.tasks = tasks,
+      next: (tasks) => {
+        this.tasks = tasks;
+        this.organizeTasksByCategory();
+      },
       error: (error) => console.error(error)
     });
   }
@@ -107,7 +139,6 @@ export class TaskKanbanComponent {
       const newCategory = this.kanbanCategories.find(category =>
         this.tasksByCategory[category] === event.container.data
       );
-      console.log("new category: ", newCategory);
   
       if (newCategory) {
         task.kanban_category = newCategory;

@@ -1,4 +1,3 @@
-<!-- Changer le nom du titre pour celui de la to-do list dans la prochaine branche -->
 <header>
     <a routerLink="/todolist">Back to lists</a>
     <h2>{{ this.listTitle }}</h2>
@@ -11,7 +10,9 @@
         <mat-button-toggle value="kanban">Kanban</mat-button-toggle>
     </mat-button-toggle-group>
     <div class="filters">
-        <p>Filter by: </p>
+        <p>
+            <span class="material-symbols-outlined">filter_list</span>
+            <span>Filter by: </span></p>
         <!-- S'occuper plus tard du style des select -->
         <mat-form-field>
             <mat-label>Priority</mat-label>
@@ -32,6 +33,23 @@
                 <mat-option value="this month">This month</mat-option>
             </mat-select>
         </mat-form-field>
+    </div>
+    <div class="sort-tasks">
+        <p>
+            <span class="material-symbols-outlined">swap_vert</span>
+            <span>Sort by: </span>
+        </p>
+        <mat-form-field>
+            <mat-label>--Sorting parameters</mat-label>
+            <mat-select name="sorting-parameters" id="sorting-parameters" [formControl]="sortingParameters" (selectionChange)="onParameterChange($event)">
+                <mat-option value="Undefined">None</mat-option>
+                <mat-option value="priority">Priority</mat-option>
+                <mat-option value="due_date">Due Date</mat-option>
+                <mat-option value="created_at">Creation date</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button *ngIf="isAscending" app-button icon="arrow_upward" class="icon-btn no-outline not-filled-btn" (click)="onOrderChange()"></button>
+        <button *ngIf="!isAscending" app-button icon="arrow_downward" class="icon-btn no-outline not-filled-btn" (click)="onOrderChange()"></button> 
     </div>
 </div>
 
