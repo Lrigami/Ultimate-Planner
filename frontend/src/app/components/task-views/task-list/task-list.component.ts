@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Task } from '../../../models/task.model';
 import { TaskService } from '../../../services/task.service';
 import { ButtonComponent } from '../../buttons/button.component';
@@ -8,7 +9,7 @@ import { TaskCardComponent } from '../../cards/task-card/task-card.component';
 @Component({
   selector: 'task-list',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, TaskCardComponent],
+  imports: [CommonModule, CdkDropList, CdkDrag, ButtonComponent, TaskCardComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
@@ -55,7 +56,7 @@ export class TaskListComponent {
   }
 
   sortTasks() {
-    this.tasks.sort((a, b) => b.id - a.id);
+    this.tasks.sort((a, b) => a.sort_order - b.sort_order);
     const taskNotDone = this.tasks.filter(task => !task.done);
     const taskDone = this.tasks.filter(task => task.done);
     this.tasks = [...taskNotDone, ...taskDone];
@@ -75,5 +76,24 @@ export class TaskListComponent {
       error: (error) => console.error(error)
     });
     this.sortTasks();
+  }
+
+  drop(event: CdkDragDrop<Task[]>) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log("event.container.data: ", event.container.data);
+      console.log("event.previousIndex - 1: ", event.previousIndex);
+      console.log("event.currentIndex - 1: ", event.currentIndex);
+      this.updateSortOrder(event.container.data);
+  }
+
+  updateSortOrder(updatedTasks: Task[]) {
+    const updatedTasksArray = updatedTasks.map((task, index) => ({
+      id: task.id,
+      kanban_category: task.kanban_category,
+      done: task.done,
+      sort_order: index + 1
+    }));
+    
+    this.taskService.updateTaskOrder(updatedTasksArray).subscribe();
   }
 }

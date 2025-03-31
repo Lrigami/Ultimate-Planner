@@ -1,12 +1,17 @@
-<div class="task-list">
-    <task-card 
-        *ngFor="let task of tasks" 
-        [task]="task" 
-        class="task-card" 
-        (edit)="onEdit(task)"
-        (delete)="onDelete(task)"
-        (checked)="loadTasks()">
-    </task-card>
+<div class="task-list" 
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="tasks">
+    @for (task of tasks; track task.id) {
+        <task-card 
+            cdkDrag
+            [task]="task" 
+            class="task-card" 
+            (edit)="onEdit(task)"
+            (delete)="onDelete(task)"
+            (checked)="loadTasks()">
+        </task-card>
+    }
 </div>
 
 <button app-button icon="add" text="Add" class="add-btn extended-fab-btn green-tonal-btn no-outline" (click)="onCreate()"></button>
