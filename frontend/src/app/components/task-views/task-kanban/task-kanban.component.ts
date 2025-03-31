@@ -62,6 +62,33 @@ export class TaskKanbanComponent {
     this.tasks.sort((a, b) => a.sort_order - b.sort_order);
   }
 
+  sortTasksByParameter(sortingParameter: string, isAscending: boolean) {
+    if (sortingParameter == 'priority') {
+      const taskHigh = this.tasks.filter(task => task.priority === 'high');
+      const taskMedium = this.tasks.filter(task => task.priority === 'medium');
+      const taskLow = this.tasks.filter(task => task.priority === 'low');
+      this.tasks = isAscending ? [...taskLow, ...taskMedium, ...taskHigh] : [...taskHigh, ...taskMedium, ...taskLow];
+    } else if (sortingParameter == 'due_date') {
+      const dueDateTasks = this.tasks.filter((task): task is Task & { due_date: Date } => !!task.due_date);
+      const noDueDateTasks = this.tasks.filter(task => !task.due_date);
+      if (isAscending) {
+        dueDateTasks.sort((a, b) => new Date(a.due_date).getTime() - new Date(b.due_date).getTime());
+        this.tasks = [...noDueDateTasks, ...dueDateTasks];
+      } else {
+        dueDateTasks.sort((a, b) => new Date(b.due_date).getTime() - new Date(a.due_date).getTime());
+        this.tasks = [...dueDateTasks, ...noDueDateTasks];
+      }
+    } else if (sortingParameter == 'created_at') {
+      if (isAscending) {
+        this.tasks.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+      } else {
+        this.tasks.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      }
+    } else {
+      this.loadTasks();
+    }
+  }
+
   organizeTasksByCategory() {
     this.tasksByCategory = {};
     this.kanbanCategories.forEach(category => {

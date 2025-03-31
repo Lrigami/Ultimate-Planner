@@ -118,11 +118,7 @@ export class ToDoListsComponent {
 
   drop(event: CdkDragDrop<Todolist[]>) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log("event.container.data: ", event.container.data);
-      console.log("event.previousIndex: ", event.previousIndex);
-      console.log("event.currentIndex: ", event.currentIndex);
       this.updateSortOrder(event.container.data);
-      console.log("event.container.data: ", event.container.data);
   }
 
   updateSortOrder(updatedTodolist: Todolist[]) {
