@@ -80,9 +80,6 @@ export class TaskListComponent {
 
   drop(event: CdkDragDrop<Task[]>) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log("event.container.data: ", event.container.data);
-      console.log("event.previousIndex - 1: ", event.previousIndex);
-      console.log("event.currentIndex - 1: ", event.currentIndex);
       this.updateSortOrder(event.container.data);
   }
 

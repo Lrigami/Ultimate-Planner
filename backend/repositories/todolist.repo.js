@@ -77,6 +77,39 @@ class Method {
         const result = await pool.query(query, values);
         return result.rows[0].count;
     }
+
+    async sortOrder(sortOrderData, userId) {
+        const client = await pool.connect();
+
+        try {
+            await client.query('BEGIN');
+    
+            for (const { id, sort_order } of sortOrderData) {
+                const result = await client.query(
+                    'UPDATE to_do_lists SET sort_order = $1 WHERE id = $2 AND user_id = $3 RETURNING id',
+                    [sort_order, id, userId]
+                );
+    
+                if (result.rowCount === 0) {
+                    throw new Error(`To-do list with id ${id} not found.`);
+                }
+            }
+    
+            await client.query('COMMIT');
+    
+            const result = await client.query(
+                'SELECT * FROM to_do_lists WHERE user_id = $1 ORDER BY sort_order ASC',
+                [userId]
+            );
+    
+            return result.rows;
+        } catch (err) {
+            await client.query('ROLLBACK');
+            throw err;
+        } finally {
+            client.release();
+        }
+    }
 }
 
 module.exports = new Method("todolist");
