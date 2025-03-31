@@ -64,6 +64,8 @@ class Method {
 
     async filter(tdlid, priorityArray, safeOperator, dueDateArray, userId) {
         await this.checkOwnership(tdlid, userId);
+        if (priorityArray.length == 0 && dueDateArray.length == 0) return;
+
         let query = `SELECT * FROM tasks WHERE to_do_list_id = $1 AND (`;
         let values = [tdlid];
 
