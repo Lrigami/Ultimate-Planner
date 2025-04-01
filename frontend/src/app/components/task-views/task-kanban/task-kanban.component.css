@@ -25,6 +25,6 @@ task-card {
 }
 
 .kanban-task-list {
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 100%;
 }
