@@ -33,4 +33,5 @@ mat-form-field {
 
 task-kanban {
     max-height: 72dvh;
+    width: 100%;
 }

@@ -3,6 +3,7 @@ ul {
     display: flex;
     gap: 20px;
     max-height: 60dvh;
+    max-width: 100%;
 }
 
 ul li {
