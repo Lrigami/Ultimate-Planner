@@ -280,10 +280,11 @@ mat-button-toggle {
 /* pages */
 
 app-menu {
+    background-color: var(--green-personalised);
     max-width: 200px;
     width: 200px;
     height: 100%;
-    background-color: #000000;
+    border-right: 1px solid var(--green-outline);
     border-radius: 0 10px 10px 0;
 }
 
