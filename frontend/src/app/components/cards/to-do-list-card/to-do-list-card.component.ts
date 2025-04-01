@@ -5,6 +5,7 @@ import { circleProgressConfig } from '../../../circle-progress.config';
 import { Router } from '@angular/router';
 import { Todolist } from '../../../models/todolist.model';
 import { TodolistService } from '../../../services/to-do-list.service';
+import { CommunicationService } from '../../../services/communication.service';
 import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
@@ -26,10 +27,10 @@ export class ToDoListCardComponent {
   @Output() delete = new EventEmitter<Todolist>();
 
   title?: string; 
-  pinned?: boolean; 
+  pinned: boolean = false; 
   color?: string;
 
-  constructor(private todolistService: TodolistService, private router: Router) {}
+  constructor(private todolistService: TodolistService, private communicationService: CommunicationService, private router: Router) {}
 
   ngOnInit() {
     this.updateList();
@@ -42,5 +43,17 @@ export class ToDoListCardComponent {
 
   goToList() {
     this.router.navigate([`/todolist/${this.list.id}`]);
+  }
+
+  pinToMenu() {
+    this.list.pinned = !this.list.pinned;
+    this.todolistService.updateList(this.list).subscribe({
+      next: (todolist) => {
+        const isPinned = todolist.pinned;
+        const listId = todolist.id;
+        const listTitle = todolist.title;
+        this.communicationService.updatePinnedState({isPinned: isPinned, tdlid: listId, title: listTitle});
+      }
+    })
   }
 }

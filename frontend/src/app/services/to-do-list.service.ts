@@ -44,7 +44,7 @@ export class TodolistService {
         return this.http.post<any>(this.apiUrl, list, { headers });
     }
 
-    updateList(list: {id: number, title: string, pinned: boolean, color: string}): Observable<any> {
+    updateList(list: {id: number, title: string, pinned: boolean, color?: string}): Observable<any> {
         const headers = this.getAuthHeaders();
         return this.http.put<any>(`${this.apiUrl}/${list.id}`, list, { headers }).pipe(
             tap(() => {

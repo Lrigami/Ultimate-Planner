@@ -19,7 +19,20 @@
 <!-- Navigation -->
 <section>
     <nav>
-
+        <ul>
+            <li>
+                <h3 routerLink="/todolist">My To-Do Lists</h3>
+                <ul id="pinned-list">
+                    <li *ngFor="let list of listOfPinnedLists">
+                        <h4 [routerLink]="['/todolist', list.tdlid]">{{ list.title }}</h4>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <!-- la route est prête pour l'injection des notes plus tard -->
+                <h3 routerLink="/notes">My Notes</h3>
+            </li>
+        </ul>
     </nav>
 </section>
 
