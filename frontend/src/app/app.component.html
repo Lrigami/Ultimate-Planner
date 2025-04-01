@@ -4,7 +4,7 @@
     <a routerLink=""></a>
     <a routerLink=""></a>
 </nav> -->
-<app-menu></app-menu>
+<app-menu *ngIf="!hideComponent"></app-menu>
 <router-outlet />
 <!-- <to-do-lists></to-do-lists>
 <to-do-list></to-do-list> -->

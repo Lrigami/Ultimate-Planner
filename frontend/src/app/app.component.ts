@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { MenuComponentGuard } from './guards/menu.guard';
 import { MenuComponent } from './components/menu/menu.component';
 // import { SignInComponent } from './pages/sign-in/sign-in.component';
 // import { ToDoListsComponent } from './pages/to-do-lists/to-do-lists.component';
@@ -13,4 +14,14 @@ import { MenuComponent } from './components/menu/menu.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  hideComponent: boolean = false;
+
+  constructor(private router: Router, private guard: MenuComponentGuard) {}
+
+  ngOnInit() {
+    this.router.events.subscribe(() => {
+      this.hideComponent = !this.guard.canActivate(null!, this.router.routerState.snapshot);
+    });
+  }
+}
