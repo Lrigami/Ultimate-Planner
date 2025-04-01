@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { MenuComponent } from './components/menu/menu.component';
 // import { SignInComponent } from './pages/sign-in/sign-in.component';
 // import { ToDoListsComponent } from './pages/to-do-lists/to-do-lists.component';
 // import { ToDoListComponent } from './pages/to-do-list/to-do-list.component';
@@ -8,7 +9,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet, MenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
