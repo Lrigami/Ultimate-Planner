@@ -1,7 +1,7 @@
 .task-list {
     position: relative;
     max-height: 72dvh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-top: 10px;
 }
 

@@ -81,7 +81,8 @@ body {
 }
 
 app-root {
-    display: block;
+    display: flex;
+    gap: 10px;
     height: 100%;
 }
 
@@ -274,10 +275,17 @@ mat-button-toggle-group {
 
 mat-button-toggle {
     text-align: center;
-    padding: 0 6px;
 }
 
 /* pages */
+
+app-menu {
+    max-width: 200px;
+    width: 200px;
+    height: 100%;
+    background-color: #000000;
+    border-radius: 0 10px 10px 0;
+}
 
 task-list {
     position: relative;
@@ -290,6 +298,7 @@ to-do-list, to-do-lists {
     align-items: center;
     position: relative;
     height: 100%;
+    width: calc(100% - 220px);
 }
 
 to-do-list-card {

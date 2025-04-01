@@ -1,20 +1,29 @@
 .list-controls {
-    width: 90%;
+    width: 100%;
+    margin-bottom: 10px;
     display: flex;
     gap: 10px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.filters, .sort-tasks {
-    display: flex;
-    gap: 30px;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
-.filters p {
-    width: 100px;
+.view-choice {
+    min-width: 145px;
+}
+
+.filters, .sort-tasks {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.filters p, .sort-tasks p {
+    width: 90px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 mat-form-field {

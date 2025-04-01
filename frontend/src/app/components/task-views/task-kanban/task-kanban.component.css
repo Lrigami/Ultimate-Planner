@@ -6,12 +6,13 @@ ul {
 }
 
 ul li {
-    width: 31dvw;
+    width: 31%;
     max-height: 100%;
 }
 
 task-card {
-    max-width: 90%;
+    max-width: 92%;
+    gap: 10px;
 }
 
 .kanban-column-header {
