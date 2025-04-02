@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.todolistService.getPinnedList({ isPinned: true }).subscribe(list => {
       list.forEach((todolist: { pinned: any; id: any; title: any; }) => {
-              this.listOfPinnedLists.push({ isPinned: todolist.pinned, tdlid: todolist.id, title: todolist.title });
+        this.listOfPinnedLists.push({ isPinned: todolist.pinned, tdlid: todolist.id, title: todolist.title });
       });
     });
     this.subscription = this.communicationService.communication$.subscribe(subject => {
@@ -47,7 +47,6 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.listOfPinnedLists.push(subject);
       }
     }
-    console.log("list of pinned list: ", this.listOfPinnedLists);
   }
 
   ngOnDestroy() {
