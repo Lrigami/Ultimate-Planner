@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Router, RouterLink} from '@angular/router';
 import { CommunicationService } from '../../services/communication.service';
 import { TodolistService } from '../../services/to-do-list.service';
+import { AuthService } from '../../services/sign-in-up-service';
 import { ButtonComponent } from '../buttons/button.component';
 
 @Component({
@@ -18,7 +19,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   subject: {isPinned: boolean; tdlid: number, title: string} | null = null;
   private subscription!: Subscription;
 
-  constructor(private communicationService: CommunicationService, private todolistService: TodolistService, private router: Router) {}
+  constructor(private communicationService: CommunicationService, private todolistService: TodolistService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.todolistService.getPinnedList({ isPinned: true }).subscribe(list => {
@@ -55,5 +56,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   navigateTo(path: string, id: number) {
     this.router.navigate([`${path}/${id}`]);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 }
