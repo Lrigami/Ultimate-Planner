@@ -71,4 +71,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     console.log(this.isFolded);
     this.foldValue.emit(this.isFolded);
   }
+
+  openSettings() {
+    // gérer la logique des paramètres dans la branche "settings"
+  }
 }

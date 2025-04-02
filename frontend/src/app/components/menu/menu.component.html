@@ -9,7 +9,7 @@
 <section [ngClass]="isFolded ? 'center' : 'space-between'">
     <img [ngClass]="isFolded ? 'no-pixel' : 'big'" src="assets/icons8-user-100.png" alt="default user icon">
     <div [ngClass]="isFolded ? 'center-btn' : 'flex-end'">
-        <button app-button icon="settings" class="icon-btn grey-tonal-btn no-outline"></button>
+        <button app-button icon="settings" class="icon-btn grey-tonal-btn no-outline" (click)="openSettings()"></button>
         <mat-slide-toggle>
 
         </mat-slide-toggle>
