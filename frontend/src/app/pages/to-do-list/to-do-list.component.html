@@ -5,7 +5,7 @@
 
 <div class="list-controls">
     <!-- insérer ici le segmented button pour la vue en list / kanban -->
-    <mat-button-toggle-group name="view choice" aria-label="View Choice" [(ngModel)]="chosenView" (change)="onViewChange($event)">
+    <mat-button-toggle-group class="view-choice" name="view choice" aria-label="View Choice" [(ngModel)]="chosenView" (change)="onViewChange($event)">
         <mat-button-toggle value="list">List</mat-button-toggle>
         <mat-button-toggle value="kanban">Kanban</mat-button-toggle>
     </mat-button-toggle-group>
@@ -14,7 +14,7 @@
             <span class="material-symbols-outlined">filter_list</span>
             <span>Filter by: </span></p>
         <!-- S'occuper plus tard du style des select -->
-        <mat-form-field>
+        <mat-form-field class="dense-2">
             <mat-label>Priority</mat-label>
             <mat-select multiple name="priority-filter" id="priority-filter" [formControl]="priority" (selectionChange)="onPriorityChange($event)">
                 <mat-option *ngFor="let priority_level of priorityLevels" [value]="priority_level">{{ priority_level }}</mat-option>
@@ -24,7 +24,7 @@
             <mat-button-toggle value="AND">And</mat-button-toggle>
             <mat-button-toggle value="OR">Or</mat-button-toggle>
         </mat-button-toggle-group>
-        <mat-form-field>
+        <mat-form-field class="dense-2">
             <mat-label>Due date</mat-label>
             <mat-select multiple name="due-date-filter" id="due-date-filter" [formControl]="dueDate" (selectionChange)="onDueDateChange($event)">
                 <mat-option value="today">Today</mat-option>
@@ -39,7 +39,7 @@
             <span class="material-symbols-outlined">swap_vert</span>
             <span>Sort by: </span>
         </p>
-        <mat-form-field>
+        <mat-form-field class="dense-2">
             <mat-label>--Sorting parameters</mat-label>
             <mat-select name="sorting-parameters" id="sorting-parameters" [formControl]="sortingParameters" (selectionChange)="onParameterChange($event)">
                 <mat-option value="Undefined">None</mat-option>

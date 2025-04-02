@@ -14,3 +14,11 @@ html {
     density: 0,
   ));
 }
+
+.dense-2 {
+  @include mat.all-component-densities(-2);
+}
+
+.mdc-text-field-filled, .mat-mdc-floating-label {
+  display: unset !important;
+}

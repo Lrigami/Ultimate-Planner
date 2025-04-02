@@ -3,15 +3,17 @@ ul {
     display: flex;
     gap: 20px;
     max-height: 60dvh;
+    max-width: 100%;
 }
 
 ul li {
-    width: 31dvw;
+    width: 31%;
     max-height: 100%;
 }
 
 task-card {
-    max-width: 90%;
+    max-width: 92%;
+    gap: 10px;
 }
 
 .kanban-column-header {
@@ -25,6 +27,6 @@ task-card {
 }
 
 .kanban-task-list {
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 100%;
 }

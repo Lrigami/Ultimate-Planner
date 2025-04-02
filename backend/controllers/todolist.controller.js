@@ -5,6 +5,7 @@ class Controller {
         this.createNewList = this.createNewList.bind(this);
         this.readAllLists = this.readAllLists.bind(this);
         this.readOneList = this.readOneList.bind(this);
+        this.getPinnedLists = this.getPinnedLists.bind(this);
         this.updateList = this.updateList.bind(this);
         this.deleteList = this.deleteList.bind(this);
         this.countTasks = this.countTasks.bind(this);
@@ -40,6 +41,16 @@ class Controller {
             res.status(200).json(oneList);
         } catch (err) {
             res.status(500).json({message: err.message});
+        }
+    }
+
+    async getPinnedLists(req, res) {
+        const userId = req.user.userId;
+        try {
+            const pinnedList = await todolistFunctions.getPinnedLists(req.body, userId);
+            res.status(200).json(pinnedList);
+        } catch (error) {
+            res.status(500).json({message: error.message});
         }
     }
 

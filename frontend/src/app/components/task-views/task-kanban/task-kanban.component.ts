@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, CdkDrag, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from '../../../models/task.model';
@@ -13,6 +13,7 @@ import { ButtonComponent } from '../../buttons/button.component';
   styleUrl: './task-kanban.component.css'
 })
 export class TaskKanbanComponent {
+  @ViewChild(TaskCardComponent) taskCardComponent!: TaskCardComponent;
   @Input() updatedTask = new EventEmitter<boolean>();
   @Output() editTask = new EventEmitter<Task>();
   @Output() deleteTask = new EventEmitter<Task>();
@@ -143,6 +144,7 @@ export class TaskKanbanComponent {
       if (newCategory) {
         task.kanban_category = newCategory;
         task.done = newCategory === "done";
+
       }
   
       transferArrayItem(

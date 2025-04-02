@@ -47,7 +47,7 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
     this.description = this.task.description;
     this.priority = this.task.priority;
     this.kanban_category = this.task.kanban_category;
-    this.due_date = this.task.due_date;
+    this.due_date = this.task.due_date ? new Date(this.task.due_date) : undefined;
     this.done = this.task.done;
   }
 
@@ -96,7 +96,13 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
   checkTask() {
     this.task.done = !this.task.done;
     this.task.kanban_category = this.task.done ? 'done' : 'to-do';
-    this.taskService.updateTask(this.task).subscribe({
+
+    const updatedTask = {
+      ...this.task, 
+      due_date: this.task.due_date ? new Date(this.task.due_date) : undefined
+    };
+
+    this.taskService.updateTask(updatedTask).subscribe({
       next: () => {
         this.dateColor();
         this.updateCard();

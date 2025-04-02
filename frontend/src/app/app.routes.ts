@@ -25,7 +25,8 @@ export const routes: Routes = [
         title: 'Authentification',
         component: SignInComponent,
     },
-    { path: '', 
+    {   
+        path: '', 
         redirectTo: '/auth', 
         pathMatch: 'full',
     },

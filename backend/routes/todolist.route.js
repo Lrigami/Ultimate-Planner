@@ -10,5 +10,6 @@ router.delete('/:tdlid', todolistController.deleteList);
 router.get('/:tdlid/total', todolistController.countTasks);
 router.get('/:tdlid/done', todolistController.countDoneTasks);
 router.post('/sortOrder', todolistController.sortTodolistOrder);
+router.post('/pinned', todolistController.getPinnedLists);
 
 module.exports = router;
