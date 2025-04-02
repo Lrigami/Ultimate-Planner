@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatButtonToggle, MatButtonToggleGroup,MatButtonToggleChange } from '@angular/material/button-toggle';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,22 +43,30 @@ export class ToDoListComponent {
   isAscending: boolean = true;
   chosenView: string = "list";
 
-  constructor (public taskService: TaskService, public todolistService: TodolistService, private route: ActivatedRoute) {}
+  constructor (public taskService: TaskService, public todolistService: TodolistService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.taskService.getAllPriority().subscribe({
       next: (allPriority) => this.priorityLevels = allPriority,
       error: (error) => console.error("Get Priority failed: ", error)
     });
-    this.route.paramMap.subscribe(params => {
-      const listId = params.get('tdlid');
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.loadList();
+      }
+    })
+  }
+
+  loadList() {
+    const listId = this.route.snapshot.paramMap.get('tdlid');
+    if (listId) {
       this.todolistService.getList(Number(listId)).subscribe({
         next: (list) => {
           this.listTitle = list[0].title;
         },
-        error: (error) => console.error("Get list title failed: ", error)
+        error: (error) => console.error("Error loading list:", error)
       });
-    });
+    }
   }
 
   openNewTaskForm() {

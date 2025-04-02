@@ -24,7 +24,7 @@
                 <h3 routerLink="/todolist">My To-Do Lists</h3>
                 <ul id="pinned-list">
                     <li *ngFor="let list of listOfPinnedLists">
-                        <h4 [routerLink]="['/todolist', list.tdlid]">{{ list.title }}</h4>
+                        <h4 (click)="navigateTo('/todolist', list.tdlid)">{{ list.title }}</h4>
                     </li>
                 </ul>
             </li>
