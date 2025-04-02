@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { CommunicationService } from '../../services/communication.service';
 import { TodolistService } from '../../services/to-do-list.service';
 import { AuthService } from '../../services/sign-in-up-service';
 import { ButtonComponent } from '../buttons/button.component';
+import { isDataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-menu',
@@ -18,6 +19,8 @@ export class MenuComponent implements OnInit, OnDestroy {
   listOfPinnedLists: {isPinned: boolean, tdlid: number, title: string}[] = [];
   subject: {isPinned: boolean; tdlid: number, title: string} | null = null;
   private subscription!: Subscription;
+  isFolded: boolean = false;
+  @Output() foldValue = new EventEmitter<boolean>;
 
   constructor(private communicationService: CommunicationService, private todolistService: TodolistService, private authService: AuthService, private router: Router) {}
 
@@ -61,5 +64,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   logout() {
     this.authService.logout();
     this.router.navigate(['']);
+  }
+
+  updateFoldingState() {
+    this.isFolded = !this.isFolded;
+    console.log(this.isFolded);
+    this.foldValue.emit(this.isFolded);
   }
 }

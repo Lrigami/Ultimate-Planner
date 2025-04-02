@@ -281,14 +281,24 @@ mat-button-toggle {
 
 app-menu {
     background-color: var(--green-personalised);
-    max-width: 200px;
-    width: 200px;
     height: 100%;
     border-right: 1px solid var(--green-outline);
     border-radius: 0 10px 10px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    transition: 0.5s;
+}
+
+.unfolded-menu {
+    max-width: 200px;
+    width: 200px;
+}
+
+.folded-menu {
+    width: 80px;
+    max-width: 80px;
 }
 
 task-list {

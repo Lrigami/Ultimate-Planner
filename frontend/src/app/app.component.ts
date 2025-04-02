@@ -16,6 +16,7 @@ import { MenuComponent } from './components/menu/menu.component';
 })
 export class AppComponent implements OnInit {
   hideComponent: boolean = false;
+  foldMenu: boolean = false;
 
   constructor(private router: Router, private guard: MenuComponentGuard) {}
 
@@ -23,5 +24,10 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(() => {
       this.hideComponent = !this.guard.canActivate(null!, this.router.routerState.snapshot);
     });
+  }
+
+  updateMenuState(isFolded: boolean) {
+    console.log("état passé: ", isFolded);
+    this.foldMenu = isFolded;
   }
 }
