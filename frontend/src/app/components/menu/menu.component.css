@@ -37,6 +37,11 @@ ul {
     padding: 0;
 }
 
+ul ul { 
+    list-style-type: circle;
+    padding-left: 10px;
+}
+
 ul h3, h4 {
     text-align: center;
     cursor: pointer;
@@ -46,6 +51,14 @@ ul h3:hover, h4:hover {
     text-decoration: underline;
 }
 
+ul h3 {
+    margin: 5px 0;
+}
+
+ul h4 {
+    font-weight: 300;
+    text-align: left;
+}
 
 section:last-of-type {
     height: 10%;
