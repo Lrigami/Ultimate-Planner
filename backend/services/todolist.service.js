@@ -16,6 +16,10 @@ class Functions {
         return await todolistMethods.readOne(listId, userId);
     }
 
+    async getPinnedLists(isPinned, userId) {
+        return await todolistMethods.getPinned(isPinned, userId);
+    }
+
     async updateList(listId, listData, userId) {
         return await todolistMethods.update(listId, listData, userId);
     }

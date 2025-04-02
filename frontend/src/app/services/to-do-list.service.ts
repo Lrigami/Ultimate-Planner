@@ -39,6 +39,15 @@ export class TodolistService {
         )
     }
 
+    getPinnedList(pinned: {isPinned: boolean}): Observable<any> {
+        const headers = this.getAuthHeaders();
+        return this.http.post<any>(`${this.apiUrl}/pinned`, pinned, { headers }).pipe(
+            tap(() => {
+                this.todolistSubject.next()
+            })
+        )
+    }
+
     createList(list: {title: string, pinned: boolean, color: string}): Observable<any> {
         const headers = this.getAuthHeaders();
         return this.http.post<any>(this.apiUrl, list, { headers });

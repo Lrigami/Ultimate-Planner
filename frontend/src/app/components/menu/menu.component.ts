@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterLink} from '@angular/router';
 import { CommunicationService } from '../../services/communication.service';
+import { TodolistService } from '../../services/to-do-list.service';
 import { ButtonComponent } from '../buttons/button.component';
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule, ButtonComponent, MatSlideToggleModule],
+  imports: [CommonModule, RouterLink, ButtonComponent, MatSlideToggleModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
@@ -17,9 +18,14 @@ export class MenuComponent implements OnInit, OnDestroy {
   subject: {isPinned: boolean; tdlid: number, title: string} | null = null;
   private subscription!: Subscription;
 
-  constructor(private communicationService: CommunicationService, private router: Router) {}
+  constructor(private communicationService: CommunicationService, private todolistService: TodolistService, private router: Router) {}
 
   ngOnInit() {
+    this.todolistService.getPinnedList({ isPinned: true }).subscribe(list => {
+      list.forEach((todolist: { pinned: any; id: any; title: any; }) => {
+              this.listOfPinnedLists.push({ isPinned: todolist.pinned, tdlid: todolist.id, title: todolist.title });
+      });
+    });
     this.subscription = this.communicationService.communication$.subscribe(subject => {
       if (subject) {
         this.subject = subject;
@@ -41,6 +47,7 @@ export class MenuComponent implements OnInit, OnDestroy {
         this.listOfPinnedLists.push(subject);
       }
     }
+    console.log("list of pinned list: ", this.listOfPinnedLists);
   }
 
   ngOnDestroy() {

@@ -28,6 +28,12 @@ class Method {
         return result.rows;
     }
 
+    async getPinned(pin, userId) {
+        const { isPinned } = pin;
+        const result = await query(`SELECT * FROM to_do_lists WHERE pinned = $1 AND user_id = $2`, [isPinned, userId]);
+        return result.rows;
+    }
+
     async update(id, data, userId) {
         // pour mettre à jour une to-do list (son titre, sa couleur, pin ou pas)
         const { title, pinned, color } = data;
