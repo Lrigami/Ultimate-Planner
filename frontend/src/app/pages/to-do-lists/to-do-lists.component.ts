@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Todolist } from '../../models/todolist.model';
 import { TodolistService } from '../../services/to-do-list.service';
-// importer title component, title form, to do list form
 import { ButtonComponent } from '../../components/buttons/button.component';
 import { ToDoListCardComponent } from '../../components/cards/to-do-list-card/to-do-list-card.component';
 import { ToDoListFormComponent } from '../../components/forms/to-do-list-form/to-do-list-form.component';
