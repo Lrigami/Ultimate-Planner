@@ -16,13 +16,15 @@ app.use(express.urlencoded({ extended: true }));
 const authRoutes = require('./routes/sign-in-up.route');
 const todolistRoutes = require('./routes/todolist.route');
 const taskRoutes = require('./routes/tasks.route');
-const enumsRoutes = require('./routes/enums.route')
+const enumsRoutes = require('./routes/enums.route');
+const notesRoutes = require('./routes/notes.route');
 // const tagRoutes = require('./routes/tags.route')
 
 app.use('/auth', authRoutes);
 app.use('/todolist', authenticateToken, todolistRoutes);
 app.use('/todolist/:tdlid/tasks', authenticateToken, taskRoutes);
 app.use('/enums', authenticateToken, enumsRoutes);
+app.use('/notes', authenticateToken, notesRoutes);
 // app.use('/tags', tagRoutes);
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

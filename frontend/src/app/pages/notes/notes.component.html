@@ -1,1 +1,43 @@
-<p>notes works!</p>
+<header>
+    <h2>My notes</h2>
+</header>
+
+<div class="notes">
+    <button app-button icon="add" text="Add" class="add-btn extended-fab-btn green-tonal-btn no-outline" (click)="openNewNoteForm()"></button>
+
+    <div class="notes-list"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="notes">
+        @for (note of notes; track note.id) {
+            <note-card
+                cdkDrag
+                [notes]="notes"       
+                (edit)="openEditForm(note)"
+                (delete)="openDeleteForm(note)">
+            </note-card>
+        }
+    </div>
+</div>
+
+<note-form
+    *ngIf="isEditFormVisible && selectedNote" 
+    class="form"
+    [noteData]="selectedList"
+    (isFormVisible)="handleFormClose()"
+    (noteUpdated)="handleFormClose()">
+</note-form>
+
+<note-form
+    *ngIf="isAddFormVisible" 
+    class="form"
+    (isFormVisible)="handleFormClose()"
+    (noteUpdated)="handleFormClose()">
+</note-form>
+
+<delete-form 
+    *ngIf="isDeleteFormVisible && selectedNote"
+    class="form"
+    [noteData]="selectedList"
+    (noteDeleted)="handleFormClose()">
+</delete-form>
