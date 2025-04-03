@@ -352,7 +352,7 @@ note-card {
     height: 150px;
     border-radius: 5px;
     border: 1px solid black;
-
+    cursor: grab;
 }
 
 .cdk-drop-list-dragging, .cdk-drop-list-receiving {
