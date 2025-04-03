@@ -1,1 +1,9 @@
-<p>note-card works!</p>
+<div class="action-btn">
+    <button app-button icon="keep" class="icon-btn no-outline not-filled-btn" [ngClass]="note.pinned ? 'pinned' : 'keep-icon'" (click)="pinToDashboard()"></button>
+    <div class="edit-supp">
+        <button app-button icon="edit" class="icon-btn no-outline not-filled-btn" (click)="edit.emit(note)"></button>
+        <button app-button icon="delete" class="icon-btn no-outline not-filled-btn" (click)="delete.emit(note)"></button>
+    </div>
+</div>
+<h3>{{ note.title }}</h3>
+<p>{{ note.body }}</p>

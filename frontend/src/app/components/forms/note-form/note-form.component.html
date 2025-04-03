@@ -1,0 +1,47 @@
+<form [formGroup]="noteForm">
+    <button app-button icon="close" class="icon-btn not-filled-btn no-outline" (click)="openSaveForm()"></button>
+
+    <div class="note-title">
+        <label for="note-title">Choose a name:</label>
+        <input type="text" maxlength="60" id="note-title" name="note-title" placeholder="My note" formControlName="title">
+    </div>
+
+    <div class="note-body">
+        <label for="note-body">Write below:</label>
+        <textarea id="note-body" name="note-body" cols="40" rows="6" placeholder="Description" formControlName="description"></textarea>
+    </div>
+
+    <div class="note-color">
+        <label for="note-color">Pick a color:</label>
+        <button id="note-color"></button>
+        <!-- Insérer ici le choix de la couleur
+         Le formControlName="color" sur ce qui s'ouvre ensuite. Voir plus tard pour la gestion des couleurs. -->
+    </div>
+
+    <div class="note-pin">
+        <label for="pin-note"><span class="keep-icon material-symbols-outlined">keep</span> Pin to the dashboard?</label>
+        <div class="check-container">
+            <input type="checkbox" id="pin-note" name="pin-note-to-dashboard" formControlName="isPinned">
+            <span *ngIf="noteForm.get('isPinned')?.value" class="check material-symbols-outlined">check</span>
+        </div>
+    </div>
+
+    <div class="choices-btn">
+        <button app-button text="Save" 
+            class="btn no-outline" 
+            [disabled]="noteForm.invalid" 
+            [ngClass]="noteForm.invalid ? 'grey-tonal-btn no-hover' : 'green-tonal-btn'" 
+            (click)="handleSaveFormClose(true)">
+        </button>
+        <button app-button text="Cancel" 
+            class="btn outlined grey-outline not-filled-btn" 
+            (click)="closeForm()">
+        </button>
+    </div>
+</form>
+
+<save-form 
+    *ngIf="isSaveFormVisible"
+    class="form" 
+    (saveData)="handleSaveFormClose($event)">
+</save-form>
