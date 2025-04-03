@@ -7,6 +7,7 @@
 
     <div class="notes-list"
         cdkDropList
+        cdkDropListOrientation="mixed"
         (cdkDropListDropped)="drop($event)"
         [cdkDropListData]="notes">
         @for (note of notes; track note.id) {

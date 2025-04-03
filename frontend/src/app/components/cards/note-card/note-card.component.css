@@ -1,0 +1,12 @@
+.edit-supp {
+    display: flex;
+    flex-direction: row;
+}
+
+h3 {
+    margin: 3px 5px 0 5px;
+}
+
+p {
+    margin: 3px 5px;
+}

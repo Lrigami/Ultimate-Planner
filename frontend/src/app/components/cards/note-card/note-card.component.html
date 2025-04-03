@@ -5,5 +5,5 @@
         <button app-button icon="delete" class="icon-btn no-outline not-filled-btn" (click)="delete.emit(note)"></button>
     </div>
 </div>
-<h3>{{ note.title }}</h3>
+<h3 *ngIf="note.title">{{ note.title }}</h3>
 <p>{{ note.body }}</p>
