@@ -23,6 +23,7 @@ export class SignUpFormComponent {
   passwordFormControl!: FormControl<string>;
   passwordConfirmationFormControl!: FormControl<string>;
 
+  // Check if email is valid and doesn't already exists
   emailValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (!control.value) {
@@ -36,6 +37,7 @@ export class SignUpFormComponent {
     };
   }
 
+  // Check is password is correct and contains all required characters
   passwordValidator(minLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.value;
@@ -60,6 +62,7 @@ export class SignUpFormComponent {
     };
   }
 
+  // Check if the two passwords are the same
   passwordConfirmationValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.value;
@@ -102,6 +105,7 @@ export class SignUpFormComponent {
     this.isCapsLockOn = event.getModifierState('CapsLock');
   }
 
+  // Sign up user is everything is ok
   handleSignUp() {
     const newUser = {
       email: this.emailFormControl.value,

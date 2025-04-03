@@ -4,7 +4,6 @@
 </header>
 
 <div class="list-controls">
-    <!-- insérer ici le segmented button pour la vue en list / kanban -->
     <mat-button-toggle-group class="view-choice" name="view choice" aria-label="View Choice" [(ngModel)]="chosenView" (change)="onViewChange($event)">
         <mat-button-toggle value="list">List</mat-button-toggle>
         <mat-button-toggle value="kanban">Kanban</mat-button-toggle>
@@ -12,8 +11,8 @@
     <div class="filters">
         <p>
             <span class="material-symbols-outlined">filter_list</span>
-            <span>Filter by: </span></p>
-        <!-- S'occuper plus tard du style des select -->
+            <span>Filter by: </span>
+        </p>
         <mat-form-field class="dense-2">
             <mat-label>Priority</mat-label>
             <mat-select multiple name="priority-filter" id="priority-filter" [formControl]="priority" (selectionChange)="onPriorityChange($event)">

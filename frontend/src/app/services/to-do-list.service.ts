@@ -19,8 +19,7 @@ export class TodolistService {
         });
     }
 
-    // to-do-lists functions
-
+    // to-do-lists
     getAllLists(): Observable<any> {
         const headers = this.getAuthHeaders();
         return this.http.get<any>(`${this.apiUrl}`, { headers }).pipe(

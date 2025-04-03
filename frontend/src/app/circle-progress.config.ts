@@ -1,5 +1,6 @@
 import { CircleProgressOptions } from 'ng-circle-progress';
 
+// Circle progress (on to-do list card) configuration
 export const circleProgressConfig: CircleProgressOptions = {
     radius: 70,
     outerStrokeWidth: 14,

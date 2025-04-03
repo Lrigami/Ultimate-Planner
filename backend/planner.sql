@@ -1,11 +1,12 @@
 CREATE EXTENSION IF NOT EXISTS citext;
 
-CREATE TYPE user_role AS ENUM ('admin', 'user');
-CREATE TYPE color AS ENUM ('grey', 'yellow', 'orange', 'pink', 'purple', 'blue', 'green');
-CREATE TYPE kanban_category AS ENUM ('to-do', 'in progress', 'done');
-CREATE TYPE mood_level AS ENUM ('great', 'good', 'meh', 'angry', 'sad', 'sleepy');
-CREATE TYPE sleep_quality AS ENUM ('good', 'normal', 'bad');
-CREATE TYPE priority_level AS ENUM ('undefined', 'high', 'medium', 'low');
+-- You can alter this database if it doesn't fully suit your needs.
+CREATE TYPE user_role AS ENUM ('admin', 'user'); -- roles for different users
+CREATE TYPE color AS ENUM ('grey', 'yellow', 'orange', 'pink', 'purple', 'blue', 'green'); -- colors a user can choose to personalised his experience
+CREATE TYPE kanban_category AS ENUM ('to-do', 'in progress', 'done'); -- three basic kanban categories
+CREATE TYPE mood_level AS ENUM ('great', 'good', 'meh', 'angry', 'sad', 'sleepy'); -- six basic moods
+CREATE TYPE sleep_quality AS ENUM ('good', 'normal', 'bad'); -- three basic sleep quality values
+CREATE TYPE priority_level AS ENUM ('undefined', 'high', 'medium', 'low'); -- four basic priorities
 
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,

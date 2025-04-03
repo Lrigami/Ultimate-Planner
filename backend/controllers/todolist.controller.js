@@ -1,5 +1,6 @@
 const todolistFunctions = require('../services/todolist.service');
 
+// To-do lists controller
 class Controller {
     constructor() {
         this.createNewList = this.createNewList.bind(this);

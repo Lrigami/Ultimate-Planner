@@ -23,25 +23,26 @@ import { DeleteFormComponent } from '../../components/forms/delete-form/delete-f
 export class ToDoListComponent {
   @ViewChild(TaskListComponent) taskListComponent!: TaskListComponent;
   @ViewChild(TaskKanbanComponent) taskKanbanComponent!: TaskKanbanComponent;
+
+  priorityLevels: string[] = [];
+  selectedPriority: [] = [];
+  selectedDueDate: [] = [];
+
   selectedTask: Task | null = null;
   selectedKanban: string = '';
-  priorityLevels: string[] = [];
-  priority = new FormControl('');
-  dueDate = new FormControl('');
-  sortingParameters = new FormControl('');
   listTitle: string = '';
-
+  sortingParameter: string = '';
+  chosenOperator: string = "AND";
+  chosenView: string = "list";
   isAddFormVisible = false;
   isAddKanbanFormVisible = false;
   isEditFormVisible = false;
   isDeleteFormVisible = false;
-
-  selectedPriority: [] = [];
-  selectedDueDate: [] = [];
-  chosenOperator: string = "AND";
-  sortingParameter: string = '';
   isAscending: boolean = true;
-  chosenView: string = "list";
+
+  priority = new FormControl('');
+  dueDate = new FormControl('');
+  sortingParameters = new FormControl('');
 
   constructor (public taskService: TaskService, public todolistService: TodolistService, private route: ActivatedRoute, private router: Router) {}
 

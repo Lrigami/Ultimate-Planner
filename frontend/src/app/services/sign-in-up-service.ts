@@ -14,13 +14,11 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     // user management
-
     createUser(user: {email: string, password: string}): Observable<any> {
         return this.http.post(`${this.apiUrl}`, user);
     }
 
     // authentification
-
     isEmailTaken(email: string): Observable<any> {
       return this.http.post(`${this.apiUrl}/emailverif`, { email }, {observe: 'response'}).pipe(
         tap(response => {
@@ -68,9 +66,6 @@ export class AuthService {
     }
 
     // passwords
-
-
-    // modifier la fonction une fois que je saurai la réponse
     forgotPassword(email: string): Observable<any> {
       return this.http.post(`${this.apiUrl}/forgotpassword`, { email }).pipe(
         tap(() => {

@@ -16,13 +16,14 @@ import { TaskCardComponent } from '../../cards/task-card/task-card.component';
   styleUrl: './task-list.component.css'
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  listId!: string;
   @Input() updatedTask = new EventEmitter<boolean>();
   @Output() editTask = new EventEmitter<Task>();
   @Output() deleteTask = new EventEmitter<Task>();
   @Output() createTask = new EventEmitter<any>();
-  tasks: Task[] = [];
   private sub!: Subscription;
+
+  listId!: string;
+  tasks: Task[] = [];
 
   constructor(private taskService: TaskService, private route: ActivatedRoute) {}
 
@@ -55,11 +56,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
   }
 
   onEdit(task: Task) {
-    this.editTask.emit(task); // Émet un événement vers le parent
+    this.editTask.emit(task);
   }
 
   onDelete(task: Task) {
-    this.deleteTask.emit(task); // Émet un événement vers le parent
+    this.deleteTask.emit(task);
   }
 
   onCreate() {
@@ -73,6 +74,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
     this.tasks = [...taskNotDone, ...taskDone];
   }
 
+  // update tasks display by selected sorting parameters but does not update the sorting order in database
   sortTasksByParameter(sortingParameter: string, isAscending: boolean) {
     if (sortingParameter == 'priority') {
       const taskHigh = this.tasks.filter(task => task.priority === 'high');

@@ -1,6 +1,6 @@
-// Management of requests/responses
 const taskFunctions = require('../services/tasks.service');
 
+// Tasks controller
 class Controller {
     constructor() {
         this.createNewTask = this.createNewTask.bind(this);

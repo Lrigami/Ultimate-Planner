@@ -1,8 +1,9 @@
-// Functions that call the methods in taskRepository
 const taskMethods = require('../repositories/tasks.repo');
 
+// Tasks services (call the repo)
 class Functions {
     async createNewTask(tdlid, taskData, userId) {
+        // check if a title is provided
         if(!taskData.title) {
             throw new Error("A title is required.");
         }
@@ -26,6 +27,7 @@ class Functions {
     }
 
     async filterTasks(tdlid, filters, userId) {
+        // check data to pass correct informations to repo
         const { priority, operator, duedate } = filters;
         const safeOperator = operator.toUpperCase() === 'AND' ? 'AND' : 'OR';
         return await taskMethods.filter(tdlid, priority, safeOperator, duedate, userId);

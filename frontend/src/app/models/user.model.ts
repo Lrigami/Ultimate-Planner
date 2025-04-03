@@ -7,3 +7,5 @@ export interface User {
     profile_picture?: Text;
     role: 'user';
 }
+
+// for now username and role have default values because it is required in db

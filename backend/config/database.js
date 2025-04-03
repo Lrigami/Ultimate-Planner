@@ -8,9 +8,9 @@ const pool = new Pool({
   port: process.env.DB_PORT
 });
 
-// Fonction pour exécuter une requête SQL
+// To execute an SQL function
 const query = (text, params) => pool.query(text, params);
-// text = la requête SQL
-// params = les paramètres de la requête afin d'empêcher les attaques par injection SQL
+// text = SQL request
+// params = request params (protection against SQL injection)
 
 module.exports = { pool, query };

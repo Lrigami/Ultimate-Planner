@@ -21,6 +21,7 @@ export class DeleteFormComponent {
 
   constructor(public taskService: TaskService, public todolistService: TodolistService) {}
 
+  // Call the right service depending on on which component is the delete button
   handleDeleteFormClose(isDeleted: boolean) {
     if (this.taskData) {
       if(isDeleted) {

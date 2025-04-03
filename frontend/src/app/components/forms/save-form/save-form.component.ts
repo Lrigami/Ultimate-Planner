@@ -10,6 +10,7 @@ import { ButtonComponent } from '../../buttons/button.component';
 export class SaveFormComponent {
   @Output() saveData = new EventEmitter<boolean>();
 
+  // emit if the modifications should be saved or not
   onCloseForm(dataResponse: boolean) {
     this.saveData.emit(dataResponse);
   }

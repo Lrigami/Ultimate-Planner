@@ -10,10 +10,12 @@ import { map } from 'rxjs/operators';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
+  // check if user is authenticated to navigate on the application
   canActivate(): Observable<boolean> {
     return this.authService.isAuthenticated().pipe(
       map(isAuth => {
         if (!isAuth) {
+          // if not, redirect vers authentication page
           this.router.navigate(['/auth']);
           return false;
         }

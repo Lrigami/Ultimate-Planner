@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
-    { provide: AuthInterceptor, useClass: AuthInterceptor, multi: true }, 
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' }}
+    { provide: AuthInterceptor, useClass: AuthInterceptor, multi: true }, // To take into account authentication 
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' }} // to update mat form field style (Angular UI)
   ],
 };

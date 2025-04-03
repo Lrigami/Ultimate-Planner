@@ -21,8 +21,7 @@ export class TaskService {
         });
     }
 
-    // tasks functions
-
+    // tasks
     setTodolistId(): void {
         this.apiUrl = `${this.baseUrl}${this.router.url}`;
     }
@@ -87,7 +86,6 @@ export class TaskService {
     }
 
     // enums
-
     getAllKanban() {
         const headers = this.getAuthHeaders();
         return this.http.get<string[]>(`${this.baseUrl}/enums/kanban`, { headers }).pipe(

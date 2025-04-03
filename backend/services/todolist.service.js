@@ -1,7 +1,9 @@
 const todolistMethods = require('../repositories/todolist.repo');
 
+// To-do lists services (call the repo)
 class Functions {
     async createNewList(listData, userId) {
+        // check if a title is correctly provided before sending a request
         if (!listData.title) {
             throw new Error("A title is required.");
         }

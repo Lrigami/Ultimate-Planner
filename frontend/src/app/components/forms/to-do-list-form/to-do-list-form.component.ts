@@ -42,8 +42,8 @@ export class ToDoListFormComponent {
   closeForm() {
     this.isFormVisible.emit(false);
   }
-  
 
+  // on closing form, check if save form needs to be opened
   openSaveForm() {
     if (this.todolistData) {
       if (this.todolistData.title === this.todolistForm.value.title && this.todolistData.pinned === this.todolistForm.value.isPinned) {
@@ -60,6 +60,7 @@ export class ToDoListFormComponent {
     }
   }
 
+  // Check if it is a update or a creation
   handleSaveFormClose(isSaved: boolean) {
     if (isSaved) {
       if (this.todolistData) {
@@ -98,5 +99,4 @@ export class ToDoListFormComponent {
       this.closeForm();
     }
   }
-
 }

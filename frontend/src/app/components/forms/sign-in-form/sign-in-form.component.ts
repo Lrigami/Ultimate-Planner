@@ -22,18 +22,22 @@ export class SignInFormComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]) as FormControl<string>;
   passwordFormControl = new FormControl('', [Validators.required]) as FormControl<string>;
 
+  // Check if written email is valid
   isInvalid(): boolean {
     return this.emailFormControl.invalid && (this.emailFormControl.dirty || this.emailFormControl.touched);
   }
 
+  // toggle Password Visibility 
   togglePasswordVisibility(): void {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
+  // When caps lock is on, it alerts the user
   onKeyDown(event: KeyboardEvent): void {
     this.isCapsLockOn = event.getModifierState('CapsLock');
   }
 
+  // login the user if everything's right
   login() {
     this.authService.login(this.emailFormControl.value, this.passwordFormControl.value).subscribe({
       next: (response) => {
@@ -49,6 +53,7 @@ export class SignInFormComponent {
     });
   }
 
+  // navigate to the forgot password page
   goToForgotPassword() {
     this.router.navigate(['/forgotpassword']);
   }

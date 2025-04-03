@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const SECRET_KEY = process.env.SECRET_KEY;
 const BASE_URL = "http://localhost:4200";
 
+// Authentication and user services
 class Functions {
     async createNewUser(userData) {
         return await authMethods.create(userData);
@@ -24,7 +25,9 @@ class Functions {
         return await authMethods.delete(userId);
     }
 
+    // Check if sign in form provided informations are correct
     async login(email, password) {
+        // Check for email in db
         const user = await authMethods.getUserByEmail(email);
     
         if (!user) {
@@ -33,6 +36,7 @@ class Functions {
             throw error;
         }
     
+        // Check for password in db
         const passwordMatch = await bcrypt.compare(password, user.hashed_password);
         if (!passwordMatch) {
             const error = new Error('Incorrect password');
@@ -40,6 +44,7 @@ class Functions {
             throw error;
         }
     
+        // User can be logged in for 24 hours
         return jwt.sign({ userId: user.id, email: user.email }, SECRET_KEY, { expiresIn: '24h' });
     };
 
@@ -47,20 +52,24 @@ class Functions {
         return await authMethods.isEmailTaken(email);
     }
 
-    // password
+    // Password reset
 
+    // Generate a random token for reset purposes (public token)
     generateResetToken() {
         return crypto.randomBytes(32).toString('hex');
     }
 
+    // hash token to store it in db (private token)
     hashToken(token) {
         return crypto.createHash('sha256').update(token).digest('hex');
     }
 
+    // Generate a url base on public token
     generateResetPasswordURL(token) {
         return `${BASE_URL}/resetpassword/${token}`;
     }
 
+    // Send an email to user to reset password
     async sendResetEmail(userEmail, resetURL) {
 
         const transporter = nodemailer.createTransport({
@@ -86,19 +95,24 @@ class Functions {
         try {
             await transporter.sendMail(mailOptions);
         } catch (error) {
-            console.error("Erreur d'envoi de l'email :", error);
+            console.error("Error sending mail :", error);
         }
     }
 
+    // Steps when a user forget his password
     async forgotPassword(email) {
+        // generate token
         const token = this.generateResetToken();
         const hashedToken = this.hashToken(token);
         await authMethods.storePasswordToken(email, hashedToken);
+        // generate reset url
         const resetURL = this.generateResetPasswordURL(token);
+        // send mail to user
         await this.sendResetEmail(email, resetURL);
         return {message: "Reset password email sent successfully."};
     }
 
+    // To reset password 
     async resetPassword(password, token) {
         const hashedToken = this.hashToken(token);
         return await authMethods.reset(password, hashedToken);

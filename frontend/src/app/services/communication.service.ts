@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+// Communication service to communicate between menu and other components
 @Injectable({
     providedIn: 'root',
 })

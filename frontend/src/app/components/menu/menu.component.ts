@@ -16,11 +16,12 @@ import { isDataSource } from '@angular/cdk/collections';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit, OnDestroy {
+  @Output() foldValue = new EventEmitter<boolean>;
+  private subscription!: Subscription;
+
   listOfPinnedLists: {isPinned: boolean, tdlid: number, title: string}[] = [];
   subject: {isPinned: boolean; tdlid: number, title: string} | null = null;
-  private subscription!: Subscription;
   isFolded: boolean = false;
-  @Output() foldValue = new EventEmitter<boolean>;
 
   constructor(private communicationService: CommunicationService, private todolistService: TodolistService, private authService: AuthService, private router: Router) {}
 
@@ -38,6 +39,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Update the pinned lists list when a user click on "pin" on the to-do list card
   updateListPin(subject: {isPinned: boolean, tdlid: number, title: string}) {
     const {isPinned, tdlid, title} = subject;
     const existingIndex = this.listOfPinnedLists.findIndex(list => list.tdlid === tdlid);
@@ -57,6 +59,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  // Navigate to the right to-do list path
   navigateTo(path: string, id: number) {
     this.router.navigate([`${path}/${id}`]);
   }
@@ -66,6 +69,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.router.navigate(['']);
   }
 
+  // Check if menu needs to be folded or not
   updateFoldingState() {
     this.isFolded = !this.isFolded;
     console.log(this.isFolded);

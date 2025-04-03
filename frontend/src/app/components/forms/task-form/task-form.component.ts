@@ -17,7 +17,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
   @Input() taskData!: { id: number, title: string, description?: string, priority?: string, kanban_category?: string, due_date?: Date, done?: boolean, to_do_list_id: number };
   @Input() kanbanData!: string;
   @Output() isFormVisible = new EventEmitter<boolean>();
-  taskUpdated = new EventEmitter<boolean>();
+  @Output() taskUpdated = new EventEmitter<boolean>();
 
   taskForm: FormGroup;
   kanbanCategories: string[] = [];
@@ -51,6 +51,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     this.priorityColor();
   }
 
+  // Cjeck checkbox if chosen kanban category is "done"
   onKanbanChange() {
     const selectedCategory = this.taskForm.get('kanban_category')?.value;
     this.taskForm.patchValue({
@@ -58,6 +59,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     });
   }
 
+  // Change kanban category automatically to "done" if checkbox is checked
   onCheckboxChange(event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
     this.taskForm.patchValue({
@@ -86,6 +88,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     this.isFormVisible.emit(false);
   }
 
+  // On close form, check if save form needs to be opened
   openSaveForm() {
     if (this.taskData) {
       if (this.taskData.title === this.taskForm.value.title && (this.taskData.description === this.taskForm.value.description || !this.taskData.description) && new Date(this.taskData.due_date ? this.taskData.due_date : '').toDateString() === new Date(this.taskForm.value.due_date).toDateString() && this.taskData.priority === this.taskForm.value.priority && this.taskData.kanban_category === this.taskForm.value.kanban_category && this.taskData.done === this.taskForm.value.isChecked) {
@@ -106,6 +109,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     this.isTagFormVisible = true;
   }
 
+  // On closing form, check if it is an update or a creation
   handleSaveFormClose(isSaved: boolean) {
     if (isSaved) {
       if (this.taskData) {
@@ -153,6 +157,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
     this.isTagFormVisible = false;
   } 
 
+  // Update segmented button color according to user choice
   priorityColor() {
     const priorityRadioBtn = this.el.nativeElement.querySelector('input[type=radio]:checked');
     const highPriority = this.el.nativeElement.querySelector('.high-priority');

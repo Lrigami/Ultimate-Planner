@@ -1,5 +1,6 @@
 const enumsFunctions = require('../services/enums.service');
 
+// controller for enums type in db
 class Controller {
     constructor() {
         this.getAllKanban = this.getAllKanban.bind(this);

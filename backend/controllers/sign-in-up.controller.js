@@ -1,5 +1,6 @@
 const authFunctions = require('../services/sign-in-up.service');
 
+// Authentication and user controller
 class Controller {
     constructor() {
         this.createNewUser = this.createNewUser.bind(this);
@@ -51,7 +52,7 @@ class Controller {
         }
     }
 
-    // authentification
+    // authentication
 
     async login(req, res) {
         try {

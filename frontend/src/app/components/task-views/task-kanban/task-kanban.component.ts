@@ -13,11 +13,11 @@ import { ButtonComponent } from '../../buttons/button.component';
   styleUrl: './task-kanban.component.css'
 })
 export class TaskKanbanComponent {
-  @ViewChild(TaskCardComponent) taskCardComponent!: TaskCardComponent;
   @Input() updatedTask = new EventEmitter<boolean>();
   @Output() editTask = new EventEmitter<Task>();
   @Output() deleteTask = new EventEmitter<Task>();
   @Output() createTask = new EventEmitter<any>();
+  @ViewChild(TaskCardComponent) taskCardComponent!: TaskCardComponent;
 
   kanbanCategories: string[] = [];
   tasks: Task[] = [];
@@ -31,6 +31,7 @@ export class TaskKanbanComponent {
     this.loadTasks();
   }
 
+  // get all existing kanban categories in enum type
   getAllKanban() {
     this.taskService.getAllKanban().subscribe({
       next: (kanban_category) => {
@@ -64,6 +65,7 @@ export class TaskKanbanComponent {
     this.organizeTasksByCategory();
   }
 
+  // update tasks display by selected sorting parameters but does not update the sorting order in database
   sortTasksByParameter(sortingParameter: string, isAscending: boolean) {
     if (sortingParameter == 'priority') {
       const taskHigh = this.tasks.filter(task => task.priority === 'high');
@@ -99,6 +101,7 @@ export class TaskKanbanComponent {
     });
   }
 
+  // apply selected filters
   async filterTasks(priorityArray: [], chosenOperator: string, dueDateArray: []) {
     await this.loadTasks();
     this.applyFilters(priorityArray, chosenOperator, dueDateArray);
@@ -129,6 +132,7 @@ export class TaskKanbanComponent {
     this.createTask.emit(kanban);
   }
 
+  // when the user drops a card, the card data is updated (category, done or not, sort_order)
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex -1, event.currentIndex - 1);
@@ -160,6 +164,7 @@ export class TaskKanbanComponent {
     }
   }
 
+  // update the task in database after drag and drop
   updateSortOrder(updatedTasks: Task[]) {
     const updatedTasksArray = updatedTasks.map((task, index) => ({
       id: task.id,

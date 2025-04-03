@@ -17,7 +17,6 @@ import { ButtonComponent } from '../../buttons/button.component';
   styleUrl: './to-do-list-card.component.css'
 })
 export class ToDoListCardComponent {
-  // Input pour passer des informations du parent vers l'enfant : de to-do-list-list à to-do-list-card ici
   @Input() list!: Todolist;
   @Input() totalTasks!: number;
   @Input() totalDoneTasks!: number;
@@ -41,10 +40,12 @@ export class ToDoListCardComponent {
     this.listId.emit(this.list.id);
   }
 
+  // navigate to the selecte list path
   goToList() {
     this.router.navigate([`/todolist/${this.list.id}`]);
   }
 
+  // pin a list to the menu
   pinToMenu() {
     this.list.pinned = !this.list.pinned;
     this.todolistService.updateList(this.list).subscribe({

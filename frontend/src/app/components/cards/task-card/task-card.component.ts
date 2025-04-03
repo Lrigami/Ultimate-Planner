@@ -12,7 +12,6 @@ import { ButtonComponent } from '../../buttons/button.component';
   styleUrl: './task-card.component.css'
 })
 export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
-  // Input pour passer des informations du parent vers l'enfant : par exemple de task-card à task-form
   @Input() task!: Task;
   @Output() edit = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<Task>();
@@ -42,6 +41,7 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
     this.checkColor();
   }
 
+  // update the task-card with correct data after an update
   updateCard() {
     this.title = this.task.title;
     this.description = this.task.description;
@@ -51,10 +51,12 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
     this.done = this.task.done;
   }
 
+  // truncate description to standardise task-card
   truncateDescription(text: string, maxLength: number): string {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
   }
 
+  // Set input checkbox color based on task priority
   checkColor() {
     const checkbox = this.el.nativeElement.querySelector('input[type=checkbox]');
     if (this.task.priority === 'high') {
@@ -68,13 +70,15 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  // gestion de la couleur des dates en fonction du temps restant (rouge =  overdue // orange = entre 1 semaine et aujourd'hui // vert = + d'une semaine)
+  // function to add days from a given date
   addDays = (date: Date, days: number): Date => {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
   }
   
+  // Set due date color based on how far away it is from now 
+  // red: overdue or today / orange: 7 days from now / green : more than thar or if task is done
   dateColor() {
     const dateSpan = this.el.nativeElement.querySelector('.due-date-span');
     if (this.task.due_date && dateSpan) {
@@ -92,7 +96,7 @@ export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
   }
 
-  // clicker sur check = done (changement de colonne)
+  // if a task is checked it is updated and it is automatically put in "done" column (on kanban view)
   checkTask() {
     this.task.done = !this.task.done;
     this.task.kanban_category = this.task.done ? 'done' : 'to-do';
