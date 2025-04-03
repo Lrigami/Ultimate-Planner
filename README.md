@@ -61,7 +61,7 @@ Here is the project roadmap for the moment:
     - [x] Menu (#30);
     - [ ] Custom management (color, pin, tags) (#29);
     - [ ] Settings (#31);
-    - [ ] Management of notes (#32);
+    - [x] Management of notes (#32);
 - [ ] Later:
     - [ ] Dashboard;
     - [ ] Tracker management (water, mood, sleep); 
