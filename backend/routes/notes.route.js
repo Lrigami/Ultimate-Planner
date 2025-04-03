@@ -8,3 +8,5 @@ router.put('/:noteid', noteController.updateNote);
 router.delete('/:noteid', noteController.deleteNote);
 router.post('/pinned', noteController.getAllPinnedNotes);
 router.post('/sortOrder', noteController.updateNotesOrder);
+
+module.exports = router;

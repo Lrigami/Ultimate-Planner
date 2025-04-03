@@ -4,13 +4,14 @@ import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk
 import { Note } from '../../models/note.model';
 import { NoteService } from '../../services/note.service';
 import { ButtonComponent } from '../../components/buttons/button.component';
+import { DeleteFormComponent } from '../../components/forms/delete-form/delete-form.component';
 import { NoteCardComponent } from '../../components/cards/note-card/note-card.component';
 import { NoteFormComponent } from '../../components/forms/note-form/note-form.component';
 
 @Component({
   selector: 'app-notes',
   standalone: true,
-  imports: [CommonModule, CdkDropList, CdkDrag, ButtonComponent, NoteCardComponent, NoteFormComponent],
+  imports: [CommonModule, CdkDropList, CdkDrag, ButtonComponent, DeleteFormComponent, NoteCardComponent, NoteFormComponent],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.css'
 })
@@ -37,7 +38,7 @@ export class NotesComponent {
     });
   }
 
-  openNewListForm() {
+  openNewNoteForm() {
     if(this.isDeleteFormVisible || this.isEditFormVisible) {
       return;
     }

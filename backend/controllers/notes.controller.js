@@ -1,4 +1,3 @@
-const { all } = require('../routes/sign-in-up.route');
 const noteFunctions = require('../services/notes.service');
 
 // Notes controller

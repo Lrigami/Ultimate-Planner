@@ -12,7 +12,7 @@
         @for (note of notes; track note.id) {
             <note-card
                 cdkDrag
-                [notes]="notes"       
+                [note]="note"       
                 (edit)="openEditForm(note)"
                 (delete)="openDeleteForm(note)">
             </note-card>
@@ -23,7 +23,7 @@
 <note-form
     *ngIf="isEditFormVisible && selectedNote" 
     class="form"
-    [noteData]="selectedList"
+    [noteData]="selectedNote"
     (isFormVisible)="handleFormClose()"
     (noteUpdated)="handleFormClose()">
 </note-form>
@@ -38,6 +38,6 @@
 <delete-form 
     *ngIf="isDeleteFormVisible && selectedNote"
     class="form"
-    [noteData]="selectedList"
+    [noteData]="selectedNote"
     (noteDeleted)="handleFormClose()">
 </delete-form>
