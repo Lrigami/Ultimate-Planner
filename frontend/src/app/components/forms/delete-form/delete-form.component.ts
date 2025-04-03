@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../../models/task.model';
 import { Todolist } from '../../../models/todolist.model';
+import { Note } from '../../../models/note.model';
 import { TaskService } from '../../../services/task.service';
 import { TodolistService } from '../../../services/to-do-list.service';
+import { NoteService } from '../../../services/note.service';
 import { ButtonComponent } from '../../buttons/button.component';
 
 @Component({
@@ -14,12 +16,14 @@ import { ButtonComponent } from '../../buttons/button.component';
 export class DeleteFormComponent {
   @Input() taskData!: Task;
   @Input() todolistData!: Todolist;
+  @Input() noteData!: Note;
   @Output() taskDeleted = new EventEmitter<boolean>();
   @Output() todolistDeleted = new EventEmitter<boolean>();
+  @Output() noteDeleted = new EventEmitter<boolean>();
 
   isFormVisible = false;
 
-  constructor(public taskService: TaskService, public todolistService: TodolistService) {}
+  constructor(public taskService: TaskService, public todolistService: TodolistService, public noteService: NoteService) {}
 
   // Call the right service depending on on which component is the delete button
   handleDeleteFormClose(isDeleted: boolean) {
@@ -44,6 +48,17 @@ export class DeleteFormComponent {
         });
       } else {
         this.todolistDeleted.emit(true);
+      }
+    } else if (this.noteData) {
+      if (isDeleted) {
+        this.noteService.deleteNote(this.noteData.id).subscribe({
+          next: () => {
+            this.noteDeleted.emit(true);
+          },
+          error: (error) => console.log("Delete failed: ", error)
+        });
+      } else {
+        this.noteDeleted.emit(true);
       }
     }
   }

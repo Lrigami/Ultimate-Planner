@@ -1,5 +1,4 @@
 const { pool, query } = require("../config/database");
-const { use } = require("../routes/todolist.route");
 
 // To-do lists requests
 class Method {

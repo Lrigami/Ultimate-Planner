@@ -7,7 +7,7 @@ import { Observable, tap, BehaviorSubject } from 'rxjs';
 })
 export class TodolistService {
     private todolistSubject = new BehaviorSubject<void>(null!);
-    todolistList$ = this.todolistSubject.asObservable(); // Pour la liste des to-do-lists plus tard
+    todolistList$ = this.todolistSubject.asObservable();
     private apiUrl = 'http://localhost:3000/todolist';
 
     constructor (private http: HttpClient) {}

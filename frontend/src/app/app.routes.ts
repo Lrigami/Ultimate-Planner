@@ -6,20 +6,9 @@ import { ToDoListComponent } from './pages/to-do-list/to-do-list.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './pages/password/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/password/reset-password/reset-password.component';
+import { NotesComponent } from './pages/notes/notes.component';
 
 export const routes: Routes = [
-    {
-        path: 'todolist',
-        title: 'My To Do lists',
-        component: ToDoListsComponent,
-        canActivate: [AuthGuard],
-    },
-    {
-        path: 'todolist/:tdlid',
-        title: 'Selected to do list',
-        component: ToDoListComponent,
-        canActivate: [AuthGuard],
-    },
     {
         path: 'auth',
         title: 'Authentification',
@@ -39,5 +28,23 @@ export const routes: Routes = [
         path: 'resetpassword/:token',
         title: 'Reset password',
         component: ResetPasswordComponent,
+    },
+    {
+        path: 'todolist',
+        title: 'My To Do lists',
+        component: ToDoListsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'todolist/:tdlid',
+        title: 'Selected to do list',
+        component: ToDoListComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'notes',
+        title: 'My notes',
+        component: NotesComponent,
+        canActivate: [AuthGuard],
     },
 ];
