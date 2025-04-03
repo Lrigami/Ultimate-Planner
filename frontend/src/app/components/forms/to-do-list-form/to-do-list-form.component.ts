@@ -92,7 +92,7 @@ export class ToDoListFormComponent {
             this.todolistUpdated.emit(true);
             this.closeForm();
           },
-          error: (error) => console.error("Create list failed: ", error)
+          error: (error) => console.error("List creation failed: ", error)
         });
       }
     } else {
