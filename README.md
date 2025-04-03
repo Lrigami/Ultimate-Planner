@@ -58,7 +58,7 @@ Here is the project roadmap for the moment:
     - [x] Kanban view (#18);
     - [x] User management (#24);
 - [ ] V1 (v. 1.1.0): 
-    - [ ] Menu (#30);
+    - [x] Menu (#30);
     - [ ] Custom management (color, pin, tags) (#29);
     - [ ] Settings (#31);
     - [ ] Management of notes (#32);
