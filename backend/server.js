@@ -25,7 +25,7 @@ app.use('/todolist', authenticateToken, todolistRoutes);
 app.use('/todolist/:tdlid/tasks', authenticateToken, taskRoutes);
 app.use('/enums', authenticateToken, enumsRoutes);
 app.use('/notes', authenticateToken, notesRoutes);
-app.use('/tags', tagRoutes);
+app.use('/tags', authenticateToken, tagRoutes);
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

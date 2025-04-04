@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { Tag } from '../models/tag.model';
 
 @Injectable({
     providedIn: 'root',
@@ -66,9 +67,19 @@ export class TagService {
       )
     }
 
-    removeTagFromTask(link: {tagId: number, taskId: number}): Observable<any> {
+    getTagFromTask(taskId: number): Observable<any> {
       const headers = this.getAuthHeaders();
-      return this.http.post<any>(`${this.apiUrl}/remove`, link, {headers}).pipe(
+      return this.http.post<{retreivedTags: Tag[]}>(`${this.apiUrl}/retreive`, {taskId}, {headers}).pipe(
+        map(response => response.retreivedTags || []),
+        tap(() => {
+          this.tagListSubject.next();
+        })
+      )
+    }
+
+    removeTagFromTask(taskId: number): Observable<any> {
+      const headers = this.getAuthHeaders();
+      return this.http.post<any>(`${this.apiUrl}/remove`, {taskId}, {headers}).pipe(
         tap(() => {
           this.tagListSubject.next();
         })

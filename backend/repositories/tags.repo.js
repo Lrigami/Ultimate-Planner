@@ -56,10 +56,20 @@ class Method {
         return result.rows[0];
     }
 
-    async remove(tagId, taskId) {
-        const result = await query(`DELETE FROM task_tags WHERE task_id = $1 AND tag_id = $2`, [taskId, tagId]);
+    async remove(id) {
+        const { taskId } = id;
+
+        const result = await query(`DELETE FROM task_tags WHERE task_id = $1`, [taskId]);
 
         return result.rows[0];
+    }
+
+    async retreive(id) {
+        const { taskId } = id;
+        
+        const result = await query(`SELECT tags.* FROM tags JOIN task_tags ON tags.id = task_tags.tag_id WHERE task_tags.task_id = $1`, [taskId]);
+
+        return result.rows;
     }
 }
 

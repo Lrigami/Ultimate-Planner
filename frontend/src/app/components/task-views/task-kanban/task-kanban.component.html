@@ -14,6 +14,7 @@
                 <task-card 
                     cdkDrag 
                     [task]="task" 
+                    [tagsList]="taskTagsMap[task.id] || []"
                     class="task-card" 
                     (edit)="onEdit(task)" 
                     (delete)="onDelete(task)" 

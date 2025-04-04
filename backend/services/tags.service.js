@@ -25,9 +25,12 @@ class Functions {
         return await tagMethods.assign(tagId, taskId);
     }
 
-    async removeFromTask(linkData) {
-        const { tagId, taskId } = linkData;
-        return await tagMethods.remove(tagId, taskId);
+    async removeFromTask(taskId) {
+        return await tagMethods.remove(taskId);
+    }
+
+    async getTagFromTask(taskId) {
+        return await tagMethods.retreive(taskId);
     }
 }
 
