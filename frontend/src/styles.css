@@ -353,6 +353,7 @@ note-card {
     border-radius: 5px;
     border: 1px solid black;
     cursor: grab;
+    overflow: hidden; /* remove once description truncate is done */
 }
 
 .cdk-drop-list-dragging, .cdk-drop-list-receiving {
