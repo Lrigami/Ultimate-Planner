@@ -1,7 +1,7 @@
 <a id="readme-top"></a>
 [![Issues][issues-shield]][issues-url]
 [![AGPL License][license-shield]][license-url]
-[![Commercial License](https://img.shields.io/badge/💼%20Commercial-License-blue?style=for-the-badge)](BUSINESS-LICENSE.md)
+[![Commercial License](https://img.shields.io/badge/💼%20Licence-Commerciale-blue?style=for-the-badge)](BUSINESS-LICENSE.md)
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <h1 align="center">Title of Project</h1>

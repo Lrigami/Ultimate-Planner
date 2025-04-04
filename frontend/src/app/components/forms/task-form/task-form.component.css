@@ -59,7 +59,6 @@ hr {
 }
 
 ul {
-    list-style-type: none;
     padding-left: 10px;
     width: 90%;
     margin: auto;
@@ -79,25 +78,6 @@ ul {
 .due-date-li input {
     position: absolute;
     right: 20px;
-}
-
-.tags-li ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.tag-li {
-    width: max-content;
-    height: max-content;
-    border: 1px solid black;
-    border-radius: 3px;
-}
-
-.tag-li button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
 }
 
 input[type=radio] {

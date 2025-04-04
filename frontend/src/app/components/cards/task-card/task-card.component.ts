@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Task } from '../../../models/task.model';
-import { Tag } from '../../../models/tag.model';
 import { TaskService } from '../../../services/task.service';
 import { ButtonComponent } from '../../buttons/button.component';
 
@@ -14,7 +13,6 @@ import { ButtonComponent } from '../../buttons/button.component';
 })
 export class TaskCardComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() task!: Task;
-  @Input() tagsList: Tag[] = [];
   @Output() edit = new EventEmitter<Task>();
   @Output() delete = new EventEmitter<Task>();
   @Output() checked = new EventEmitter<void>();
