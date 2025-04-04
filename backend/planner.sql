@@ -61,7 +61,8 @@ CREATE TABLE tags (
 	name CITEXT NOT NULL UNIQUE,
 	color color NOT NULL DEFAULT 'grey',
 	created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-	UNIQUE (user_id, name)
+	UNIQUE (user_id, name),
+	FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE task_tags (
