@@ -2,7 +2,9 @@ import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, CdkDrag, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from '../../../models/task.model';
+import { Tag } from '../../../models/tag.model';
 import { TaskService } from '../../../services/task.service';
+import { TagService } from '../../../services/tags.service';
 import { TaskCardComponent } from '../../cards/task-card/task-card.component';
 import { ButtonComponent } from '../../buttons/button.component';
 
@@ -22,8 +24,9 @@ export class TaskKanbanComponent {
   kanbanCategories: string[] = [];
   tasks: Task[] = [];
   tasksByCategory: { [key: string]: Task[]} = {};
+  taskTagsMap: { [taskId: number]: Tag[] } = {};
 
-  constructor (public taskService: TaskService) {}
+  constructor (public taskService: TaskService, public tagService: TagService) {}
 
   ngOnInit() {
     this.getAllKanban();
@@ -43,21 +46,24 @@ export class TaskKanbanComponent {
     });
   }
   
-  loadTasks(): Promise<void>{
-    return new Promise ((resolve, reject) => {
-      this.taskService.getAllTasks().subscribe({
-        next: (tasks) => {
-          this.tasks = tasks;
-          this.organizeTasksByCategory();
-          this.sortTasks();
-          resolve();
-        },
-        error: (error) => {
-          console.error("Error fetching tasks: ", error);
-          reject(new Error(error));
-        }
-      });
-    });
+  async loadTasks() {
+    try {
+      const tasks = await this.taskService.getAllTasks().toPromise();
+      this.tasks = tasks;
+      this.taskTagsMap = {};
+
+      const tagRequests = this.tasks.map(task =>
+        this.tagService.getTagFromTask(task.id).toPromise().then(tags => {
+          this.taskTagsMap[task.id] = tags; 
+        }).catch(error => console.error(`Error fetching tags for task ${task.id}:`, error))
+      );
+
+      await Promise.all(tagRequests);
+      this.organizeTasksByCategory();
+      this.sortTasks();
+    } catch (error) {
+      console.error("Error fetching tasks: ", error);
+    }
   }
 
   sortTasks() {

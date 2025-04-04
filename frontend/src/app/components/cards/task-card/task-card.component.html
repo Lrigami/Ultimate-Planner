@@ -14,7 +14,9 @@
             <span class="due-date-span">{{ task.due_date | date:'dd/MM/yyyy' }}</span>
         </span>
     </p>
-    <p><!-- Gérer les tags plus tard : *ngFor tag of tags : {{tag}ac} --></p>
+    <p class="tags" *ngIf="tagsList.length > 0">
+        <span *ngFor="let tag of tagsList">{{ tag.name }}</span>
+    </p>
 </div>
 <div class="edit-supp">
     <button app-button icon="edit" class="icon-btn no-outline not-filled-btn" (click)="edit.emit(task)"></button>
