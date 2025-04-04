@@ -1,7 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ElementRef, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Tag } from '../../../models/tag.model';
 import { TaskService } from '../../../services/task.service';
+import { TagService } from '../../../services/tags.service';
+import { TagCardComponent } from '../../cards/tag-card/tag-card.component';
 import { ButtonComponent } from '../../buttons/button.component';
 import { SaveFormComponent } from '../save-form/save-form.component';
 import { TagFormComponent } from '../tag-form/tag-form.component';
@@ -9,7 +12,7 @@ import { TagFormComponent } from '../tag-form/tag-form.component';
 @Component({
   selector: 'task-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ButtonComponent, SaveFormComponent, TagFormComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TagCardComponent, ButtonComponent, SaveFormComponent, TagFormComponent],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css'
 })
@@ -21,10 +24,12 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   taskForm: FormGroup;
   kanbanCategories: string[] = [];
+  tagsList: any[] = [];
+  selectedTagList: Tag[] = [];
   isSaveFormVisible = false;
   isTagFormVisible = false;
 
-  constructor(private el: ElementRef, private renderer: Renderer2, public taskService: TaskService) {
+  constructor(private el: ElementRef, private renderer: Renderer2, public taskService: TaskService, public tagService: TagService) {
     this.taskForm = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl(''),
@@ -41,11 +46,21 @@ export class TaskFormComponent implements OnInit, OnChanges {
       next: (allKanban) => this.kanbanCategories = allKanban,
       error: (error) => console.error("Get Kanban failed: ", error)
     });
+    this.tagService.getAllTags().subscribe({
+      next: (alltags) => {
+        this.tagsList = alltags.map((tag: Tag) => ({
+          ...tag,
+          selected: false
+        }));
+        console.log('tagsList: ', this.tagsList);
+      },
+      error: (error) => console.error("Get tags failed: ", error)
+    });
     this.priorityColor();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['taskData']?.currentValue) {
+    if (changes['taskData']?.currentValue || changes['tagsList'].currentValue) {
       this.updateForm();
     }
     this.priorityColor();
@@ -82,6 +97,39 @@ export class TaskFormComponent implements OnInit, OnChanges {
         kanban_category: this.kanbanData ?? 'to-do'
       });
     }
+  }
+
+  updateTagList(event: boolean) {
+    if (event) {
+      this.tagService.getAllTags().subscribe({
+        next: (alltags) => this.tagsList = alltags.map((tag: Tag) => ({
+          ...tag,
+          selected: false
+        })),
+        error: (error) => console.error("Get tags failed: ", error)
+      });
+    }
+    this.handleTagFormClose();
+  }
+
+  updateSelectedTags(tag: any) {
+    const foundTag = this.tagsList.find(t => t.id === tag.id);
+
+    if (foundTag) {
+      foundTag.selected = !foundTag.selected;
+  
+      const index = this.selectedTagList.findIndex(t => t.id === foundTag.id);
+  
+      if (foundTag.selected) {
+        if (index === -1) this.selectedTagList.push(foundTag);
+      } else {
+        this.selectedTagList.splice(index, 1);
+      }
+    } else {
+      console.log("No tag found with this id: ", tag.id);
+    }
+
+    console.log("tags selected: ", this.selectedTagList);
   }
 
   closeForm() {
@@ -130,6 +178,23 @@ export class TaskFormComponent implements OnInit, OnChanges {
           },
           error: (error) => console.error("Update failed: ", error)
         });
+        this.tagService.removeTagFromTask(updatedTask.id).subscribe({
+          next: () => {},
+          error: (err) => console.error(err)
+        });
+        this.selectedTagList.forEach(selectedTag => {
+          const link = {
+            tagId: selectedTag.id,
+            taskId: updatedTask.id
+          };
+          this.tagService.assignTagToTask(link).subscribe({
+            next: () => {
+              console.log("tags have been linked to this task.");
+              this.taskUpdated.emit(true);
+            },
+            error: (err) => console.error(err)
+          })
+        })
       } else {
         const newTask = {
           title: this.taskForm.value.title,
@@ -141,7 +206,17 @@ export class TaskFormComponent implements OnInit, OnChanges {
         };
 
         this.taskService.createTask(newTask).subscribe({
-          next: () => {
+          next: (newTask) => {
+            this.selectedTagList.forEach(selectedTag => {
+              const link = {
+                tagId: selectedTag.id,
+                taskId: newTask.id
+              };
+              this.tagService.assignTagToTask(link).subscribe({
+                next: () => console.log("tags have been linked to this task."),
+                error: (err) => console.error(err)
+              })
+            });
             this.taskUpdated.emit(true);
             this.closeForm();
           },

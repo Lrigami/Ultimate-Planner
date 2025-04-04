@@ -4,7 +4,9 @@ import { CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Task } from '../../../models/task.model';
+import { Tag } from '../../../models/tag.model';
 import { TaskService } from '../../../services/task.service';
+import { TagService } from '../../../services/tags.service';
 import { ButtonComponent } from '../../buttons/button.component';
 import { TaskCardComponent } from '../../cards/task-card/task-card.component';
 
@@ -24,8 +26,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   listId!: string;
   tasks: Task[] = [];
+  taskTagsMap: { [taskId: number]: Tag[] } = {};
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) {}
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private tagService: TagService) {}
 
   ngOnInit() {
     this.sub = this.route.paramMap.subscribe(params => { 
@@ -39,13 +42,25 @@ export class TaskListComponent implements OnInit, OnDestroy {
      this.sub.unsubscribe();
   }
 
-  loadTasks(): Promise<void>{
-    return new Promise ((resolve, reject) => {
+  loadTasks(): Promise<void> {
+    return new Promise((resolve, reject) => {
       this.taskService.getAllTasks().subscribe({
         next: (tasks) => {
           this.tasks = tasks;
-          this.sortTasks();
-          resolve();
+          this.taskTagsMap = {};
+  
+          const tagRequests = this.tasks.map(task => 
+            this.tagService.getTagFromTask(task.id).toPromise().then(tags => {
+              this.taskTagsMap[task.id] = tags;
+            }).catch(error => {
+              console.error(`Error fetching tags for task ${task.id}:`, error);
+            })
+          );
+  
+          Promise.all(tagRequests).then(() => {
+            this.sortTasks();
+            resolve();
+          });
         },
         error: (error) => {
           console.error("Error fetching tasks: ", error);

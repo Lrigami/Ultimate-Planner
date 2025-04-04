@@ -68,3 +68,16 @@ input[type=checkbox] {
     border: 2px solid;
     cursor: pointer;
 }
+
+.tags {
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tags span {
+    width: max-content;
+    padding: 0 8px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
