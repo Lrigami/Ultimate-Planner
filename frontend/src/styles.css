@@ -449,6 +449,13 @@ note-form {
     top: calc(50dvh - 229px);
 }
 
+tag-form {
+    flex-direction: column;
+    height: 200px;
+    max-width: 350px;
+    position: absolute;
+}
+
 /* personalised colors */
 
 .grey {
