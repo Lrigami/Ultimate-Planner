@@ -338,10 +338,6 @@ task-card {
     position: relative;
 }
 
-tag-card {
-    margin: 0;
-}
-
 app-notes {
     width: calc(100% - 220px);
     height: 100%;
@@ -357,7 +353,6 @@ note-card {
     border-radius: 5px;
     border: 1px solid black;
     cursor: grab;
-    overflow: hidden; /* remove once description truncate is done */
 }
 
 .cdk-drop-list-dragging, .cdk-drop-list-receiving {
@@ -451,13 +446,6 @@ to-do-list-form {
 note-form {
     position: absolute;
     top: calc(50dvh - 229px);
-}
-
-tag-form {
-    flex-direction: column;
-    height: 200px;
-    max-width: 350px;
-    position: absolute;
 }
 
 /* personalised colors */

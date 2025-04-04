@@ -1,13 +1,11 @@
-const express = require('express');
-const router = express.Router({ mergeParams: true});
-const tagController = require('../controllers/tags.controller');
+const { query } = require("../config/database");
+const pool = require("../config/database");
 
-router.get('/', tagController.getAllTags);
-router.post('/', tagController.createNewTag);
-router.put('/:tagid', tagController.updateTag);
-router.delete('/:tagid', tagController.deleteTag);
-router.post('/assign', tagController.assignToTask);
-router.post('/remove', tagController.removeFromTask);
-router.post('/retreive', tagController.getTagFromTask);
+class Method {
 
-module.exports = router;
+    async create(data) {
+        
+    }
+}
+
+module.exports = new Method("tags");

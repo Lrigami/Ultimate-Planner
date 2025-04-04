@@ -18,7 +18,7 @@
             <textarea cols="40" rows="6" placeholder="Description" formControlName="description"></textarea>
         </div>
         <hr />
-        <ul>
+        <ul type="none">
             <li class="due-date-li">
                 <span class="material-symbols-outlined">acute</span>
                 <label for="due-date">Due date: </label>
@@ -42,14 +42,10 @@
                 </div>
             </li>
             <li class="tags-li">
-                <span>Tags: </span>
-                <ul>
-                    <li>
-                        <button app-button icon="add" class="icon-btn not-filled-btn no-outline" (click)="openNewTagForm()"></button>
-                    </li>
-                    <li *ngFor="let tag of tagsList" class="tag-li">
-                        <button (click)="updateSelectedTags(tag)"><tag-card [name]="tag.name"></tag-card></button>
-                    </li>
+                <span>Tags: </span><button app-button icon="add" class="icon-btn not-filled-btn no-outline" (click)="openNewTagForm()"></button>
+                <ul type="none">
+                    <!-- For tag in tags table : display tag sous forme de bouton checkbox -->
+                    <!-- Cliquer sur le bouton ouvre un formulaire de création de tag -->
                 </ul>              
             </li>
         </ul>
@@ -77,5 +73,5 @@
 <tag-form 
     *ngIf="isTagFormVisible"    
     class="form" 
-    (saveData)="updateTagList($event)">
+    (saveData)="handleTagFormClose()">
 </tag-form>
