@@ -338,6 +338,10 @@ task-card {
     position: relative;
 }
 
+tag-card {
+    margin: 0;
+}
+
 app-notes {
     width: calc(100% - 220px);
     height: 100%;
