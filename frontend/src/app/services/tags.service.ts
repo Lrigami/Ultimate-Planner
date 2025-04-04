@@ -20,7 +20,7 @@ export class TagService {
       });
     }
 
-    createTag(tag: {title: string, color: string}): 
+    createTag(tag: {name: string, color: string}): 
     Observable<any> {
       const headers = this.getAuthHeaders();
       return this.http.post<any>(this.apiUrl, tag, { headers }).pipe(
@@ -39,7 +39,7 @@ export class TagService {
       )
     }
 
-    updateTag(tag: {id: number, title: string, color: string}): Observable<any> {
+    updateTag(tag: {id: number, name: string, color: string}): Observable<any> {
       const headers = this.getAuthHeaders();
       return this.http.put<any>(`${this.apiUrl}/${tag.id}`, tag, { headers }).pipe(
         tap(() => {
