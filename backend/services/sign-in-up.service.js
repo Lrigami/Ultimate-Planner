@@ -64,7 +64,7 @@ class Functions {
         return crypto.createHash('sha256').update(token).digest('hex');
     }
 
-    // Generate a url base on public token
+    // Generate a url based on public token
     generateResetPasswordURL(token) {
         return `${BASE_URL}/resetpassword/${token}`;
     }
