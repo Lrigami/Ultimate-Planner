@@ -29,5 +29,5 @@ export class ForgotPasswordComponent {
         }, 
         error: (err) => console.error("Mail error:", err) 
     });
-}
+  }
 }

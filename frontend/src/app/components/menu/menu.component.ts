@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Update the pinned lists list when a user click on "pin" on the to-do list card
+  // Update the pinned lists list when a user clicks on "pin" on the to-do list card
   updateListPin(subject: {isPinned: boolean, tdlid: number, title: string}) {
     const {isPinned, tdlid, title} = subject;
     const existingIndex = this.listOfPinnedLists.findIndex(list => list.tdlid === tdlid);
