@@ -9,8 +9,8 @@ export class MenuComponentGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     // prevent menu component from appearing on the following routes:
-    const forbiddenRoutes = ['/auth', '/forgotpassword', '/resetpassword'];
+    const forbiddenRoutes = ['/auth', '/forgotpassword', '/resetpassword/'];
 
-    return !forbiddenRoutes.includes(state.url);
+    return !forbiddenRoutes.some(path => state.url.startsWith(path));
   }
 }
