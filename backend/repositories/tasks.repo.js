@@ -3,7 +3,7 @@ const { pool, query } = require("../config/database");
 // Tasks requests
 class Method {
 
-    // Check if list is one of user's list before doing anything 
+    // Check if the list is one of user's list before doing anything 
     // This function is called in the others functions below
     async checkOwnership(tdlid, userId) {
         const query = `
