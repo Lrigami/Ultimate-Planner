@@ -60,7 +60,7 @@ export class TaskFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['taskData']?.currentValue || changes['tagsList'].currentValue) {
+    if (changes['taskData']?.currentValue) {
       this.updateForm();
     }
     this.priorityColor();
@@ -230,6 +230,8 @@ export class TaskFormComponent implements OnInit, OnChanges {
 
   handleTagFormClose() {
     this.isTagFormVisible = false;
+    this.updateForm();
+    this.priorityColor();
   } 
 
   // Update segmented button color according to user choice
