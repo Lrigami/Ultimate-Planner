@@ -2,13 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="description" content="Ultimate Planner application">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Frontend</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" />
+  <link rel="preload" as="image" href="./assets/icons8-user-100.png" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
+  </noscript>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    :root {
+      --red-outline: #E61931;
+      --green-outline: #8BBB44;
+      --grey-tonal-btn: #E6E6E6;
+      --grey-outline: #D9D9D9;
+      --text-white: #FFFFFF;
+      --text-black: #000000;
+      --red-tonal-btn: #F5A3AD;
+      --green-tonal-btn: #D1E4B4;
+      --green-tonal-btn-hover: hsl(84, 47%, 75%);
+      --green-tonal-btn-active: hsl(84, 47%, 70%);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      overflow: hidden;
+    }
+
+    app-root {
+      display: flex;
+      gap: 10px;
+      height: 100%;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    header a {
+      position: absolute;
+      left: 15px;
+    }
+
+    .btn {
+      height: 40px;
+      min-width: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 11pt;
+    }
+
+    .text-only-btn {
+      padding: 0 24px;
+    }
+
+    .icon-btn {
+      min-width: 30px;
+      min-height: 30px;
+      max-width: 30px;
+      max-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--grey-tonal-btn);
+    }
+
+    .red-outline {
+      border-color: var(--red-outline);
+      border-style: solid;
+      border-width: 2px;
+    }
+
+    .green-outline {
+      border-color: var(--green-outline);
+      border-style: solid;
+      border-width: 2px;
+    }
+
+    .red-tonal-btn {
+      background-color: var(--red-tonal-btn);
+    }
+
+    .green-tonal-btn {
+      background-color: var(--green-tonal-btn);
+    }
+
+    .green-tonal-btn:hover {
+      background-color: var(--green-tonal-btn-hover);
+    }
+
+    .green-tonal-btn:active,
+    .green-tonal-btn:focus {
+      background-color: var(--green-tonal-btn-active);
+    }
+  </style>
+  <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
 </head>
 <body class="mat-typography">
   <app-root></app-root>
