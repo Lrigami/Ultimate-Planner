@@ -7,7 +7,7 @@
 
 <!-- User actions section -->
 <section [ngClass]="isFolded ? 'center' : 'space-between'">
-    <img [ngClass]="isFolded ? 'no-pixel' : 'big'" src="assets/icons8-user-100.png" alt="default user icon">
+    <img [ngClass]="isFolded ? 'no-pixel' : 'big'" src="assets/icons8-user-100.png" alt="default user icon" width="100" height="100" decoding="async">
     <div [ngClass]="isFolded ? 'center-btn' : 'flex-end'">
         <button app-button icon="settings" class="icon-btn grey-tonal-btn no-outline" (click)="openSettings()"></button>
         <mat-slide-toggle>
@@ -21,19 +21,19 @@
     <nav>
         <ul [ngClass]="isFolded ? 'space-list-el' : ''">
             <li>
-                <h3 routerLink="/todolist">
+                <h2 routerLink="/todolist">
                     <span class="material-symbols-outlined">list</span>
                     <span *ngIf="!isFolded">My To-Do Lists</span>
-                </h3>
+                </h2>
                 <ul id="pinned-list" *ngIf="!isFolded">
                     <li *ngFor="let list of listOfPinnedLists">
-                        <h4 (click)="navigateTo('/todolist', list.tdlid)">{{ list.title }}</h4>
+                        <h3 (click)="navigateTo('/todolist', list.tdlid)">{{ list.title }}</h3>
                     </li>
                 </ul>
             </li>
             <li>
                 <!-- la route est prête pour l'injection des notes plus tard -->
-                <h3 routerLink="/notes"><span class="material-symbols-outlined">sticky_note_2</span><span *ngIf="!isFolded">My Notes</span></h3>
+                <h2 routerLink="/notes"><span class="material-symbols-outlined">sticky_note_2</span><span *ngIf="!isFolded">My Notes</span></h2>
             </li>
         </ul>
     </nav>
@@ -41,7 +41,7 @@
 
 <!-- Log out -->
 <section>
-    <button app-button icon="logout" [text]="isFolded ? undefined : 'Log out'" class=" red-tonal-btn no-outline white-text-btn" [ngClass]="isFolded ? 'icon-btn' : 'btn'" (click)="logout()"></button>
+    <button app-button icon="logout" [text]="isFolded ? undefined : 'Log out'" class=" red-tonal-btn no-outline" [ngClass]="isFolded ? 'icon-btn' : 'btn'" (click)="logout()"></button>
 </section>
 
 <button app-button icon="chevron_left" class="fold-btn icon-btn outlined grey-outline grey-tonal-btn" (click)="updateFoldingState()" [ngClass]="isFolded ? 'folded-menu-btn' : '' "></button>
